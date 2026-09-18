@@ -1,1421 +1,1351 @@
-<title>Meera Annadurai</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400&display=swap">
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meera Annadurai — Oracle HCM & AI Solution Architect</title>
+<meta name="description" content="18 years in IT · 15+ in Oracle Applications — Oracle Fusion HCM &amp; E-Business Suite specialist covering Core HR, Payroll, Absence, ORC, LMS, Goals &amp; Performance, Talent Management, Succession Planning. Production AI Agents, Redwood UI, OIC, and enterprise analytics. Based in Dubai.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* ═══════════════════════════════
-   TOKENS — light (default)
-═══════════════════════════════ */
+/* ─── TOKENS ─────────────────────────────────────── */
 :root {
-  --bg:       #F7F3EC;
-  --bg2:      #EDE8DF;
-  --bg3:      #E3DDD2;
-  --ink:      #1A1410;
-  --ink2:     #6E6256;
-  --ink3:     #A09488;
-  --copper:   #B5672B;
-  --copper-s: rgba(181,103,43,0.12);
-  --teal:     #26687F;
-  --teal-s:   rgba(38,104,127,0.10);
-  --rule:     rgba(26,20,16,0.10);
-  --nav-bg:   rgba(247,243,236,0.92);
+  --bg:           #f5f2ed;
+  --card:         #fdfcfa;
+  --ink:          #18130e;
+  --ink2:         #5a5048;
+  --copper:       #B5672B;
+  --copper-dim:   rgba(181,103,43,0.12);
+  --teal:         #1f5f74;
+  --teal-dim:     rgba(31,95,116,0.10);
+  --border:       #ddd6cc;
+  --code-bg:      #ede9e3;
+  --tag-bg:       #e5f0f4;
+  --tag-ink:      #175568;
+  --rule:         rgba(24,19,14,0.10);
+  --nav-h:        64px;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg:       #0E0A06;
-    --bg2:      #171008;
-    --bg3:      #201508;
-    --ink:      #EDE7DA;
-    --ink2:     #988C7E;
-    --ink3:     #5E5248;
-    --copper-s: rgba(181,103,43,0.15);
-    --teal-s:   rgba(38,104,127,0.14);
-    --rule:     rgba(237,231,218,0.10);
-    --nav-bg:   rgba(14,10,6,0.92);
-  }
-}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg:    #0e0c0a; --card: #161310; --ink: #e8e1d8; --ink2: #9a9088;
+  --teal:  #4db8d5; --border: #2a2420; --code-bg: #1c1914;
+  --tag-bg:#0a2530; --tag-ink:#6dcae0; --rule: rgba(232,225,216,0.08);
+}}
 :root[data-theme="dark"] {
-  --bg:       #0E0A06;
-  --bg2:      #171008;
-  --bg3:      #201508;
-  --ink:      #EDE7DA;
-  --ink2:     #988C7E;
-  --ink3:     #5E5248;
-  --copper-s: rgba(181,103,43,0.15);
-  --teal-s:   rgba(38,104,127,0.14);
-  --rule:     rgba(237,231,218,0.10);
-  --nav-bg:   rgba(14,10,6,0.92);
+  --bg:    #0e0c0a; --card: #161310; --ink: #e8e1d8; --ink2: #9a9088;
+  --teal:  #4db8d5; --border: #2a2420; --code-bg: #1c1914;
+  --tag-bg:#0a2530; --tag-ink:#6dcae0; --rule: rgba(232,225,216,0.08);
 }
-
-/* ═══════════════════════════════
-   RESET & BASE
-═══════════════════════════════ */
+/* ─── RESET & BASE ───────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: 'DM Sans', system-ui, sans-serif;
-  font-weight: 300;
-  line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'IBM Plex Serif', Georgia, serif;
+  font-size: 17px;
+  line-height: 1.75;
 }
 a { color: inherit; text-decoration: none; }
-a:focus-visible { outline: 2px solid var(--copper); outline-offset: 3px; }
+img { display: block; max-width: 100%; }
 
-/* ═══════════════════════════════
-   NAV
-═══════════════════════════════ */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
+/* ─── NAV ────────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
   padding: 0 2.5rem;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: transparent;
-  transition: background 0.4s ease, backdrop-filter 0.4s ease;
-  border-bottom: 1px solid transparent;
+  background: var(--ink);
+  border-bottom: 2px solid var(--copper);
+  transition: box-shadow .25s;
 }
-.nav.scrolled {
-  background: var(--nav-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule);
+nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
+.nav-logo {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .85rem;
+  color: #f0ebe3;
+  letter-spacing: .08em;
 }
-.nav-name {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
-  color: #fff;
-  transition: color 0.4s ease;
-}
-.nav.scrolled .nav-name { color: var(--ink); }
-.nav-links {
-  display: flex;
-  gap: 2rem;
-  list-style: none;
-}
+.nav-logo span { color: var(--copper); }
+.nav-links { display: flex; gap: 2rem; }
 .nav-links a {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .78rem;
+  font-weight: 500;
+  color: #9a9088;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.65);
-  transition: color 0.3s ease;
+  transition: color .2s;
 }
-.nav.scrolled .nav-links a { color: var(--ink2); }
 .nav-links a:hover { color: var(--copper); }
 
-@media (max-width: 640px) {
-  .nav-links { display: none; }
-  .nav { padding: 0 1.5rem; }
-}
-
-/* ═══════════════════════════════
-   HERO
-═══════════════════════════════ */
+/* ─── HERO ───────────────────────────────────────── */
 .hero {
-  background: #0C0906;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 2.5rem 5rem;
   position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: calc(var(--nav-h) + 5rem) 2.5rem 5rem;
   overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: -10%;
-  width: 50%; height: 60%;
-  background: radial-gradient(ellipse at bottom left, rgba(181,103,43,0.12) 0%, transparent 65%);
-  pointer-events: none;
-}
-.hero::after {
-  content: '';
-  position: absolute;
-  top: 0; right: -5%;
-  width: 40%; height: 50%;
-  background: radial-gradient(ellipse at top right, rgba(38,104,127,0.08) 0%, transparent 65%);
-  pointer-events: none;
+  background: var(--ink);
 }
 #hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%; height: 100%;
-  opacity: 0.35;
+  position: absolute; inset: 0;
+  opacity: .18;
   pointer-events: none;
 }
 .hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-}
-.hero-eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.62rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--copper);
-  margin-bottom: 2.5rem;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: fadeUp 0.8s 0.2s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.hero-name {
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: clamp(3.5rem, 10vw, 9rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  color: #EDE7DA;
-  text-wrap: balance;
-}
-.hero-name .line-first {
-  display: block;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 0.9s 0.35s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.hero-rule {
-  display: block;
-  height: 1px;
-  background: var(--copper);
-  width: 100%;
-  margin: 0.6rem 0;
-  opacity: 0;
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: ruleIn 0.9s 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.hero-name .line-last {
-  display: block;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeUp 0.9s 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.hero-sub {
-  margin-top: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  opacity: 0;
-  transform: translateY(15px);
-  animation: fadeUp 0.9s 0.8s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.hero-role {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 300;
-  font-size: clamp(1rem, 2.2vw, 1.3rem);
-  color: rgba(237,231,218,0.75);
-  line-height: 1.4;
-}
-.hero-domain {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.14em;
-  color: var(--teal);
-  text-transform: uppercase;
-}
-.hero-cta {
-  margin-top: 3rem;
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  opacity: 0;
-  animation: fadeUp 0.9s 1s cubic-bezier(0.22,1,0.36,1) forwards;
-}
-.btn-primary {
-  padding: 0.7rem 1.5rem;
-  background: var(--copper);
-  color: #fff;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-.btn-primary:hover { opacity: 0.85; }
-.btn-ghost {
-  padding: 0.7rem 1.5rem;
-  border: 1px solid rgba(237,231,218,0.25);
-  color: rgba(237,231,218,0.7);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 400;
-  cursor: pointer;
-  transition: border-color 0.2s, color 0.2s;
-}
-.btn-ghost:hover {
-  border-color: rgba(237,231,218,0.5);
-  color: rgba(237,231,218,0.9);
-}
-
-/* ═══════════════════════════════
-   SECTIONS — shared
-═══════════════════════════════ */
-.section {
-  padding: 6rem 2.5rem;
-  border-top: 1px solid var(--rule);
-}
-.section-inner {
-  max-width: 1100px;
-  margin: 0 auto;
+  position: relative; z-index: 1;
+  max-width: 820px;
 }
 .eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.60rem;
-  letter-spacing: 0.24em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--copper);
-  margin-bottom: 3rem;
+  margin-bottom: 1.2rem;
+}
+.hero h1 {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  font-weight: 300;
+  line-height: 1.08;
+  color: #f0ebe3;
+  margin-bottom: 1.5rem;
+  letter-spacing: -.02em;
+}
+.hero-role {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #9a9088;
+  max-width: 580px;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+.hero-tags {
+  display: flex; flex-wrap: wrap; gap: .6rem;
+  margin-bottom: 2.8rem;
+}
+.hero-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .06em;
+  color: #9a9088;
+  border: 1px solid rgba(154,144,136,.3);
+  border-radius: 3px;
+  padding: .25rem .65rem;
+}
+.hero-tag.active { color: var(--copper); border-color: rgba(181,103,43,.45); }
+.hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .82rem;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: .7rem 1.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all .2s;
+  display: inline-block;
+}
+.btn-primary { background: var(--copper); color: #fff; }
+.btn-primary:hover { background: #a05b25; }
+.btn-secondary { border-color: rgba(154,144,136,.45); color: #9a9088; background: transparent; }
+.btn-secondary:hover { border-color: var(--copper); color: var(--copper); }
+
+/* ─── SECTIONS ───────────────────────────────────── */
+.section {
+  border-top: 1px solid var(--rule);
+  padding: 5rem 2.5rem;
+}
+.section-inner { max-width: 900px; margin: 0 auto; }
+.section-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 2rem;
 }
 
-/* ═══════════════════════════════
-   ABOUT
-═══════════════════════════════ */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 320px;
-  gap: 5rem;
-  align-items: start;
-}
+/* ─── ABOUT ──────────────────────────────────────── */
 .about-pull {
-  font-family: 'Syne', sans-serif;
-  font-weight: 600;
-  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-family: 'IBM Plex Serif', serif;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  font-weight: 300;
   line-height: 1.35;
-  letter-spacing: -0.02em;
   color: var(--ink);
+  max-width: 760px;
   margin-bottom: 2rem;
-  text-wrap: balance;
+  border-left: 3px solid var(--copper);
+  padding-left: 1.5rem;
 }
-.about-body {
-  font-size: 0.9rem;
-  color: var(--ink2);
-  line-height: 1.85;
-  max-width: 55ch;
+.about-body { max-width: 720px; color: var(--ink2); line-height: 1.8; }
+.about-body p + p { margin-top: 1rem; }
+.about-stats {
+  display: flex; flex-wrap: wrap; gap: 1.5rem;
+  margin-top: 3rem;
 }
-.about-body + .about-body { margin-top: 1.1rem; }
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
+.stat {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--copper);
+  padding: 1.2rem 1.5rem;
+  min-width: 140px;
+  border-radius: 2px;
 }
-.stat-box {
-  background: var(--bg);
-  padding: 1.4rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.stat-n {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 2.2rem;
-  line-height: 1;
+.stat-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 1.6rem;
+  font-weight: 500;
   color: var(--copper);
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  margin-bottom: .35rem;
 }
 .stat-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink3);
-}
-@media (max-width: 800px) {
-  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .stats-grid { grid-template-columns: repeat(4, 1fr); }
-}
-
-/* ═══════════════════════════════
-   EXPERTISE
-═══════════════════════════════ */
-.expertise-clusters {
-  display: flex;
-  flex-direction: column;
-  gap: 2.5rem;
-}
-.cluster-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--ink3);
-  margin-bottom: 0.85rem;
-}
-.cluster-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-.tag {
-  padding: 0.38rem 0.85rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  border: 1px solid var(--rule);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .72rem;
   color: var(--ink2);
-  letter-spacing: 0.01em;
-  transition: background 0.2s, color 0.2s;
-  cursor: default;
-}
-.tag:hover { background: var(--bg2); color: var(--ink); }
-.tag.primary {
-  background: var(--copper-s);
-  border-color: rgba(181,103,43,0.25);
-  color: var(--copper);
-  font-weight: 500;
-}
-.tag.secondary {
-  background: var(--teal-s);
-  border-color: rgba(38,104,127,0.2);
-  color: var(--teal);
+  letter-spacing: .05em;
+  text-transform: uppercase;
 }
 
-/* ═══════════════════════════════
-   AI VISUAL SECTION
-═══════════════════════════════ */
-.ai-section {
-  background: #0C0906;
-  padding: 6rem 2.5rem;
-  border-top: 1px solid rgba(181,103,43,0.2);
-  border-bottom: 1px solid rgba(181,103,43,0.2);
-  position: relative;
-  overflow: hidden;
-}
-.ai-section .eyebrow { color: var(--copper); }
-.ai-section-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
-  color: #EDE7DA;
-  letter-spacing: -0.02em;
-  margin-bottom: 1rem;
-  text-wrap: balance;
-}
-.ai-section-sub {
-  font-size: 0.9rem;
-  color: rgba(237,231,218,0.55);
-  max-width: 55ch;
-  line-height: 1.75;
-  margin-bottom: 3.5rem;
-}
-.ai-cards {
+/* ─── EXPERTISE ──────────────────────────────────── */
+.expertise-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1px;
-  background: rgba(237,231,218,0.08);
-  border: 1px solid rgba(237,231,218,0.08);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+.expertise-group {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+.expertise-group h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 1rem;
+}
+.tag-cloud { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tag {
+  background: var(--tag-bg);
+  color: var(--tag-ink);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .72rem;
+  font-weight: 500;
+  padding: .2rem .6rem;
+  border-radius: 3px;
+}
+.tag.copper { background: var(--copper-dim); color: var(--copper); }
+
+/* ─── AI PROJECTS ────────────────────────────────── */
+.ai-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 .ai-card {
-  background: #0C0906;
-  padding: 2rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--copper);
+  border-radius: 4px;
+  padding: 1.8rem;
   position: relative;
   overflow: hidden;
-  transition: background 0.3s;
 }
-.ai-card:hover { background: #151009; }
+.ai-card.teal { border-top-color: var(--teal); }
 .ai-card canvas {
-  display: block;
-  width: 100%;
-  height: 140px;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(237,231,218,0.06);
+  position: absolute; bottom: 0; right: 0;
+  opacity: .12; width: 120px; height: 80px;
+  pointer-events: none;
 }
-.ai-card-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
+.ai-card-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .65rem;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--copper);
-  margin-bottom: 0.5rem;
+  margin-bottom: .75rem;
 }
+.ai-card.teal .ai-card-label { color: var(--teal); }
 .ai-card h3 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-size: 1rem;
-  color: #EDE7DA;
   line-height: 1.3;
-  margin-bottom: 0.75rem;
+  margin-bottom: .9rem;
+  color: var(--ink);
 }
 .ai-card p {
-  font-size: 0.82rem;
-  color: rgba(237,231,218,0.5);
-  line-height: 1.7;
-}
-.ai-card .ai-metric {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(237,231,218,0.06);
-}
-.ai-metric-item { display: flex; flex-direction: column; gap: 0.2rem; }
-.ai-metric-val {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  color: var(--copper);
-  line-height: 1;
-  letter-spacing: -0.02em;
-}
-.ai-metric-lbl {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.52rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(237,231,218,0.3);
-}
-.ai-pipeline {
-  margin-top: 3.5rem;
-  border: 1px solid rgba(237,231,218,0.08);
-  background: rgba(237,231,218,0.02);
-  padding: 2rem;
-}
-.pipeline-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(237,231,218,0.3);
-  margin-bottom: 1.5rem;
-}
-.pipeline-steps {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0;
-}
-.pipeline-step {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  min-width: 120px;
-}
-.step-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #EDE7DA;
-}
-.step-tech {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.55rem;
-  letter-spacing: 0.1em;
-  color: var(--teal);
-  text-transform: uppercase;
-}
-.pipeline-arrow {
-  padding: 0 0.75rem;
-  color: rgba(181,103,43,0.5);
-  font-size: 1.2rem;
-  line-height: 1;
-  align-self: center;
-  margin-bottom: 0.3rem;
-}
-@media (max-width: 600px) {
-  .pipeline-steps { flex-direction: column; align-items: flex-start; }
-  .pipeline-arrow { transform: rotate(90deg); }
-}
-
-/* ═══════════════════════════════
-   WORK
-═══════════════════════════════ */
-.work-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
-}
-.work-card {
-  background: var(--bg);
-  display: grid;
-  grid-template-columns: 4px 1fr auto;
-  gap: 0 2rem;
-  align-items: center;
-  padding: 2rem 2rem 2rem 0;
-  transition: background 0.2s;
-  cursor: default;
-}
-.work-card:hover { background: var(--bg2); }
-.work-accent {
-  height: 100%;
-  min-height: 80px;
-  background: var(--copper);
-}
-.work-accent.teal { background: var(--teal); }
-.work-accent.mixed {
-  background: linear-gradient(to bottom, var(--copper) 50%, var(--teal) 50%);
-}
-.work-content { min-width: 0; }
-.work-tag {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--copper);
-  margin-bottom: 0.4rem;
-}
-.work-card:nth-child(even) .work-tag { color: var(--teal); }
-.work-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 600;
-  font-size: clamp(1rem, 1.8vw, 1.2rem);
-  line-height: 1.2;
-  margin-bottom: 0.6rem;
-  letter-spacing: -0.01em;
-}
-.work-body {
-  font-size: 0.84rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .85rem;
   color: var(--ink2);
-  line-height: 1.75;
-  max-width: 60ch;
+  line-height: 1.65;
+  margin-bottom: 1.2rem;
 }
-.work-meta {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  color: var(--ink3);
+.ai-meta {
+  display: flex; gap: .5rem; flex-wrap: wrap;
+}
+.ai-meta span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  text-align: right;
-  white-space: nowrap;
-  padding-right: 0.5rem;
-}
-@media (max-width: 700px) {
-  .work-card { grid-template-columns: 4px 1fr; }
-  .work-meta { display: none; }
-}
-
-/* ═══════════════════════════════
-   WRITING / BLOG
-═══════════════════════════════ */
-.blog-note {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  background: var(--bg2);
-  border: 1px solid var(--rule);
-  padding: 1.1rem 1.25rem;
-  margin-bottom: 2.5rem;
-  font-size: 0.82rem;
   color: var(--ink2);
-  line-height: 1.6;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  padding: .15rem .5rem;
 }
-.blog-note-icon {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
+.ai-meta span.live { background: rgba(31,95,116,.12); color: var(--teal); border-color: rgba(31,95,116,.3); }
+
+/* ─── WRITING ────────────────────────────────────── */
+.writing-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+  margin-bottom: 2rem;
+}
+.writing-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .7rem;
+  letter-spacing: .1em;
   color: var(--copper);
   text-transform: uppercase;
-  white-space: nowrap;
-  padding-top: 0.1rem;
+  border-bottom: 1px solid var(--copper);
+  padding-bottom: .1rem;
+  transition: opacity .2s;
 }
-.posts-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--rule);
-  border: 1px solid var(--rule);
+.writing-link:hover { opacity: .7; }
+.post-list { display: flex; flex-direction: column; gap: 0; }
+.post-item {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
 }
-.post-card {
-  background: var(--bg);
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  transition: background 0.2s;
+.post-date {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  color: var(--copper);
+  letter-spacing: .06em;
+  flex-shrink: 0;
+  min-width: 70px;
 }
-.post-card:hover { background: var(--bg2); }
-.post-status {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-.post-status.draft { color: var(--ink3); }
-.post-status.ready { color: var(--teal); }
 .post-title {
-  font-family: 'Syne', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.35;
-  letter-spacing: -0.01em;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: .9rem;
+  color: var(--ink);
+  line-height: 1.4;
+  transition: color .2s;
 }
-.post-excerpt {
-  font-size: 0.82rem;
-  color: var(--ink2);
-  line-height: 1.7;
-  flex: 1;
-}
-.post-topic {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
+.post-item:hover .post-title { color: var(--copper); }
+.post-tag {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: .08em;
   text-transform: uppercase;
-  color: var(--ink3);
-  margin-top: auto;
+  color: var(--teal);
+  background: var(--teal-dim);
+  border-radius: 2px;
+  padding: .1rem .45rem;
 }
 
-/* ═══════════════════════════════
-   CONTACT
-═══════════════════════════════ */
-.contact-section {
-  text-align: center;
-  padding: 6rem 2.5rem;
-  border-top: 1px solid var(--rule);
+/* ─── CONTACT ────────────────────────────────────── */
+.contact-section { text-align: center; padding: 6rem 2.5rem; }
+.contact-section h2 {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  margin-bottom: 1rem;
 }
-.contact-heading {
-  font-family: 'Syne', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  margin-bottom: 1.25rem;
-  text-wrap: balance;
-}
-.contact-sub {
-  font-size: 0.9rem;
+.contact-section p {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1rem;
   color: var(--ink2);
-  max-width: 45ch;
+  max-width: 540px;
   margin: 0 auto 2.5rem;
   line-height: 1.7;
 }
-.contact-links {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+.contact-links { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
 .contact-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.65rem 1.25rem;
-  border: 1px solid var(--rule);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .75rem;
+  letter-spacing: .1em;
   text-transform: uppercase;
-  color: var(--ink2);
-  transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.contact-link:hover {
-  background: var(--copper-s);
-  border-color: rgba(181,103,43,0.3);
   color: var(--copper);
+  border: 1px solid rgba(181,103,43,.4);
+  border-radius: 3px;
+  padding: .5rem 1.2rem;
+  transition: all .2s;
+}
+.contact-link:hover { background: var(--copper); color: #fff; }
+
+/* ─── FOOTER ─────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  color: #5a5048;
+  text-align: center;
+  padding: 1.8rem 2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  border-top: 2px solid var(--copper);
 }
 
-/* ═══════════════════════════════
-   FOOTER
-═══════════════════════════════ */
-.footer {
-  padding: 1.75rem 2.5rem;
-  border-top: 1px solid var(--rule);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-.footer-copy {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--ink3);
-}
-
-/* ═══════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════ */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1),
-              transform 0.7s cubic-bezier(0.22,1,0.36,1);
-}
+/* ─── REVEAL ANIMATION ───────────────────────────── */
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .65s ease, transform .65s ease; }
 .reveal.visible { opacity: 1; transform: none; }
 
-@media (prefers-reduced-motion: reduce) {
-  .reveal, .hero-name .line-first, .hero-name .line-last,
-  .hero-eyebrow, .hero-sub, .hero-cta, .hero-rule {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
+/* ─── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 640px) {
+  nav { padding: 0 1.2rem; }
+  .nav-links { gap: 1rem; }
+  .hero, .section { padding-left: 1.2rem; padding-right: 1.2rem; }
+  .contact-section { padding: 4rem 1.2rem; }
+  .post-item { flex-wrap: wrap; gap: .4rem; }
+  .post-date { min-width: auto; }
+  .post-tag { margin-left: 0; }
 }
-@keyframes fadeUp { to { opacity: 1; transform: none; } }
-@keyframes ruleIn { to { opacity: 1; transform: scaleX(1); } }
-</style>
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: .01ms !important; }
+}
 
-<!-- ══ NAV ══ -->
-<nav class="nav" id="nav">
-  <a href="#" class="nav-name">Meera Annadurai</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#expertise">Expertise</a></li>
-    <li><a href="#ai">AI Work</a></li>
-    <li><a href="#work">Projects</a></li>
-    <li><a href="#writing">Writing</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+/* ─── CHAT WIDGET ────────────────────────────────── */
+#mcw-btn{position:fixed;bottom:28px;right:28px;width:56px;height:56px;border-radius:50%;background:var(--copper);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 18px rgba(181,103,43,.45);font-size:1.4rem;display:flex;align-items:center;justify-content:center;z-index:9999;transition:transform .2s,box-shadow .2s}
+#mcw-btn:hover{transform:scale(1.08);box-shadow:0 6px 24px rgba(181,103,43,.55)}
+#mcw-panel{position:fixed;bottom:96px;right:28px;width:385px;height:610px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 40px rgba(24,19,14,.22);display:none;flex-direction:column;z-index:9999;font-family:'IBM Plex Sans',sans-serif;overflow:hidden}
+#mcw-panel.open{display:flex}
+/* Gate */
+#mcw-panel #gate{flex:1;display:flex;align-items:center;justify-content:center;padding:1.2rem 1rem;background:var(--bg);overflow-y:auto}
+#mcw-panel .gate-card{background:var(--card);border:1px solid var(--border);border-top:3px solid var(--copper);border-radius:14px;padding:1.8rem 1.5rem 1.5rem;width:100%;max-width:340px;box-shadow:0 4px 20px rgba(24,19,14,.08)}
+#mcw-panel .gate-av{width:42px;height:42px;border-radius:50%;background:var(--copper);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:1.1rem;font-weight:500;display:flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+#mcw-panel .gate-title{font-family:'IBM Plex Serif',Georgia,serif;font-size:1.1rem;font-weight:600;color:var(--ink);margin-bottom:.25rem;text-wrap:balance}
+#mcw-panel .gate-sub{font-size:.8rem;color:var(--ink2);margin-bottom:1.3rem;line-height:1.5}
+#mcw-panel .gate-sub strong{color:var(--copper);font-weight:600}
+#mcw-panel .gate-fields{display:flex;flex-direction:column;gap:.6rem;margin-bottom:.9rem}
+#mcw-panel .field-wrap{display:flex;flex-direction:column;gap:.2rem}
+#mcw-panel .field-wrap label{font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+#mcw-panel .gate-input{padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.84rem;font-family:inherit;background:var(--bg);color:var(--ink);outline:none;transition:border-color .18s}
+#mcw-panel .gate-input:focus{border-color:var(--copper)}
+#mcw-panel .gate-input.err{border-color:#c0392b}
+#mcw-panel .ferr{font-size:.68rem;color:#c0392b;min-height:.85em}
+#mcw-panel .gate-btn{width:100%;padding:.6rem 1rem;background:var(--copper);color:#fff;border:none;border-radius:8px;font-family:inherit;font-size:.88rem;font-weight:600;cursor:pointer;transition:background .18s}
+#mcw-panel .gate-btn:hover{background:#8f4e1e}
+#mcw-panel .gate-note{text-align:center;font-size:.67rem;color:var(--ink2);margin-top:.7rem}
+/* App shell */
+#mcw-panel #app{flex:1;display:none;flex-direction:column;min-height:0;overflow:hidden}
+#mcw-panel #app.on{display:flex}
+/* App header */
+#mcw-panel .app-header{background:var(--ink);border-bottom:2px solid var(--copper);display:flex;align-items:center;gap:.6rem;padding:.7rem 1rem;flex-shrink:0}
+#mcw-panel .hd-av{width:30px;height:30px;border-radius:50%;background:var(--copper);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+#mcw-panel .hd-info{flex:1;min-width:0}
+#mcw-panel .hd-name{font-size:.84rem;font-weight:600;color:#f0ebe3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#mcw-panel .hd-sub{font-size:.62rem;color:#6a6058}
+#mcw-panel .hd-user{font-family:'IBM Plex Mono',monospace;font-size:.58rem;color:#6a6058;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:88px}
+#mcw-panel .hd-badge{font-size:.58rem;font-family:'IBM Plex Mono',monospace;font-weight:500;background:rgba(181,103,43,.2);color:var(--copper);border:1px solid rgba(181,103,43,.3);border-radius:100px;padding:.1rem .5rem;letter-spacing:.04em;flex-shrink:0}
+#mcw-panel .mcw-close-btn{background:none;border:none;color:#6a6058;cursor:pointer;font-size:1rem;padding:0;line-height:1;flex-shrink:0}
+/* Tabs */
+#mcw-panel .tabs{display:flex;background:var(--card);border-bottom:1px solid var(--border);flex-shrink:0}
+#mcw-panel .tab{flex:1;padding:.5rem .4rem;font-size:.76rem;font-weight:600;color:var(--ink2);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;font-family:inherit}
+#mcw-panel .tab.active{color:var(--copper);border-bottom-color:var(--copper)}
+#mcw-panel .tab:hover:not(.active){color:var(--ink)}
+/* Panes */
+#mcw-panel #pane-chat{flex:1;display:flex;flex-direction:column;min-height:0;overflow:hidden}
+#mcw-panel #pane-dash{flex:1;display:none;overflow-y:auto;padding:.8rem}
+/* Messages */
+#mcw-panel #chat-body{flex:1;overflow-y:auto;padding:.8rem;display:flex;flex-direction:column;gap:.7rem;scroll-behavior:smooth}
+#mcw-panel .msg{display:flex;gap:.45rem;max-width:88%}
+#mcw-panel .msg.bot{align-self:flex-start}
+#mcw-panel .msg.user{align-self:flex-end;flex-direction:row-reverse}
+#mcw-panel .msg.sys{align-self:center;max-width:100%}
+#mcw-panel .m-av{width:22px;height:22px;border-radius:50%;background:var(--copper);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:.62rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:3px}
+#mcw-panel .bubble{padding:.5rem .78rem;border-radius:11px;font-size:.8rem;line-height:1.55}
+#mcw-panel .msg.bot .bubble{background:var(--card);color:var(--ink);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:3px 11px 11px 11px}
+#mcw-panel .msg.user .bubble{background:var(--copper);color:#fff;border-radius:11px 3px 11px 11px}
+#mcw-panel .msg.block .bubble{background:#fde8e8;color:#8b1a1a;border:1px solid rgba(200,50,50,.2);border-left:3px solid #c0392b;font-size:.76rem}
+#mcw-panel .msg.warn .bubble{background:#fff3e8;color:#7a3a0a;border:1px solid rgba(181,103,43,.2);border-left:3px solid var(--copper);font-size:.76rem}
+#mcw-panel .bubble a{color:var(--teal);text-decoration:underline}
+#mcw-panel .msg.user .bubble a{color:#ffe0c0}
+#mcw-panel .bubble strong{font-weight:600}
+#mcw-panel .ts{font-size:.58rem;color:var(--ink2);font-family:'IBM Plex Mono',monospace;margin-top:.1rem;padding-left:28px}
+#mcw-panel .msg.user .ts{text-align:right;padding-left:0;padding-right:28px}
+/* Typing indicator */
+#mcw-panel .tdots{display:flex;gap:4px;align-items:center;padding:.5rem .78rem;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--teal);border-radius:3px 11px 11px 11px}
+#mcw-panel .tdots span{width:5px;height:5px;border-radius:50%;background:var(--copper);animation:mcw-td .9s infinite}
+#mcw-panel .tdots span:nth-child(2){animation-delay:.2s}
+#mcw-panel .tdots span:nth-child(3){animation-delay:.4s}
+@keyframes mcw-td{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-5px)}}
+/* Quick replies */
+#mcw-panel #qr-row{display:flex;flex-wrap:wrap;gap:.35rem;padding:0 .8rem .5rem;flex-shrink:0}
+#mcw-panel .qr{background:var(--teal-dim);color:var(--teal);border:1px solid rgba(31,95,116,.25);border-radius:100px;padding:.22rem .65rem;font-size:.72rem;font-weight:500;cursor:pointer;font-family:inherit;transition:background .14s,color .14s;white-space:nowrap}
+#mcw-panel .qr:hover{background:var(--teal);color:#fff;border-color:var(--teal)}
+/* Input row */
+#mcw-panel .inp-row{display:flex;gap:.45rem;padding:.6rem .8rem;border-top:1px solid var(--border);background:var(--card);flex-shrink:0}
+#mcw-panel #msg-in{flex:1;padding:.45rem .72rem;border:1.5px solid var(--border);border-radius:7px;font-size:.82rem;font-family:inherit;background:var(--bg);color:var(--ink);outline:none;resize:none;height:34px;max-height:100px;transition:border-color .18s}
+#mcw-panel #msg-in:focus{border-color:var(--copper)}
+#mcw-panel #send-btn{width:34px;height:34px;border-radius:7px;background:var(--copper);color:#fff;border:none;cursor:pointer;font-size:.9rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s}
+#mcw-panel #send-btn:hover{background:#8f4e1e}
+#mcw-panel #send-btn:disabled{opacity:.35;cursor:default}
+/* Dashboards */
+#mcw-panel .dash-section{margin-bottom:1.2rem}
+#mcw-panel .dash-badge{display:inline-flex;align-items:center;gap:.35rem;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.22rem .6rem .22rem .45rem;border-radius:5px;margin-bottom:.65rem;font-family:'IBM Plex Mono',monospace}
+#mcw-panel .badge-oac{background:rgba(0,55,100,.12);color:#003764}
+#mcw-panel .badge-pbi{background:rgba(26,46,80,.10);color:#1a2e50}
+#mcw-panel .dash-logo-dot{width:7px;height:7px;border-radius:50%}
+#mcw-panel .dot-oac{background:#0078c8}
+#mcw-panel .dot-pbi{background:#e8a200}
+#mcw-panel .kpi-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+#mcw-panel .kpi{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:.5rem .7rem;flex:1;min-width:70px}
+#mcw-panel .kpi-num{font-family:'IBM Plex Mono',monospace;font-size:1.15rem;font-weight:500;color:var(--copper);line-height:1.1;margin-bottom:.07rem}
+#mcw-panel .kpi-lbl{font-size:.58rem;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
+#mcw-panel .kpi-delta{font-size:.58rem;color:#1e7e5a;font-weight:500;margin-top:.08rem}
+#mcw-panel .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+#mcw-panel .chart-card{background:var(--card);border:1px solid var(--border);border-radius:9px;padding:.65rem;overflow:hidden}
+#mcw-panel .chart-card.wide{grid-column:1/-1}
+#mcw-panel .chart-title{font-size:.65rem;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:.5rem;font-family:'IBM Plex Sans',sans-serif}
+#mcw-panel canvas.chart{width:100%;display:block;max-width:100%}
+#mcw-panel .dash-note{font-size:.63rem;color:var(--ink2);margin-top:.45rem;font-style:italic;text-align:center}
+@media(max-width:440px){#mcw-panel{width:calc(100vw - 24px);right:12px;bottom:84px}#mcw-panel .chart-grid{grid-template-columns:1fr}#mcw-panel .chart-card.wide{grid-column:auto}}
+@media(prefers-color-scheme:dark){#mcw-panel .msg.block .bubble{background:#2a0808;color:#f07070}#mcw-panel .msg.warn .bubble{background:#2a1800;color:#f0a060}#mcw-panel .badge-oac{background:rgba(0,120,200,.18);color:#4db8d5}#mcw-panel .badge-pbi{background:rgba(100,150,255,.12);color:#8ab4f8}}
+:root[data-theme="dark"] #mcw-panel .msg.block .bubble{background:#2a0808;color:#f07070}
+:root[data-theme="dark"] #mcw-panel .msg.warn .bubble{background:#2a1800;color:#f0a060}
+:root[data-theme="dark"] #mcw-panel .badge-oac{background:rgba(0,120,200,.18);color:#4db8d5}
+:root[data-theme="dark"] #mcw-panel .badge-pbi{background:rgba(100,150,255,.12);color:#8ab4f8}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-logo">M<span>.</span>Annadurai</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#ai">AI Work</a>
+    <a href="#writing">Writing</a>
+    <a href="#contact">Contact</a>
+  </div>
 </nav>
 
-<!-- ══ HERO ══ -->
-<section class="hero" id="hero">
+<!-- ─── HERO ─────────────────────────────────────── -->
+<section class="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-inner">
-    <p class="hero-eyebrow">Oracle Enterprise AI Specialist · Dubai</p>
-    <h1 class="hero-name">
-      <span class="line-first">Meera</span>
-      <span class="hero-rule"></span>
-      <span class="line-last">Annadurai</span>
-    </h1>
-    <div class="hero-sub">
-      <p class="hero-role">Oracle Fusion HCM &amp; Enterprise AI leader — 15+ years delivering<br>HCM systems across aviation, healthcare, and FMCG in the GCC.</p>
-      <p class="hero-domain">Oracle AI Agent Studio · Azure ML Studio · Fusion HCM · VBCS · Redwood · DBA Candidate</p>
+    <p class="eyebrow reveal">Oracle HCM &amp; AI Solution Architect · Dubai</p>
+    <h1 class="reveal">Meera<br>Annadurai</h1>
+    <p class="hero-role reveal">
+      18 years in IT · 15+ years in Oracle Applications — spanning Oracle Fusion HCM and Oracle E-Business Suite.
+      Deploying production AI Agents and leading Redwood UI rollouts — independently, without a Systems Integrator.
+    </p>
+    <div class="hero-tags reveal">
+      <span class="hero-tag active">Oracle AI Agent Studio</span>
+      <span class="hero-tag active">RAG Architecture</span>
+      <span class="hero-tag active">Redwood UI</span>
+      <span class="hero-tag">VBCS · OIC</span>
+      <span class="hero-tag">Azure ML</span>
+      <span class="hero-tag">Power BI · OTBI</span>
+      <span class="hero-tag">DBA Candidate — GenAI</span>
     </div>
-    <div class="hero-cta">
-      <a href="#ai" class="btn-primary">AI Projects</a>
-      <a href="#contact" class="btn-ghost">Get in Touch</a>
+    <div class="hero-ctas reveal">
+      <a href="#ai" class="btn btn-primary">AI Projects</a>
+      <a href="#contact" class="btn btn-secondary">Get in Touch</a>
     </div>
   </div>
 </section>
 
-<!-- ══ ABOUT ══ -->
+<!-- ─── ABOUT ─────────────────────────────────────── -->
 <section class="section" id="about">
   <div class="section-inner">
     <p class="eyebrow reveal">About</p>
-    <div class="about-grid">
-      <div class="reveal">
-        <p class="about-pull">Fifteen years of Oracle HCM — and now deploying AI agents on top of it.</p>
-        <p class="about-body">
-          Based in Dubai, I've led Oracle Fusion HCM and ERP implementations across some of the region's most demanding organizations — Emirates Airlines, Dubai Airports, Mai Dubai — independently, without a Systems Integrator. That means owning every decision: architecture, configuration, testing, go-live, and every difficult conversation in between.
-        </p>
-        <p class="about-body">
-          My expertise spans Core HCM, Payroll, Absence, Learning, Recruitment, and Performance Management, along with OIC integrations, BIP/OTBI reporting, and the full Redwood UI migration stack. I've led EBS-to-Fusion Payroll migrations, resolved complex absence and payroll errors, and debugged SCORM failures in Redwood — the kind of work that doesn't appear on a slide deck.
-        </p>
-        <p class="about-body">
-          I'm currently pursuing a DBA specializing in Generative AI at Golden Gate University (AACSB), researching the practitioner gap between what Oracle AI Agent Studio can do and what organizations are actually deploying. The research and the field work run in parallel — they always have.
-        </p>
-      </div>
-      <div class="reveal">
-        <div class="stats-grid">
-          <div class="stat-box">
-            <span class="stat-n">15+</span>
-            <span class="stat-label">Years Oracle HCM</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-n">3</span>
-            <span class="stat-label">Industries</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-n">8+</span>
-            <span class="stat-label">HCM Modules</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-n">45</span>
-            <span class="stat-label">Gap Issues Found</span>
-          </div>
-          <div class="stat-box" style="grid-column: span 2;">
-            <span class="stat-n" style="font-size:1.5rem;">DBA</span>
-            <span class="stat-label">Generative AI · Golden Gate University (AACSB)</span>
-          </div>
-        </div>
-      </div>
+    <p class="about-pull reveal">
+      Senior ERP architect and Oracle HCM leader with 18 years of independent transformation delivery across healthcare, aviation, and FMCG — turning Oracle complexity into business outcomes through integrations, analytics, and AI that frees up HR rather than adds to its workload.
+    </p>
+    <div class="about-body reveal">
+      <p>Based in Dubai, I'm a Business Applications Principal with 18 years in IT and 15+ in Oracle Applications — working across the full <strong>Oracle Fusion HCM</strong> and <strong>Oracle E-Business Suite</strong> landscape as a techno-functional practitioner. I don't just configure — I build VBCS pages, write Fast Formula, design HCM Extracts, wire OIC integrations, and set up the data pipelines that sit behind the dashboards leaders actually use.</p>
+      <p>My integration work connects Oracle Fusion to <strong>WhatsApp</strong> for real-time employee notifications, <strong>SharePoint</strong> for document and approval flows, biometric attendance systems, and SAP Financials — surfacing it all through <strong>Power BI and OAC dashboards</strong> covering leave forecasting, attrition risk, headcount projections, and recruitment pipeline. Across the Fusion suite I've delivered hands-on work in <strong>Core HR · Payroll · Absence · ORC · LMS · Goals &amp; Performance · Talent Management · Succession Planning · Benefits · Compensation</strong>, alongside Redwood UX rollouts and AI Agents live in production.</p>
+      <p>My belief in AI is straightforward: it should <strong>enable people, not restrict them</strong>. The four AI Agents I built — Leave Assistant, Policy RAG Agent, Workflow Agent, Symptoms App — are designed to reduce friction, surface answers faster, and free up HR teams to focus on work that matters. I see AI as a lever for <strong>revenue generation and employee wellness</strong>, not another layer of controls on how people work.</p>
+      <p>I'm actively looking to connect with teams investing in new technology sectors — healthcare AI, enterprise automation, HR tech — and I'm part of advisory communities that support <strong>AI tools literacy</strong>, helping practitioners across organisations learn how to build and use AI with confidence. Currently pursuing a <strong>DBA specialising in Generative AI</strong> at Golden Gate University (AACSB accredited, 2026–2029), with research focused on enterprise AI deployment gaps.</p>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat"><div class="stat-num">18</div><div class="stat-label">Years IT</div></div>
+      <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Years Oracle Apps</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">AI Agents Live</div></div>
+      <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Industries</div></div>
+      <div class="stat"><div class="stat-num">10+</div><div class="stat-label">HCM Modules</div></div>
+      <div class="stat"><div class="stat-num">45</div><div class="stat-label">Gap Issues Found</div></div>
+      <div class="stat"><div class="stat-num">DBA</div><div class="stat-label">GenAI · GGU</div></div>
     </div>
   </div>
 </section>
 
-<!-- ══ EXPERTISE ══ -->
-<section class="section" id="expertise" style="background: var(--bg2);">
+<!-- ─── EXPERTISE ──────────────────────────────────── -->
+<section class="section" id="expertise">
   <div class="section-inner">
     <p class="eyebrow reveal">Expertise</p>
-    <div class="expertise-clusters">
-      <div class="reveal">
-        <p class="cluster-label">Oracle HCM Modules</p>
-        <div class="cluster-tags">
-          <span class="tag primary">Core HCM</span>
-          <span class="tag primary">Payroll</span>
-          <span class="tag primary">Absence Management</span>
-          <span class="tag">Learning</span>
-          <span class="tag">Recruitment</span>
-          <span class="tag">Performance Management</span>
+    <div class="expertise-grid reveal">
+      <div class="expertise-group">
+        <h3>Oracle Fusion HCM &amp; E-Business Suite</h3>
+        <div class="tag-cloud">
+          <span class="tag copper">Core HR</span>
+          <span class="tag copper">Payroll</span>
+          <span class="tag copper">Absence Management</span>
+          <span class="tag copper">Oracle Recruiting (ORC)</span>
+          <span class="tag copper">Learning (LMS)</span>
+          <span class="tag copper">Goals &amp; Performance</span>
+          <span class="tag copper">Talent Management</span>
+          <span class="tag copper">Succession Planning</span>
           <span class="tag">Compensation</span>
           <span class="tag">Benefits</span>
-        </div>
-      </div>
-      <div class="reveal">
-        <p class="cluster-label">Platform &amp; Integration</p>
-        <div class="cluster-tags">
-          <span class="tag primary">OIC Integrations</span>
-          <span class="tag primary">BIP / OTBI Reporting</span>
-          <span class="tag primary">HCM Extracts</span>
-          <span class="tag">HCM Data Loader (HDL)</span>
-          <span class="tag">VBCS / VB Studio</span>
-          <span class="tag">Redwood UI</span>
-          <span class="tag">EBS HRMS → Fusion Migration</span>
-          <span class="tag">REST APIs</span>
           <span class="tag">Fast Formula</span>
+          <span class="tag">HDL / PBL</span>
+          <span class="tag">HCM Extracts</span>
+          <span class="tag">Oracle EBS HRMS</span>
         </div>
       </div>
-      <div class="reveal">
-        <p class="cluster-label">AI &amp; Enterprise Intelligence</p>
-        <div class="cluster-tags">
-          <span class="tag secondary">Oracle AI Agent Studio</span>
-          <span class="tag secondary">Azure ML Studio (AutoML)</span>
-          <span class="tag secondary">Azure Managed Online Endpoints</span>
-          <span class="tag secondary">Generative AI (DBA Research)</span>
-          <span class="tag">VBCS Analytics Dashboards</span>
-          <span class="tag">Workforce Intelligence</span>
-          <span class="tag">Attrition Prediction Modelling</span>
-          <span class="tag">Employee Data Pipelines</span>
+      <div class="expertise-group">
+        <h3>AI &amp; Intelligence</h3>
+        <div class="tag-cloud">
+          <span class="tag copper">Oracle AI Agent Studio</span>
+          <span class="tag copper">RAG Architecture</span>
+          <span class="tag copper">Azure ML / AutoML</span>
+          <span class="tag">Attrition Modelling</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Tableau</span>
+          <span class="tag">Python Analytics</span>
+          <span class="tag">Predictive Modelling</span>
+          <span class="tag">Azure Functions</span>
+          <span class="tag">OAC Dashboards</span>
         </div>
       </div>
-      <div class="reveal">
-        <p class="cluster-label">Industry Domain</p>
-        <div class="cluster-tags">
-          <span class="tag">Aviation (Emirates Airlines, Dubai Airports)</span>
-          <span class="tag">Healthcare</span>
-          <span class="tag">FMCG (Mai Dubai)</span>
-          <span class="tag">Manufacturing</span>
-          <span class="tag">BFSI</span>
-          <span class="tag">Large-scale Implementations (no SI)</span>
+      <div class="expertise-group">
+        <h3>Platform &amp; Integration</h3>
+        <div class="tag-cloud">
+          <span class="tag copper">Redwood UI</span>
+          <span class="tag copper">VBCS</span>
+          <span class="tag copper">OIC / PAAS</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">BIP / OTBI</span>
+          <span class="tag">APEX</span>
+          <span class="tag">SharePoint Integration</span>
+          <span class="tag">Biometric Systems</span>
+          <span class="tag">PL/SQL</span>
+          <span class="tag">ADF · HDL</span>
+        </div>
+      </div>
+      <div class="expertise-group">
+        <h3>Delivery &amp; Domain</h3>
+        <div class="tag-cloud">
+          <span class="tag">Healthcare · GCC</span>
+          <span class="tag">FMCG · Manufacturing</span>
+          <span class="tag">Aviation · Oracle EBS</span>
+          <span class="tag">No-SI Delivery</span>
+          <span class="tag">Agile / JIRA</span>
+          <span class="tag">Vendor Management</span>
+          <span class="tag">Security Design</span>
+          <span class="tag">EBS → Fusion Migration</span>
+          <span class="tag">Oracle EBS HRMS</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ AI & INNOVATION ══ -->
-<section class="ai-section" id="ai">
+<!-- ─── AI PROJECTS ────────────────────────────────── -->
+<section class="section" id="ai">
   <div class="section-inner">
-    <p class="eyebrow reveal" style="color:var(--copper);">AI &amp; Innovation</p>
-    <h2 class="ai-section-title reveal">Building intelligence on top of Oracle.</h2>
-    <p class="ai-section-sub reveal">Deploying AI agents, training ML models on HCM data, and connecting Oracle Fusion to Azure's machine learning infrastructure — in production, not just demos.</p>
+    <p class="eyebrow reveal">AI &amp; Innovation</p>
 
-    <div class="ai-cards reveal">
+    <div class="ai-grid reveal">
 
       <div class="ai-card">
-        <canvas id="canvas-nn" width="400" height="140"></canvas>
-        <p class="ai-card-tag">Oracle AI Agent Studio</p>
-        <h3>Workforce Absence Analyst Agent</h3>
-        <p>Deployed a live Absence Analyst AI agent inside Oracle HCM — monitoring absence trends, flagging anomalies, and surfacing insights directly in the HCM dashboard without any external tool dependency.</p>
-        <div class="ai-metric">
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">Live</span>
-            <span class="ai-metric-lbl">Production Status</span>
-          </div>
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">0</span>
-            <span class="ai-metric-lbl">External Tools Needed</span>
-          </div>
+        <p class="ai-card-label">RAG · Oracle HCM · Healthcare Sector</p>
+        <h3>AI-Powered HR Self-Service Assistant</h3>
+        <p>Architected and deployed an in-house RAG-based HR self-service assistant integrated with Oracle Fusion HCM data models in a large GCC healthcare environment. Reduced helpdesk inquiries by 40% in production — zero external tool dependency.</p>
+        <div class="ai-meta">
+          <span class="live">Live · Production</span>
+          <span>RAG Architecture</span>
+          <span>Fusion HCM Data</span>
+          <span>40% Fewer Tickets</span>
+        </div>
+      </div>
+
+      <div class="ai-card teal">
+        <p class="ai-card-label">Oracle AI Agent Studio · Healthcare Sector</p>
+        <h3>Oracle AI Agents Suite — 4 Live Agents</h3>
+        <p>Deployed four Oracle AI Agents in production: <strong>Leave Assistant</strong> (absence queries and approvals), <strong>Policy RAG Agent</strong> (HR policy Q&A), <strong>Workflow Agent</strong> (HCM process routing), and <strong>Symptoms Analysis App</strong> (clinical support). All connected to live Fusion HCM without external tools.</p>
+        <div class="ai-meta">
+          <span class="live">Live · Production</span>
+          <span>4 Agents</span>
+          <span>AI Agent Studio</span>
+          <span>No External Tools</span>
         </div>
       </div>
 
       <div class="ai-card">
-        <canvas id="canvas-ml" width="400" height="140"></canvas>
-        <p class="ai-card-tag">Azure ML Studio · Oracle HCM</p>
+        <p class="ai-card-label">Azure ML · Oracle HCM · OTBI</p>
         <h3>Employee Attrition Prediction Pipeline</h3>
-        <p>Built an end-to-end ML pipeline: Oracle HCM data → Azure AutoML classification model → Managed Online Endpoint → surfaced as a risk score in OTBI and VBCS. Enables proactive retention decisions before attrition happens.</p>
-        <div class="ai-metric">
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">AutoML</span>
-            <span class="ai-metric-lbl">Model Selection</span>
-          </div>
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">REST</span>
-            <span class="ai-metric-lbl">HCM Integration</span>
-          </div>
+        <p>End-to-end ML pipeline: Oracle HCM data → Azure AutoML classification model → Managed Online Endpoint → attrition risk score surfaced directly in OTBI and VBCS for HR leadership. Built and deployed in a GCC FMCG manufacturing environment.</p>
+        <div class="ai-meta">
+          <span class="live">Deployed</span>
+          <span>Azure AutoML</span>
+          <span>REST Integration</span>
+          <span>OTBI Surface</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="ai-grid reveal" style="margin-top:1.5rem">
+      <div class="ai-card teal" style="border-top-color:var(--teal)">
+        <p class="ai-card-label" style="color:var(--teal)">DBA Research · Golden Gate University</p>
+        <h3>Practitioner Gap Research — Enterprise AI Adoption</h3>
+        <p>Doctoral research (2026–2029) examining the gap between Oracle AI Agent Studio's capabilities and actual enterprise deployment rates across the GCC — grounded in real production implementation data across healthcare and FMCG sectors.</p>
+        <div class="ai-meta">
+          <span>DBA · AACSB</span>
+          <span>GGU San Francisco</span>
+          <span>Generative AI</span>
         </div>
       </div>
 
       <div class="ai-card">
-        <canvas id="canvas-research" width="400" height="140"></canvas>
-        <p class="ai-card-tag">DBA Research · Generative AI</p>
-        <h3>Practitioner Gap in Enterprise AI Deployment</h3>
-        <p>Doctoral research at Golden Gate University (AACSB) examining the gap between Oracle AI Agent Studio's capabilities and actual enterprise deployment rates — grounded in real implementation data from the field.</p>
-        <div class="ai-metric">
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">DBA</span>
-            <span class="ai-metric-lbl">Degree Level</span>
-          </div>
-          <div class="ai-metric-item">
-            <span class="ai-metric-val">GGU</span>
-            <span class="ai-metric-lbl">AACSB Accredited</span>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Azure ML Pipeline visualization -->
-    <div class="ai-pipeline reveal">
-      <p class="pipeline-label">Azure ML + Oracle HCM — Attrition Prediction Pipeline</p>
-      <div class="pipeline-steps">
-        <div class="pipeline-step">
-          <span class="step-name">HCM Data</span>
-          <span class="step-tech">OTBI Extract</span>
-        </div>
-        <span class="pipeline-arrow">→</span>
-        <div class="pipeline-step">
-          <span class="step-name">Azure Blob</span>
-          <span class="step-tech">Data Store</span>
-        </div>
-        <span class="pipeline-arrow">→</span>
-        <div class="pipeline-step">
-          <span class="step-name">AutoML</span>
-          <span class="step-tech">Classification</span>
-        </div>
-        <span class="pipeline-arrow">→</span>
-        <div class="pipeline-step">
-          <span class="step-name">Endpoint</span>
-          <span class="step-tech">Managed Online</span>
-        </div>
-        <span class="pipeline-arrow">→</span>
-        <div class="pipeline-step">
-          <span class="step-name">VBCS</span>
-          <span class="step-tech">Service Connection</span>
-        </div>
-        <span class="pipeline-arrow">→</span>
-        <div class="pipeline-step">
-          <span class="step-name">OTBI Report</span>
-          <span class="step-tech">Risk Dashboard</span>
+        <p class="ai-card-label">Power BI · OAC · Python</p>
+        <h3>10+ Executive Analytics Dashboards</h3>
+        <p>Built 10+ OAC and Power BI dashboards covering attrition, leave trends, recruitment pipeline, overtime, and headcount forecasting — used weekly by C-suite and department heads across healthcare and FMCG sectors. Applied Python predictive algorithms for leave forecasting and workforce planning.</p>
+        <div class="ai-meta">
+          <span>Power BI</span>
+          <span>OAC</span>
+          <span>Python</span>
+          <span>C-Suite</span>
         </div>
       </div>
     </div>
+
   </div>
 </section>
 
-<!-- ══ WORK / PROJECTS ══ -->
-<section class="section" id="work">
+<!-- ─── WRITING ────────────────────────────────────── -->
+<section class="section" id="writing">
   <div class="section-inner">
-    <p class="eyebrow reveal">Selected Projects</p>
-    <div class="work-list reveal">
-
-      <div class="work-card">
-        <div class="work-accent"></div>
-        <div class="work-content">
-          <p class="work-tag">Redwood UI · Oracle Fusion</p>
-          <h3 class="work-title">Multi-Phase Redwood UI Migration</h3>
-          <p class="work-body">Led an independent, full-cycle Redwood UI rollout across Core HCM, Absence, Payroll, Learning, and Recruitment. Resolved a Submit button failure caused by a missing ojAction binding and a VB Studio canvas failure from stale Runtime Dependency metadata post-26A patch. Fixed payslip generation failure (mainTemplPath is null) traced to a BIP catalog path mismatch. Delivered without a Systems Integrator.</p>
-        </div>
-        <div class="work-meta">Dubai Airports<br>Independent Delivery</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent teal"></div>
-        <div class="work-content">
-          <p class="work-tag">AI Agent Studio · Oracle HCM</p>
-          <h3 class="work-title">Workforce AI Agent — Absence Analyst Deployment</h3>
-          <p class="work-body">Deployed and debugged AI Agent Studio agents including the Workforce Operations Absence Analyst workflow. Diagnosed JSON node errors by parsing exported .wf files directly. Built a VBCS analytics dashboard using BIP Person Data and Absence reports as REST data sources — delivering Oracle AI intelligence without OAC dependency.</p>
-        </div>
-        <div class="work-meta">Production<br>Live Absence Analyst</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent"></div>
-        <div class="work-content">
-          <p class="work-tag">Azure ML · Oracle HCM Integration</p>
-          <h3 class="work-title">Employee Attrition Prediction — End-to-End ML Pipeline</h3>
-          <p class="work-body">Built a complete employee attrition prediction system: OTBI data extraction → Azure Blob upload → AutoML classification (AUC_weighted) → Managed Online Endpoint REST API → VBCS service connection → risk score surface in OTBI. Enables HR teams to identify flight-risk employees proactively before attrition occurs.</p>
-        </div>
-        <div class="work-meta">Azure ML Studio<br>AutoML + REST</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent teal"></div>
-        <div class="work-content">
-          <p class="work-tag">HCM Strategy · Gap Analysis</p>
-          <h3 class="work-title">45-Issue HCM Improvement Brief</h3>
-          <p class="work-body">Conducted a comprehensive gap analysis (H1–H45) identifying missing Compensation, Benefits, and Workforce Health modules, a universal Redwood UI enablement gap, and 14 configuration mismatches. Categorised by impact and effort. Delivered as an executive brief positioning the organization's Oracle Cloud roadmap for the next two releases — anchored in live system data.</p>
-        </div>
-        <div class="work-meta">Executive Brief<br>45 Issues</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent mixed"></div>
-        <div class="work-content">
-          <p class="work-tag">BIP / OTBI · Reporting</p>
-          <h3 class="work-title">Multi-Sheet Excel Reports via BI Publisher</h3>
-          <p class="work-body">Designed RTF templates using for-each-group loops and xls-sheet-break tags to generate multi-sheet Excel outputs from a single BIP report — one sheet per department or absence type. Built dynamic sheet naming using current-group() and configured XLSX native output format. Reduced manual reporting hours for HR teams across three organizations.</p>
-        </div>
-        <div class="work-meta">BIP / RTF<br>Multi-org</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent"></div>
-        <div class="work-content">
-          <p class="work-tag">VBCS · Integration</p>
-          <h3 class="work-title">VBCS Service Connections for HCM Extensions</h3>
-          <p class="work-body">Built VBCS service connections to external REST APIs and Azure ML endpoints, enabling real-time data display within Oracle HCM pages — attrition risk scores, live leave balances, third-party HR data — without requiring Oracle Analytics Cloud. Includes fallback handling for offline API scenarios.</p>
-        </div>
-        <div class="work-meta">VBCS<br>REST Integration</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent teal"></div>
-        <div class="work-content">
-          <p class="work-tag">HCM Data Loader · Migration</p>
-          <h3 class="work-title">EBS HRMS to Oracle Fusion Payroll Migration</h3>
-          <p class="work-body">Led the migration of legacy Oracle EBS HRMS to Oracle Fusion Payroll for a large-scale organization — covering element migration, absence plan conversion, fast formula rewriting, and payroll balance initialization. Managed the parallel-run validation and go-live. Resolved retro-pay calculation failures tied to missing retroactive element components.</p>
-        </div>
-        <div class="work-meta">EBS → Fusion<br>Payroll Migration</div>
-      </div>
-
-      <div class="work-card">
-        <div class="work-accent"></div>
-        <div class="work-content">
-          <p class="work-tag">Oracle Absence · Fast Formula</p>
-          <h3 class="work-title">Seniority-Tier Absence Accrual Plan Design</h3>
-          <p class="work-body">Designed and configured multi-tier absence accrual plans using Fast Formula band matrices — 15/20/25 days by tenure, with proration on hire/termination and carryover ceilings. Resolved ANC-3405194 class absence errors and tested carryover calculations via year-end Sandbox simulations before Production enablement.</p>
-        </div>
-        <div class="work-meta">Absence Module<br>Fast Formula</div>
-      </div>
-
+    <div class="writing-header reveal">
+      <p class="eyebrow" style="margin-bottom:0">Writing</p>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="writing-link">eBizTechTalk ↗</a>
+    </div>
+    <p style="font-family:'IBM Plex Sans',sans-serif;font-size:.9rem;color:var(--ink2);margin-bottom:2rem" class="reveal">
+      Technical Oracle HCM writing published on eBizTechTalk since 2017 — covering Fusion Cloud implementation, BIP/OTBI, AI deployments, and integration patterns from real projects.
+    </p>
+    <div class="post-list reveal">
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Oracle HCM Extracts — A Practical Guide to Building Your First Integration Extract</span>
+        <span class="post-tag">Extracts</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">OTBI in Oracle Fusion HCM — Five Tricks That Make Your Reports Faster and More Useful</span>
+        <span class="post-tag">OTBI</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Oracle Fusion Absence Management — Accrual Plan Design That Actually Works</span>
+        <span class="post-tag">Absence</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Oracle Fusion Payroll — The Element Configuration Mistakes That Cost You Time</span>
+        <span class="post-tag">Payroll</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Generating Multi-Sheet Excel Reports from Oracle HCM Using BI Publisher (BIP)</span>
+        <span class="post-tag">BIP</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Connecting External APIs to Oracle HCM Using VBCS Service Connections</span>
+        <span class="post-tag">VBCS</span>
+      </a>
+      <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">How I Identified 45 Configuration Gaps in an Oracle HCM Implementation — A Structured Approach</span>
+        <span class="post-tag">Gap Analysis</span>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- ══ WRITING ══ -->
-<section class="section" id="writing" style="background: var(--bg2);">
-  <div class="section-inner">
-    <p class="eyebrow reveal">Writing</p>
-
-    <div class="blog-note reveal">
-      <span class="blog-note-icon">↗ Live Blog</span>
-      <span><strong style="font-weight:500; color:var(--ink);">eBizTechTalk</strong> — Oracle Applications Techno Functional Resources. Active since 2017, covering SQL analytics, Oracle 18c, and BI Publisher. New posts incoming on Fusion HCM and AI. <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" style="color:var(--copper); text-decoration:underline; text-decoration-color:rgba(181,103,43,0.35);">Visit the blog →</a></span>
-    </div>
-
-    <div class="posts-grid reveal">
-
-      <a class="post-card" href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" style="cursor:pointer;">
-        <p class="post-status ready">Published · Oct 2018</p>
-        <h3 class="post-title">COALESCE in SQL — Handling NULLs Cleanly</h3>
-        <p class="post-excerpt">Returns the first non-null expression from a list — works like a CASE statement but far more readable. A concise reference for Oracle SQL developers dealing with sparse data.</p>
-        <p class="post-topic">SQL · Oracle Analytics</p>
-      </a>
-
-      <a class="post-card" href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" style="cursor:pointer;">
-        <p class="post-status ready">Published · Aug 2018</p>
-        <h3 class="post-title">RANK, DENSE_RANK, and ROW_NUMBER — When to Use Which</h3>
-        <p class="post-excerpt">Three functions that look similar and behave very differently. PERCENT_RANK, CUME_DIST, and NTILE covered too — with real examples on employee salary and sales data.</p>
-        <p class="post-topic">SQL Analytics · Oracle 18c</p>
-      </a>
-
-      <a class="post-card" href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" style="cursor:pointer;">
-        <p class="post-status ready">Published · Nov 2017</p>
-        <h3 class="post-title">RTF to Multiple Excel Sheets in BI Publisher</h3>
-        <p class="post-excerpt">Generating separate Excel sheet tabs from a single RTF template using XML tagging in BI Publisher — the kind of thing that takes hours to figure out and 10 minutes to do once you know.</p>
-        <p class="post-topic">BIP · XML Publisher · Reporting</p>
-      </a>
-
-      <div class="post-card">
-        <p class="post-status draft">Coming Next</p>
-        <h3 class="post-title">Deploying Oracle AI Agent Studio in Production — Field Notes</h3>
-        <p class="post-excerpt">The demos are polished. The reality involves JSON node errors, .wf file parsing, and knowing which seeded agents handle which request types. A practitioner guide from a live deployment.</p>
-        <p class="post-topic">AI Agent Studio · Oracle Fusion</p>
-      </div>
-
-      <div class="post-card">
-        <p class="post-status draft">Coming Next</p>
-        <h3 class="post-title">Azure ML + Oracle HCM: Attrition Prediction End to End</h3>
-        <p class="post-excerpt">Oracle holds the record. Azure ML adds the intelligence. Dataset → AutoML pipeline → deployed endpoint → OTBI surface. A full walkthrough you can replicate on a demo tenant.</p>
-        <p class="post-topic">Azure ML · Oracle HCM · AI</p>
-      </div>
-
-      <div class="post-card">
-        <p class="post-status draft">Coming Next</p>
-        <h3 class="post-title">Redwood UI Migration: What Broke and How I Fixed It</h3>
-        <p class="post-excerpt">The missing ojAction binding. Stale Runtime Dependency metadata post-26A. A BIP catalog path mismatch causing null mainTemplPath. A technical guide for teams planning their rollout.</p>
-        <p class="post-topic">Redwood UI · VBCS · Oracle Fusion</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ══ CONTACT ══ -->
-<section class="contact-section" id="contact">
-  <h2 class="contact-heading reveal">Let's work together.</h2>
-  <p class="contact-sub reveal">
-    Open to Oracle HCM leadership roles, Enterprise AI integration projects, and consulting engagements across the GCC region and beyond.
+<!-- ─── CONTACT ────────────────────────────────────── -->
+<section class="section contact-section" id="contact">
+  <p class="eyebrow reveal" style="text-align:center">Contact</p>
+  <h2 class="reveal">Let's work together.</h2>
+  <p class="reveal">
+    Open to Oracle Fusion HCM AI integration projects, Redwood UI engagements, enterprise analytics, and senior consulting roles across the GCC and beyond.
   </p>
   <div class="contact-links reveal">
-    <a href="mailto:akmeera2k4@gmail.com" class="contact-link">
-      <span>✉</span> Email
-    </a>
-    <a href="https://www.linkedin.com/in/" class="contact-link" target="_blank" rel="noopener">
-      <span>↗</span> LinkedIn
-    </a>
-    <a href="https://ebiztechtalk.blogspot.com" class="contact-link" target="_blank" rel="noopener">
-      <span>✎</span> eBizTechTalk
-    </a>
+    <a href="mailto:meera2k10@gmail.com" class="contact-link">✉ Send Email</a>
+    <a href="https://www.linkedin.com/in/meeraka/" target="_blank" rel="noopener" class="contact-link">LinkedIn</a>
+    <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="contact-link">eBizTechTalk</a>
   </div>
 </section>
 
-<!-- ══ FOOTER ══ -->
-<footer class="footer">
-  <span class="footer-copy">© 2026 Meeramaheswari Annadurai · Dubai</span>
-  <span class="footer-copy">Oracle Fusion HCM · Enterprise AI · DBA Candidate</span>
+<!-- ─── FOOTER ────────────────────────────────────── -->
+<footer>
+  © 2026 Meera Annadurai · Dubai&nbsp;&nbsp;|&nbsp;&nbsp;Oracle Fusion HCM · Enterprise AI · DBA Candidate · GGU
 </footer>
 
+<!-- ─── CHAT WIDGET ────────────────────────────────── -->
+<button id="mcw-btn" title="Chat with Meera's assistant">💬</button>
+<div id="mcw-panel">
+
+  <!-- GATE -->
+  <div id="gate">
+    <div class="gate-card">
+      <div class="gate-av">M</div>
+      <h2 class="gate-title">Ask Meera AK's Assistant</h2>
+      <p class="gate-sub">I answer questions about Meera's <strong>HR Analytics</strong>, Oracle AI Agent work, Redwood UI projects, and HCM implementations. Please introduce yourself first.</p>
+      <div class="gate-fields">
+        <div class="field-wrap">
+          <label for="g-name">Your Name</label>
+          <input id="g-name" class="gate-input" type="text" placeholder="e.g. Sarah Chen" autocomplete="name"/>
+          <span class="ferr" id="en"></span>
+        </div>
+        <div class="field-wrap">
+          <label for="g-email">Your Email</label>
+          <input id="g-email" class="gate-input" type="email" placeholder="e.g. sarah@company.com" autocomplete="email"/>
+          <span class="ferr" id="ee"></span>
+        </div>
+      </div>
+      <button class="gate-btn" id="gate-go">Start →</button>
+      <p class="gate-note">Your details are shared only with Meera. No spam.</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="app">
+    <div class="app-header">
+      <div class="hd-av">M</div>
+      <div class="hd-info">
+        <div class="hd-name">Meera AK's Assistant</div>
+        <div class="hd-sub">Oracle HCM · AI · Analytics · Dubai</div>
+      </div>
+      <span class="hd-user" id="hd-user"></span>
+      <span class="hd-badge">Online</span>
+      <button class="mcw-close-btn" id="mcw-close">✕</button>
+    </div>
+    <div class="tabs">
+      <button class="tab active" id="t-chat" onclick="mcwSwitchTab('chat')">💬 Chat</button>
+      <button class="tab" id="t-dash" onclick="mcwSwitchTab('dash')">📊 Dashboards</button>
+    </div>
+
+    <!-- CHAT PANE -->
+    <div id="pane-chat">
+      <div id="chat-body"></div>
+      <div id="qr-row"></div>
+      <div class="inp-row">
+        <textarea id="msg-in" placeholder="Ask about HR projects, AI agents, analytics…" rows="1"></textarea>
+        <button id="send-btn" title="Send">➤</button>
+      </div>
+    </div>
+
+    <!-- DASHBOARD PANE -->
+    <div id="pane-dash">
+      <div class="dash-section">
+        <div class="dash-badge badge-oac">
+          <span class="dash-logo-dot dot-oac"></span>Oracle Analytics Cloud
+        </div>
+        <div class="kpi-row">
+          <div class="kpi"><div class="kpi-num">40%</div><div class="kpi-lbl">Helpdesk Cut</div><div class="kpi-delta">↑ AI RAG</div></div>
+          <div class="kpi"><div class="kpi-num">4</div><div class="kpi-lbl">AI Agents</div><div class="kpi-delta">↑ Live</div></div>
+          <div class="kpi"><div class="kpi-num">10+</div><div class="kpi-lbl">Dashboards</div><div class="kpi-delta">C-Suite</div></div>
+          <div class="kpi"><div class="kpi-num">5+</div><div class="kpi-lbl">Modules</div><div class="kpi-delta">Redwood</div></div>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-title">Attrition Risk by Dept</div>
+            <canvas class="chart" id="c-attr" height="150"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Leave Trend — YTD</div>
+            <canvas class="chart" id="c-leave" height="150"></canvas>
+          </div>
+          <div class="chart-card wide">
+            <div class="chart-title">Headcount Forecast — 6 Months</div>
+            <canvas class="chart" id="c-head" height="130"></canvas>
+          </div>
+        </div>
+        <p class="dash-note">Sample — same KPI types and chart patterns as Meera's OAC production dashboards</p>
+      </div>
+      <div class="dash-section">
+        <div class="dash-badge badge-pbi">
+          <span class="dash-logo-dot dot-pbi"></span>Power BI · HR Analytics
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <div class="chart-title">Recruitment Pipeline</div>
+            <canvas class="chart" id="c-recruit" height="160"></canvas>
+          </div>
+          <div class="chart-card">
+            <div class="chart-title">Overtime by Role Group</div>
+            <canvas class="chart" id="c-over" height="160"></canvas>
+          </div>
+          <div class="chart-card wide">
+            <div class="chart-title">Turnover vs Hire Rate — 12 Month</div>
+            <canvas class="chart" id="c-turn" height="130"></canvas>
+          </div>
+        </div>
+        <p class="dash-note">Power BI patterns from FMCG sector — attrition, leave forecasting, Python algorithms</p>
+      </div>
+    </div><!-- /pane-dash -->
+  </div><!-- /app -->
+
+</div><!-- /mcw-panel -->
+
+<!-- ─── SCRIPTS ───────────────────────────────────── -->
 <script>
-/* ── Nav scroll ── */
+/* ── NAV scroll shadow ── */
 const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 80);
-}, { passive: true });
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
 
-/* ── Scroll reveal ── */
+/* ── Reveal on scroll ── */
 const revealEls = document.querySelectorAll('.reveal');
-const revealObs = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObs.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-revealEls.forEach(el => revealObs.observe(el));
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, { threshold: 0.08 });
+revealEls.forEach(el => io.observe(el));
 
-/* stagger grid children */
-document.querySelectorAll('.posts-grid, .stats-grid, .work-list, .ai-cards').forEach(parent => {
-  [...parent.children].forEach((child, i) => {
-    child.style.transitionDelay = (i * 0.07) + 's';
-  });
-});
-
-/* ── Hero neural network canvas ── */
-(function() {
-  const canvas = document.getElementById('hero-canvas');
-  const ctx = canvas.getContext('2d');
-  let W, H, nodes, t = 0;
-
-  function resize() {
-    W = canvas.width = canvas.offsetWidth;
-    H = canvas.height = canvas.offsetHeight;
-    buildNodes();
-  }
-
-  function buildNodes() {
-    nodes = [];
-    const count = Math.floor(W / 60);
-    for (let i = 0; i < count * 3; i++) {
-      nodes.push({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        r: Math.random() * 1.5 + 0.5
-      });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.008;
-
+/* ── Hero canvas neural-net animation ── */
+(function(){
+  const c = document.getElementById('hero-canvas');
+  if(!c) return;
+  const ctx = c.getContext('2d');
+  function resize(){ c.width = c.offsetWidth; c.height = c.offsetHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+  const N = 55;
+  const nodes = Array.from({length:N}, () => ({
+    x: Math.random(), y: Math.random(),
+    vx: (Math.random()-.5)*.0006, vy: (Math.random()-.5)*.0006
+  }));
+  function draw(){
+    ctx.clearRect(0,0,c.width,c.height);
+    const W = c.width, H = c.height;
+    const t = Date.now() * .00025;
     nodes.forEach(n => {
-      n.x += n.vx; n.y += n.vy;
-      if (n.x < 0 || n.x > W) n.vx *= -1;
-      if (n.y < 0 || n.y > H) n.vy *= -1;
+      n.x += n.vx + Math.sin(t + n.y*4)*.0002;
+      n.y += n.vy + Math.cos(t + n.x*4)*.0002;
+      if(n.x<0)n.x=1; if(n.x>1)n.x=0;
+      if(n.y<0)n.y=1; if(n.y>1)n.y=0;
     });
-
-    // Draw edges
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const dx = nodes[i].x - nodes[j].x;
-        const dy = nodes[i].y - nodes[j].y;
-        const dist = Math.sqrt(dx*dx + dy*dy);
-        if (dist < 120) {
-          const alpha = (1 - dist / 120) * 0.25;
-          const pulse = 0.5 + 0.5 * Math.sin(t + i * 0.3);
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const dx=(nodes[i].x-nodes[j].x)*W, dy=(nodes[i].y-nodes[j].y)*H;
+        const d=Math.sqrt(dx*dx+dy*dy);
+        if(d<160){
+          ctx.strokeStyle=`rgba(181,103,43,${(1-d/160)*.7})`;
+          ctx.lineWidth=.8;
           ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(nodes[j].x, nodes[j].y);
-          ctx.strokeStyle = dist < 60
-            ? `rgba(181,103,43,${alpha * pulse})`
-            : `rgba(38,104,127,${alpha * 0.6})`;
-          ctx.lineWidth = 0.5;
+          ctx.moveTo(nodes[i].x*W,nodes[i].y*H);
+          ctx.lineTo(nodes[j].x*W,nodes[j].y*H);
           ctx.stroke();
         }
       }
     }
-
-    // Draw nodes
-    nodes.forEach((n, i) => {
-      const pulse = 0.7 + 0.3 * Math.sin(t * 1.5 + i * 0.7);
+    nodes.forEach(n=>{
+      ctx.fillStyle='rgba(181,103,43,.9)';
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * pulse, 0, Math.PI * 2);
-      ctx.fillStyle = i % 3 === 0
-        ? `rgba(181,103,43,0.7)` : `rgba(38,104,127,0.5)`;
+      ctx.arc(n.x*W,n.y*H,2,0,Math.PI*2);
       ctx.fill();
     });
-
     requestAnimationFrame(draw);
   }
-
-  resize();
-  window.addEventListener('resize', resize);
   draw();
 })();
 
-/* ── AI Card Canvas: Neural Network ── */
-function drawNeuralNet(canvasId) {
-  const c = document.getElementById(canvasId);
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
-  const layers = [[2, H*0.3, H*0.7], [3, H*0.2, H*0.5, H*0.8], [4, H*0.15, H*0.38, H*0.62, H*0.85], [3, H*0.2, H*0.5, H*0.8], [2, H*0.3, H*0.7]];
-  const xs = [W*0.1, W*0.28, W*0.5, W*0.72, W*0.9];
-  let t = 0;
+/* ── Chat Widget — full resume-backed KB + dashboards ── */
+(function(){
+  const WEB3FORMS_KEY='cde1fde1-4717-4f6d-9f57-6de5ea440282'; // ← sign up free at web3forms.com with meera2k10@gmail.com
+  const MEERA_EMAIL='meera2k10@gmail.com';
 
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.025;
+  /* ─ Offensive filter ─ */
+  const BAD=['fuck','shit','bitch','asshole','bastard','cunt','dick','pussy','cock','nigger','nigga','faggot','retard','whore','slut'];
+  const MILD=['crap','damn','hell','wtf','idiot','stupid'];
+  function isOff(t){const tl=t.toLowerCase().replace(/[^a-z0-9 ]/g,' ');return BAD.some(b=>tl.includes(b));}
+  function isMild(t){const tl=t.toLowerCase();return MILD.some(b=>tl.includes(b));}
 
-    layers.forEach((layer, li) => {
-      if (li < layers.length - 1) {
-        const nextLayer = layers[li+1];
-        layer.slice(1).forEach(y1 => {
-          nextLayer.slice(1).forEach(y2 => {
-            const pulse = 0.3 + 0.25 * Math.sin(t + li * 1.1 + y1 * 0.01);
-            ctx.beginPath();
-            ctx.moveTo(xs[li], y1);
-            ctx.lineTo(xs[li+1], y2);
-            ctx.strokeStyle = `rgba(181,103,43,${pulse})`;
-            ctx.lineWidth = 0.8;
-            ctx.stroke();
-          });
-        });
-      }
-    });
+  /* ─ Knowledge base — first-person, humanised ─ */
+  const KB=[
+    {q:['how are you','how r you','how do you do','you doing','hows meera','how\'s meera','how is meera'],
+     a:'Hi! I\'m doing great, thank you for asking 😊 Excited about some interesting AI agents work at the moment — always something new to build. What brings you here today?'},
+    {q:['who are you','who is this','what is this','about you','introduce yourself','tell me about yourself'],
+     a:'I\'m Meera AK — Oracle HCM specialist, analytics builder, and AI practitioner based in Dubai 👋<br><br>I\'ve spent 18 years in IT, with 15+ deep in Oracle applications — both Fusion HCM and E-Business Suite. My work sits at that intersection of enterprise systems, data, and now AI: I configure and build, then wire up the integrations and dashboards that turn system complexity into decisions people can actually act on.<br><br>What would you like to know about my work?'},
+    {q:['who is meera','about meera','background','overview','summary'],
+     a:'I\'m Meera AK (Meeramaheswari Annadurai) — <strong>18 years in IT, 15+ in Oracle Applications</strong>, based in Dubai. Currently a Business Applications Principal in GCC healthcare, where I\'ve deployed 4 AI Agents to production, led a Redwood UI rollout across 5 modules (no SI), and built 10+ OAC/Power BI dashboards used weekly by C-suite.<br><br>I work across the full Oracle Fusion HCM suite — Core HR, Payroll, Absence, ORC, LMS, Goals &amp; Performance, Talent Management, Succession Planning — and I bring the analytics and AI layer on top. What aspect of my work interests you most?'},
+    {q:['what do you enjoy','passionate about','love about work','favourite part','what excites you','what drives you'],
+     a:'Honestly? The moment when a system that used to frustrate people starts helping them instead 😄<br><br>I get genuinely excited building things where Oracle Fusion data flows into an AI agent or analytics dashboard that a real HR manager opens every morning and trusts. And I love the integration challenges — connecting Fusion to WhatsApp, SharePoint, biometric systems — where you make disparate systems feel like one experience.<br><br>What\'s your world? Oracle? AI? Analytics? I\'d love to hear what you\'re working on.'},
+    {q:['philetics','phygitalytics','advisory','learning community','ai literacy','ai tools','teaching','mentor','community','knowledge transfer','ai consulting','ai beyond oracle','broader ai','general ai'],
+     a:'This is genuinely close to my heart — and it\'s where I\'m investing beyond my Oracle work! 💡<br><br>I\'m connected with <strong><a href="https://www.linkedin.com/company/phygitalytics/" target="_blank" rel="noopener">Phygitalytics</a></strong> — an AI advisory community that takes a practical, grounded view on AI implementation: Human-in-the-Loop design, skills-based hiring in the AI era, applied AI literacy for practitioners, not just hype. The kind of thinking I fully align with.<br><br>Beyond that connection, I actively support <strong>AI tools literacy</strong> — helping HR leaders, business users, and practitioners understand how to use AI in their organisations responsibly. The real mechanics: what agents can do, where RAG fits, how to govern AI without blocking people.<br><br>My philosophy: AI should enable people, not add to their workload or restrict them. If you\'re building in this space or exploring AI for your organisation, I\'d genuinely love to connect.'},
+    {q:['project','looking for','available for','new opportunity','open to','collaborate','work together','engage','hire me','bring you in'],
+     a:'__NAME__, great timing to ask! 🤝<br><br>I\'m actively looking to connect with teams working on:<br>• <strong>Oracle Fusion HCM / ERP transformation</strong> — especially no-SI or lean-team implementations<br>• <strong>Oracle AI Agent Studio deployments</strong> — agents that make real work easier<br>• <strong>HR Analytics</strong> — OAC, Power BI, Python, predictive modelling<br>• <strong>AI literacy &amp; advisory</strong> — helping organisations build AI confidence (connected with <a href="https://www.linkedin.com/company/phygitalytics/" target="_blank" rel="noopener">Phygitalytics</a>)<br>• <strong>Emerging tech ventures</strong> — Human-in-the-Loop AI, skills-based hiring, applied AI design<br><br>Drop me a message — I respond personally. 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a>',
+     dyn:true},
+    {q:['analytics','hr analytics','business analytics','data analytics','kpi','metric','dashboard'],
+     a:'Analytics is where I probably spend the most energy outside of core implementation! 📊<br><br>I\'ve built <strong>15+ analytics solutions</strong> across my career:<br>• <strong>OAC:</strong> 10+ dashboards — attrition, leave heat maps, recruitment pipeline, headcount forecasting — consumed weekly by C-suite<br>• <strong>Power BI:</strong> Attrition risk, leave forecasting (Python ML), turnover drivers, recruitment funnel<br>• <strong>Tableau:</strong> Aviation and airport sector workforce analytics<br>• <strong>Python + Azure AutoML:</strong> End-to-end attrition prediction pipeline into OTBI<br><br>Switch to the 📊 <em>Dashboards</em> tab to see sample charts — I built those here too 😊'},
+    {q:['power bi','powerbi','pbi','microsoft bi'],
+     a:'Power BI is one of my favourite tools for connecting Oracle Fusion data to leadership! I\'ve built:<br>• Attrition risk dashboards with Python-driven ML scores<br>• Leave forecasting using predictive algorithms — used for resourcing decisions<br>• Turnover and recruitment funnel reports consumed by C-suite weekly<br><br>The 📊 Dashboards tab has sample charts. Curious about a specific use case?'},
+    {q:['oracle analytics','oac','oracle analytics cloud'],
+     a:'I love working with OAC because it sits natively with Oracle Fusion — no data movement, no latency. I\'ve built <strong>10+ OAC dashboards</strong> covering attrition, leave liability, recruitment pipeline, overtime, and 6-month headcount forecasting — all via OTBI subject areas. C-suite opens these every Monday morning. 📈<br><br>Want to know how I structured a specific one?'},
+    {q:['otbi','bi publisher','bip','report','reporting'],
+     a:'Reporting is where I\'ve probably built the most volume — <strong>20+ custom solutions</strong>:<br>• <strong>OTBI:</strong> Cross-subject-area analysis across HR, Payroll, Absence, Recruitment<br>• <strong>BI Publisher:</strong> Multi-sheet Excel outputs, PDF payslips with bursting, letter templates, compliance reports<br><br>I\'ve handled some complex ones — multi-jurisdiction payslip bursting, custom Recruitment analytics, cross-module headcount. Anything specific you\'re trying to solve?'},
+    {q:['attrition','azure','automl','machine learning','ml','prediction','turnover'],
+     a:'This project is one I\'m proudest of! 🤖 I built an end-to-end attrition prediction pipeline:<br><br>1️⃣ Oracle Fusion HCM → automated data extract (HDL/HCM Extracts)<br>2️⃣ Azure AutoML → classification model training<br>3️⃣ Managed Online Endpoint → REST inference<br>4️⃣ Attrition risk scores surfaced in OTBI + VBCS for HR leaders<br><br>I also built Python-based turnover algorithms and deep learning leave forecasting on top. The full pipeline runs without manual intervention.'},
+    {q:['leave','absence','leave forecast'],
+     a:'Absence is one of those modules that looks simple but gets complex fast — accrual plans, eligibility rules, BPM approvals, calendar overlaps 😅<br><br>I\'ve worked on it from both sides:<br>• <strong>Functional config:</strong> Full absence type/plan setup, eligibility, approval flows<br>• <strong>Analytics:</strong> OAC and Power BI leave trend dashboards, heat maps, leave liability forecasting<br>• <strong>Predictive:</strong> Python algorithms for leave pattern forecasting used in resourcing<br><br>What\'s the challenge you\'re working on?'},
+    {q:['headcount','workforce planning','staffing','resource planning'],
+     a:'Workforce planning is where analytics and HCM config meet — I enjoy this a lot! I\'ve built:<br>• OAC and Power BI 6-month headcount forecasting dashboards<br>• Recruitment pipeline analytics (open position → hire timeline)<br>• Python algorithms for leave and overtime forecasting for resourcing<br>• Oracle Fusion Position Management configuration for headcount governance<br><br>Lots of this feeds into C-suite weekly briefs. What\'s your planning horizon?'},
+    {q:['recruitment','orc','oracle recruiting','hiring','pipeline','applicant','onboarding'],
+     a:'I\'ve worked Oracle Recruiting Cloud (ORC) from requisition all the way through onboarding:<br>• <strong>Functional:</strong> Requisition templates, offer management, onboarding checklist setup<br>• <strong>Analytics:</strong> Power BI funnel — stage conversion, time-to-hire, source of hire, offer acceptance rates<br>• <strong>OTBI:</strong> Custom Recruitment subject area reports for leadership<br><br>The analytics side is particularly powerful when you connect it to attrition data — you can see where hiring is outpacing retention. Interesting angle?'},
+    {q:['ai agent','leave assistant','policy agent','workflow agent','symptoms','oracle agent','agent studio'],
+     a:'I\'ve deployed <strong>4 Oracle AI Agents live in production</strong> via Oracle AI Agent Studio — and I mean genuinely in production, used by real employees daily 🚀<br><br>• <strong>Leave Assistant</strong> — answers absence queries, handles approvals<br>• <strong>Policy RAG Agent</strong> — retrieves HR policy answers from documents in seconds<br>• <strong>Workflow Agent</strong> — routes HCM process questions intelligently<br>• <strong>Symptoms Analysis App</strong> — clinical triage assistant<br><br>Result: 40% reduction in HR helpdesk tickets. Zero external tool dependency — all on Oracle. What\'s your interest in AI agents?'},
+    {q:['rag','hr self service','self-service','helpdesk','chatbot','hr assistant'],
+     a:'The RAG project is one I\'m really proud of! I designed and built an in-house RAG-based HR self-service assistant — integrated directly with Oracle Fusion HCM data models in a large GCC healthcare environment.<br><br>The result: <strong>40% reduction in helpdesk inquiries in production</strong>. Employees ask questions in natural language, get policy answers instantly, and the load on HR teams dropped significantly.<br><br>Zero external tool dependency — built on Oracle\'s own stack. Want to know how the RAG architecture was structured?'},
+    {q:['redwood','redwood ui','ux rollout','ui migration'],
+     a:'The Redwood rollout was one of my most challenging — and satisfying — projects! I led it independently across <strong>5+ HCM modules</strong> (Core HCM, Absence, Payroll, Learning, Recruitment) with no Systems Integrator.<br><br>I hit some tricky issues: a Submit button failure from a missing ojAction binding, and a VB Studio canvas crash post-26A patch. Solved both myself. It\'s the kind of thing that only happens when you really understand the stack end-to-end 😊<br><br>Are you working on a Redwood migration?'},
+    {q:['vbcs','visual builder','page customisation','page customization'],
+     a:'VBCS is where functional config meets development — I really enjoy it! I\'ve built:<br>• Custom VBCS screens for payroll element entry and attrition risk display<br>• Redwood-compliant page extensions across Core HCM, Absence, Payroll<br>• Resolved VB Studio canvas failures post-patch (26A)<br><br>The combination of VBCS + OIC + Fusion REST APIs lets you build genuinely powerful custom experiences without leaving the Oracle stack. What are you trying to build?'},
+    {q:['payroll','salary','fast formula','element','costing'],
+     a:'Payroll is one of my core strengths — I\'ve done it in both Fusion and EBS:<br><br><strong>Oracle Fusion Payroll:</strong><br>• Element configuration, costing setup, payroll flows<br>• Fast Formula for complex earnings/deductions<br>• VBCS screens for payroll entry, BIP payslip templates<br><br><strong>Oracle EBS Payroll:</strong><br>• Full HRMS config, AME workflows, PL/SQL, custom forms<br><br>I ran a full multi-jurisdiction payroll implementation in the FMCG sector — end to end, no SI. What\'s the payroll challenge you\'re looking at?'},
+    {q:['oic','integration','whatsapp','biometric','sap','sharepoint','rest api','webhook'],
+     a:'Integration is where I connect Oracle to the real world! I\'ve built <strong>8+ integration points</strong>:<br>• <strong>WhatsApp:</strong> Real-time employee notifications via OIC<br>• <strong>SharePoint:</strong> Document flows and approval routing<br>• <strong>Biometric systems:</strong> Attendance feeds into Fusion HCM<br>• <strong>SAP Financials:</strong> OIC-based bi-directional sync<br>• <strong>Azure Functions:</strong> REST inference from AutoML models<br>• <strong>Medical benefits connectors</strong>, ETL/TIBCO, APEX customisations<br><br>The WhatsApp + HCM integration is a particularly popular one — employees love getting leave approvals on their phones 📱 Interested in how that was built?'},
+    {q:['hcm module','core hcm','benefits','performance','goals','learning','lms','compensation','succession','talent management'],
+     a:'I\'ve worked across the <strong>full Oracle Fusion HCM suite</strong> — 18 years in IT, 15+ on Oracle Applications:<br><br>Core HR · Payroll · Absence Management · <strong>Oracle Recruiting Cloud (ORC)</strong> · <strong>Learning (LMS)</strong> · <strong>Goals &amp; Performance</strong> · <strong>Talent Management</strong> · <strong>Succession Planning</strong> · Benefits · Compensation · Position Management · BPM · VBCS · OTBI/BIP<br><br>Also well-versed in <strong>Oracle E-Business Suite (EBS HRMS)</strong> — HR, Payroll, AME, PL/SQL. I\'ve run full EBS-to-Fusion migrations independently. Any specific module you\'d like to dig into?'},
+    {q:['career','experience','implementations','work history','sector','industry'],
+     a:'Here\'s a quick career snapshot:<br><br>🏥 <strong>Healthcare GCC (2025–now):</strong> 4 AI Agents live, RAG assistant (40% ticket drop), Redwood rollout (5 modules, no SI), 10+ OAC/Power BI dashboards<br><br>🛒 <strong>FMCG (2021–2025):</strong> Full Oracle Fusion HCM implementation, Azure AutoML attrition, OIC integrations (biometric, SAP, SharePoint)<br><br>✈️ <strong>Aviation (2018–2020):</strong> Oracle EBS HR/Payroll — large-scale airline environment<br><br>🛫 <strong>Airport (2016–2018):</strong> Oracle EBS, Tableau, Kronos workforce management<br><br>What period or sector is most relevant to what you\'re working on?'},
+    {q:['education','dba','degree','golden gate','ggu','qualification','studying'],
+     a:'I\'m currently pursuing a <strong>Doctor of Business Administration specialising in Generative AI</strong> at Golden Gate University, San Francisco (AACSB accredited, 2026–2029) — research focused on enterprise AI deployment gaps. It\'s a perfect complement to what I\'m already building in production 😊<br><br>Earlier degrees:<br>• <strong>PGDM-IT</strong> — BIMTECH (2022)<br>• <strong>BE Computer Science</strong> — Anna University (2006)'},
+    {q:['certification','certified','oracle certified','oci','pmp'],
+     a:'My current certifications:<br>• ✅ Oracle HCM Business Process Certified Foundations Associate<br>• ✅ Oracle Cloud Infrastructure 2023 Foundations Associate<br>• ✅ Data Analysis and Machine Learning — London International Studies<br>• ✅ Agile Methodology Training<br>• 🔄 PMP — In Progress<br><br>I keep these current alongside live project work — certifications mean more when you\'re also shipping real things 😊'},
+    {q:['blog','ebiztechtalk','write','article','writing','publish'],
+     a:'I run <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener"><strong>eBizTechTalk</strong></a> — my Oracle HCM technical blog, going since 2017 📝<br><br>Everything I write comes from live project work — real issues, real configs, real fixes. Topics cover Fusion implementation deep-dives, BIP/OTBI tricks, AI deployment notes, VBCS patterns, OIC integrations.<br><br>If you\'re an Oracle practitioner you\'ll find something useful there. What topics do you write or read about?'},
+    {q:['contact','email','reach','connect','message','linkedin'],
+     a:'__NAME__, I\'d love to hear from you! 🤝<br><br>Best ways to reach me:<br>• 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a><br>• 🔗 <a href="https://www.linkedin.com/in/meeraka/" target="_blank" rel="noopener">LinkedIn — Meera AK</a><br><br>I reply personally — whether it\'s a project conversation, an Oracle question, or just a connection. Looking forward to it!',
+     dyn:true},
+    {q:['hello','hi','hey','good morning','good afternoon','good evening','hiya','howdy'],
+     a:'Hi __NAME__! Lovely to meet you 😊 I\'m here to chat about Meera\'s work — Oracle HCM, AI agents, analytics, integrations — or anything in between. What would you like to explore?',
+     dyn:true},
+    {q:['what can you do','what do you know','help me','what topics','questions'],
+     a:'Great question! You can ask me about:<br><br>💼 <strong>Oracle work</strong> — Fusion HCM modules, EBS, Redwood, VBCS, payroll, integrations<br>📊 <strong>Analytics</strong> — OAC, Power BI, Tableau, Python, Azure AutoML<br>🤖 <strong>AI projects</strong> — Oracle AI Agents, RAG architecture, production deployments<br>🔗 <strong>Integrations</strong> — OIC, WhatsApp, SharePoint, SAP, biometric systems<br>📝 <strong>Blog &amp; writing</strong> — eBizTechTalk<br>🤝 <strong>Projects &amp; collaboration</strong> — what Meera\'s open to<br><br>Or just have a conversation — I\'m here! 😊'},
+  ];
 
-    layers.forEach((layer, li) => {
-      layer.slice(1).forEach(y => {
-        const pulse = 0.7 + 0.3 * Math.sin(t * 1.5 + li * 0.9 + y * 0.02);
-        ctx.beginPath();
-        ctx.arc(xs[li], y, 5 * pulse, 0, Math.PI * 2);
-        ctx.fillStyle = li === 0 || li === layers.length - 1
-          ? `rgba(181,103,43,0.9)` : `rgba(38,104,127,0.8)`;
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(xs[li], y, 7 * pulse, 0, Math.PI * 2);
-        ctx.strokeStyle = li === 0 || li === layers.length - 1
-          ? `rgba(181,103,43,0.2)` : `rgba(38,104,127,0.15)`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
+  const QUICK=['What are you working on?','AI Agents in Oracle','Analytics & dashboards','ORC & LMS modules','Open to projects?','Let\'s connect'];
+  let userName='',visitorEmail='',offenseCount=0,qrShown=false;
+  const panel=document.getElementById('mcw-panel');
+  const gate=document.getElementById('gate');
+  const app=document.getElementById('app');
+  const cbody=document.getElementById('chat-body');
+  const qrRow=document.getElementById('qr-row');
+  const inp=document.getElementById('msg-in');
+  const sBtn=document.getElementById('send-btn');
+
+  /* Toggle */
+  document.getElementById('mcw-btn').onclick=()=>{
+    panel.classList.toggle('open');
+    if(panel.classList.contains('open'))setTimeout(()=>document.getElementById('g-name')?.focus(),120);
+  };
+  document.getElementById('mcw-close').onclick=()=>panel.classList.remove('open');
+
+  /* Gate */
+  document.getElementById('gate-go').onclick=doGate;
+  document.getElementById('g-name')?.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('g-email')?.focus();});
+  document.getElementById('g-email')?.addEventListener('keydown',e=>{if(e.key==='Enter')doGate();});
+
+  function doGate(){
+    const name=(document.getElementById('g-name')?.value||'').trim();
+    const email=(document.getElementById('g-email')?.value||'').trim();
+    let ok=true;
+    const en=document.getElementById('en'),ee=document.getElementById('ee');
+    const gn=document.getElementById('g-name'),ge=document.getElementById('g-email');
+    if(!name){gn?.classList.add('err');if(en)en.textContent='Please enter your name.';ok=false;}
+    else{gn?.classList.remove('err');if(en)en.textContent='';}
+    if(!email||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ge?.classList.add('err');if(ee)ee.textContent='Please enter a valid email.';ok=false;}
+    else{ge?.classList.remove('err');if(ee)ee.textContent='';}
+    if(!ok)return;
+    userName=name.split(' ')[0]; visitorEmail=email;
+    gate.style.display='none';
+    app.classList.add('on');
+    const hu=document.getElementById('hd-user');
+    if(hu)hu.textContent=userName+' · '+email;
+    greet();
+    notify('New portfolio visitor',`Name: ${name}\nEmail: ${email}\nTime: ${new Date().toLocaleString()}`);
+    setTimeout(drawAll,300);
+  }
+
+  /* Tabs */
+  window.mcwSwitchTab=function(id){
+    document.getElementById('pane-chat').style.display=id==='chat'?'flex':'none';
+    document.getElementById('pane-dash').style.display=id==='dash'?'block':'none';
+    document.getElementById('t-chat').classList.toggle('active',id==='chat');
+    document.getElementById('t-dash').classList.toggle('active',id==='dash');
+    if(id==='dash')drawAll();
+  };
+
+  /* Greet */
+  function greet(){
+    botMsg(`Hi ${userName}! Great to meet you 👋 I\'m Meera\'s assistant — I know her work inside out: Oracle HCM, AI agents, analytics, integrations, blog. Ask me anything, or pick a topic below to get started.`,false);
+    setTimeout(()=>{
+      if(qrShown)return;qrShown=true;
+      QUICK.forEach(lbl=>{
+        const b=document.createElement('button');b.className='qr';b.textContent=lbl;
+        b.onclick=()=>{qrRow.innerHTML='';addUser(lbl);respond(lbl);};
+        qrRow.appendChild(b);
       });
-    });
-
-    requestAnimationFrame(frame);
+    },450);
   }
-  frame();
-}
 
-/* ── AI Card Canvas: ML Pipeline bars ── */
-function drawMLChart(canvasId) {
-  const c = document.getElementById(canvasId);
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
-  const vals = [0.62, 0.78, 0.71, 0.85, 0.73, 0.89, 0.91, 0.88, 0.95, 0.87, 0.79, 0.92];
-  let t = 0;
-  const labels = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  /* Send */
+  sBtn.onclick=doSend;
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doSend();}});
+  inp.addEventListener('input',()=>{inp.style.height='34px';inp.style.height=Math.min(inp.scrollHeight,100)+'px';});
 
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.018;
-    const pad = 20, bw = (W - pad*2) / vals.length - 4;
-    vals.forEach((v, i) => {
-      const pulse = v + 0.03 * Math.sin(t + i * 0.5);
-      const barH = (H - pad*2) * pulse;
-      const x = pad + i * ((W - pad*2) / vals.length) + 2;
-      const y = H - pad - barH;
-      const isHigh = pulse > 0.88;
-      ctx.fillStyle = isHigh
-        ? `rgba(181,103,43,${0.5 + 0.3*Math.sin(t + i)})`
-        : `rgba(38,104,127,0.35)`;
-      ctx.fillRect(x, y, bw, barH);
-      if (isHigh) {
-        ctx.fillStyle = `rgba(181,103,43,0.9)`;
-        ctx.fillRect(x, y, bw, 2);
-      }
-    });
-
-    // trend line
-    ctx.beginPath();
-    vals.forEach((v, i) => {
-      const pulse = v + 0.03 * Math.sin(t + i * 0.5);
-      const x = pad + i * ((W - pad*2) / vals.length) + 2 + bw/2;
-      const y = H - pad - (H - pad*2) * pulse;
-      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    });
-    ctx.strokeStyle = `rgba(181,103,43,0.5)`;
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    requestAnimationFrame(frame);
-  }
-  frame();
-}
-
-/* ── AI Card Canvas: Research wave ── */
-function drawResearchWave(canvasId) {
-  const c = document.getElementById(canvasId);
-  if (!c) return;
-  const ctx = c.getContext('2d');
-  const W = c.width, H = c.height;
-  let t = 0;
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    t += 0.018;
-
-    // Multiple sine waves
-    [
-      { amp: H*0.18, freq: 0.012, phase: 0, color: 'rgba(181,103,43,0.5)', lw: 1.5 },
-      { amp: H*0.12, freq: 0.02, phase: 1.2, color: 'rgba(38,104,127,0.5)', lw: 1 },
-      { amp: H*0.08, freq: 0.03, phase: 2.4, color: 'rgba(181,103,43,0.25)', lw: 0.8 },
-    ].forEach(wave => {
-      ctx.beginPath();
-      for (let x = 0; x <= W; x += 2) {
-        const y = H/2 + wave.amp * Math.sin(wave.freq * x + t * 1.2 + wave.phase);
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.strokeStyle = wave.color;
-      ctx.lineWidth = wave.lw;
-      ctx.stroke();
-    });
-
-    // Dots on the main wave
-    for (let x = 20; x < W; x += 60) {
-      const y = H/2 + H*0.18 * Math.sin(0.012 * x + t * 1.2);
-      ctx.beginPath();
-      ctx.arc(x, y, 3, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(181,103,43,${0.6 + 0.4*Math.sin(t + x*0.05)})`;
-      ctx.fill();
+  function doSend(){
+    const txt=inp.value.trim();if(!txt)return;
+    inp.value='';inp.style.height='34px';qrRow.innerHTML='';
+    addUser(txt);
+    if(isOff(txt)){
+      offenseCount++;
+      if(offenseCount>=2){sysMsg('⛔ Flagged for inappropriate language. Chat closed.','block');sBtn.disabled=true;inp.disabled=true;}
+      else sysMsg('🚫 Please keep it professional — one more instance and this chat will close.','block');
+      return;
     }
-
-    requestAnimationFrame(frame);
+    if(isMild(txt))sysMsg('⚠️ Please keep the conversation professional.','warn');
+    respond(txt);
   }
-  frame();
-}
 
-drawNeuralNet('canvas-nn');
-drawMLChart('canvas-ml');
-drawResearchWave('canvas-research');
+  function respond(txt){
+    showTyping();
+    setTimeout(()=>{removeTyping();botMsg(getReply(txt));},600+Math.random()*400);
+  }
+
+  function resolveA(e){
+    if(!e.dyn)return e.a;
+    return e.a.replace(/__NAME__/g,userName);
+  }
+  function getReply(txt){
+    const t=txt.toLowerCase();
+    for(const e of KB){if(e.q.some(k=>t.includes(k)))return resolveA(e);}
+    if(/thank|great|awesome|helpful|appreciate|perfect|love it/i.test(txt))
+      return `You\'re very welcome, ${userName}! 😊 Always happy to chat. Anything else on your mind?`;
+    if(/bye|goodbye|done|later|take care|ttyl/i.test(txt))
+      return `It was lovely chatting, ${userName}! Feel free to come back anytime. And if you\'d like to connect properly — 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a> or <a href="https://www.linkedin.com/in/meeraka/" target="_blank" rel="noopener">LinkedIn</a> 👋`;
+    if(/interesting|impressive|wow|amazing|cool|nice/i.test(txt))
+      return `Thank you, ${userName}! 😊 That genuinely means a lot. I put a lot of care into this work — happy to go deeper on anything that caught your eye. What would you like to explore?`;
+    if(/consult|hire|project|engage|work together|opportunit|proposal|rate|pricing/i.test(txt)){
+      notify(`Project inquiry from ${userName}`,`Name: ${userName}\nEmail: ${visitorEmail}\n\nMessage: "${txt}"`);
+      return `That\'s exciting, ${userName}! I\'d love to explore that further. I\'ve just flagged your message so Meera will follow up personally. In the meantime, the quickest way to reach her is 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a> — she responds personally, usually within a day. What kind of project is it?`;}
+    const nudges=['HR Analytics or dashboards','Oracle AI Agents','Fusion HCM modules','integrations like WhatsApp or SharePoint','the eBizTechTalk blog'];
+    const pick=nudges[Math.floor(Math.random()*nudges.length)];
+    return `Hmm, I want to make sure I give you a useful answer, ${userName}! 🤔 I might not have that exact topic covered yet — try asking me about <em>${pick}</em>, or just tell me what you\'re working on and I\'ll do my best to help.`;
+  }
+
+  function botMsg(html,ts=true){
+    const r=document.createElement('div');r.className='msg bot';
+    r.innerHTML=`<div class="m-av">M</div><div class="bubble">${html}</div>`;
+    cbody.appendChild(r);
+    if(ts){const t=document.createElement('div');t.className='ts';t.textContent=now();cbody.appendChild(t);}
+    scroll();
+  }
+  function addUser(txt){
+    const r=document.createElement('div');r.className='msg user';
+    r.innerHTML=`<div class="bubble">${esc(txt)}</div>`;
+    cbody.appendChild(r);
+    const t=document.createElement('div');t.className='ts';t.textContent=now();cbody.appendChild(t);
+    scroll();
+  }
+  function sysMsg(html,cls){
+    const r=document.createElement('div');r.className=`msg ${cls} sys`;
+    r.innerHTML=`<div class="bubble">${html}</div>`;
+    cbody.appendChild(r);scroll();
+  }
+  let tyEl=null;
+  function showTyping(){
+    const r=document.createElement('div');r.className='msg bot';
+    const av=document.createElement('div');av.className='m-av';av.textContent='M';
+    const d=document.createElement('div');d.className='tdots';d.innerHTML='<span></span><span></span><span></span>';
+    r.appendChild(av);r.appendChild(d);tyEl=r;cbody.appendChild(r);scroll();
+  }
+  function removeTyping(){if(tyEl){tyEl.remove();tyEl=null;}}
+  function scroll(){cbody.scrollTop=cbody.scrollHeight;}
+  function now(){return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});}
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function notify(subject,msg){
+    if(!WEB3FORMS_KEY||WEB3FORMS_KEY==='YOUR_ACCESS_KEY')return;
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,to_email:MEERA_EMAIL,subject,message:msg,from_name:'Portfolio Assistant'})}).catch(()=>{});
+  }
+
+  /* ─ Charts ─ */
+  const isDark=()=>document.documentElement.dataset.theme==='dark'||(!document.documentElement.dataset.theme&&window.matchMedia('(prefers-color-scheme:dark)').matches);
+  function themed(l,d){return isDark()?d:l;}
+  function px(c,R){c.width=c.offsetWidth*R;c.height=c.offsetHeight*R;}
+  let drawn=false;
+  function drawAll(){
+    const pd=document.getElementById('pane-dash');
+    if(!pd||(!pd.offsetParent&&drawn))return;
+    drawn=true;const R=window.devicePixelRatio||1;
+    drawAttrition(R);drawLeave(R);drawHead(R);drawRecruit(R);drawOver(R);drawTurn(R);
+  }
+
+  function drawAttrition(R){
+    const c=document.getElementById('c-attr');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const depts=['Nursing','Operations','Admin','Finance','IT','HR'];
+    const vals=[18,14,9,7,5,4];
+    const colors=['#c0392b','#e67e22','#e67e22','#f39c12','#27ae60','#27ae60'];
+    const pad={l:68*R,r:22*R,t:14*R,b:24*R};
+    const bH=Math.floor((H-pad.t-pad.b)/depts.length*0.6);
+    const gap=(H-pad.t-pad.b-bH*depts.length)/(depts.length+1);
+    const ink=themed('#5a5048','#9a9088');
+    ctx.clearRect(0,0,W,H);ctx.font=`${10*R}px IBM Plex Sans,sans-serif`;ctx.fillStyle=ink;ctx.textBaseline='middle';
+    depts.forEach((d,i)=>{
+      const y=pad.t+gap*(i+1)+bH*i+bH/2;
+      ctx.textAlign='right';ctx.fillText(d,pad.l-5*R,y);
+      const bW=(vals[i]/20)*(W-pad.l-pad.r);
+      ctx.fillStyle=colors[i]+'bb';ctx.beginPath();ctx.roundRect(pad.l,y-bH/2,bW,bH,2*R);ctx.fill();
+      ctx.fillStyle=colors[i];ctx.textAlign='left';ctx.fillText(vals[i]+'%',pad.l+bW+3*R,y);
+    });
+    ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${9*R}px IBM Plex Sans,sans-serif`;
+    ctx.fillText('Attrition Risk %',W/2,H-7*R);
+  }
+
+  function drawLeave(R){
+    const c=document.getElementById('c-leave');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const vals=[210,185,230,195,245,290,320,280,195,210,175,155];
+    const pad={l:36*R,r:14*R,t:14*R,b:24*R};
+    const minV=100,maxV=350,ink=themed('#5a5048','#9a9088'),grid=themed('rgba(0,0,0,.07)','rgba(255,255,255,.07)');
+    ctx.clearRect(0,0,W,H);const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;
+    [100,200,300].forEach(v=>{
+      const y=pad.t+gH*(1-(v-minV)/(maxV-minV));
+      ctx.strokeStyle=grid;ctx.lineWidth=R;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+      ctx.fillStyle=ink;ctx.font=`${8*R}px IBM Plex Mono,monospace`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(v,pad.l-3*R,y);
+    });
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+gH);
+    grad.addColorStop(0,'rgba(31,95,116,.25)');grad.addColorStop(1,'rgba(31,95,116,.02)');
+    ctx.beginPath();vals.forEach((v,i)=>{const x=pad.l+i/(months.length-1)*gW,y=pad.t+gH*(1-(v-minV)/(maxV-minV));i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    ctx.lineTo(pad.l+gW,pad.t+gH);ctx.lineTo(pad.l,pad.t+gH);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+    ctx.beginPath();ctx.strokeStyle=themed('#1f5f74','#4db8d5');ctx.lineWidth=2*R;ctx.lineJoin='round';
+    vals.forEach((v,i)=>{const x=pad.l+i/(months.length-1)*gW,y=pad.t+gH*(1-(v-minV)/(maxV-minV));i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});ctx.stroke();
+    ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;
+    months.forEach((m,i)=>{if(i%3===0)ctx.fillText(m,pad.l+i/(months.length-1)*gW,H-8*R);});
+  }
+
+  function drawHead(R){
+    const c=document.getElementById('c-head');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const labels=['Now','M+1','M+2','M+3','M+4','M+5','M+6'];
+    const forecast=[1240,1255,1268,1280,1295,1310,1325];
+    const lower=[1240,1240,1248,1255,1265,1275,1285];
+    const upper=[1240,1270,1288,1305,1325,1345,1365];
+    const pad={l:46*R,r:14*R,t:14*R,b:24*R};
+    const minV=1200,maxV=1400,gW=W-pad.l-pad.r,gH=H-pad.t-pad.b;
+    const ink=themed('#5a5048','#9a9088'),grid=themed('rgba(0,0,0,.07)','rgba(255,255,255,.07)');
+    ctx.clearRect(0,0,W,H);
+    [1200,1250,1300,1350,1400].forEach(v=>{
+      const y=pad.t+gH*(1-(v-minV)/(maxV-minV));
+      ctx.strokeStyle=grid;ctx.lineWidth=R;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+      ctx.fillStyle=ink;ctx.font=`${8*R}px IBM Plex Mono,monospace`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(v,pad.l-3*R,y);
+    });
+    const X=i=>pad.l+i/(labels.length-1)*gW,Y=v=>pad.t+gH*(1-(v-minV)/(maxV-minV));
+    ctx.beginPath();upper.forEach((v,i)=>i===0?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v)));
+    for(let i=lower.length-1;i>=0;i--)ctx.lineTo(X(i),Y(lower[i]));
+    ctx.closePath();ctx.fillStyle='rgba(181,103,43,.12)';ctx.fill();
+    ctx.setLineDash([4*R,3*R]);ctx.strokeStyle=themed('#B5672B','#d4855a');ctx.lineWidth=2*R;ctx.beginPath();
+    forecast.forEach((v,i)=>i===0?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v)));ctx.stroke();ctx.setLineDash([]);
+    ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;
+    labels.forEach((l,i)=>ctx.fillText(l,X(i),H-8*R));
+  }
+
+  function drawRecruit(R){
+    const c=document.getElementById('c-recruit');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const stages=['Open Roles','Applications','Shortlisted','Interviewed','Offered','Hired'];
+    const vals=[45,312,87,52,28,21];
+    const pad={l:82*R,r:36*R,t:10*R,b:10*R};
+    const gH=H-pad.t-pad.b,bH=Math.floor(gH/stages.length*0.66);
+    const gap=(gH-bH*stages.length)/(stages.length+1);
+    const blue=themed('#1a5fa8','#4a8fd4'),ink=themed('#5a5048','#9a9088');
+    ctx.clearRect(0,0,W,H);const maxW=W-pad.l-pad.r;
+    stages.forEach((s,i)=>{
+      const y=pad.t+gap*(i+1)+bH*i;
+      const bW=maxW*(vals[i]/vals[0]);
+      const alpha=Math.round((1-i*0.08)*255).toString(16).padStart(2,'0');
+      ctx.fillStyle=blue+alpha;ctx.beginPath();ctx.roundRect(pad.l,y,bW,bH,2*R);ctx.fill();
+      ctx.fillStyle=ink;ctx.font=`${9*R}px IBM Plex Sans,sans-serif`;ctx.textAlign='right';ctx.textBaseline='middle';
+      ctx.fillText(s,pad.l-5*R,y+bH/2);ctx.textAlign='left';ctx.fillStyle='#fff';
+      if(bW>28*R)ctx.fillText(vals[i],pad.l+5*R,y+bH/2);
+      else{ctx.fillStyle=ink;ctx.fillText(vals[i],pad.l+bW+3*R,y+bH/2);}
+    });
+  }
+
+  function drawOver(R){
+    const c=document.getElementById('c-over');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const roles=['Clinical','Nursing','Technical','Admin','Support'];
+    const vals=[38,52,24,18,12];
+    const pad={l:24*R,r:10*R,t:14*R,b:32*R};
+    const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b,maxV=60;
+    const yellow=themed('#c77a00','#e8a200'),ink=themed('#5a5048','#9a9088'),grid=themed('rgba(0,0,0,.07)','rgba(255,255,255,.07)');
+    ctx.clearRect(0,0,W,H);
+    [20,40,60].forEach(v=>{
+      const y=pad.t+gH*(1-v/maxV);
+      ctx.strokeStyle=grid;ctx.lineWidth=R;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+      ctx.fillStyle=ink;ctx.font=`${8*R}px IBM Plex Mono,monospace`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(v,pad.l-2*R,y);
+    });
+    const bW=Math.floor(gW/roles.length*0.6),gapX=(gW-bW*roles.length)/(roles.length+1);
+    roles.forEach((r,i)=>{
+      const x=pad.l+gapX*(i+1)+bW*i,bH=gH*(vals[i]/maxV);
+      ctx.fillStyle=yellow+'cc';ctx.beginPath();ctx.roundRect(x,pad.t+gH-bH,bW,bH,2*R);ctx.fill();
+      ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;
+      ctx.fillText(r,x+bW/2,H-18*R);ctx.fillText(vals[i]+'h',x+bW/2,pad.t+gH-bH-4*R);
+    });
+    ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;ctx.fillText('Avg hrs/month',W/2,H-7*R);
+  }
+
+  function drawTurn(R){
+    const c=document.getElementById('c-turn');if(!c)return;px(c,R);
+    const ctx=c.getContext('2d');const W=c.width,H=c.height;
+    const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const turnover=[4.2,3.8,5.1,4.6,3.9,4.8,6.2,5.5,4.1,3.7,4.0,3.5];
+    const hireRate=[5.5,4.8,6.2,5.8,6.0,5.2,4.8,6.5,7.1,5.9,6.3,7.0];
+    const pad={l:32*R,r:54*R,t:14*R,b:24*R};
+    const gW=W-pad.l-pad.r,gH=H-pad.t-pad.b,minV=0,maxV=9;
+    const ink=themed('#5a5048','#9a9088'),grid=themed('rgba(0,0,0,.07)','rgba(255,255,255,.07)');
+    ctx.clearRect(0,0,W,H);
+    [3,6,9].forEach(v=>{
+      const y=pad.t+gH*(1-(v-minV)/(maxV-minV));
+      ctx.strokeStyle=grid;ctx.lineWidth=R;ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(W-pad.r,y);ctx.stroke();
+      ctx.fillStyle=ink;ctx.font=`${8*R}px IBM Plex Mono,monospace`;ctx.textAlign='right';ctx.textBaseline='middle';ctx.fillText(v+'%',pad.l-2*R,y);
+    });
+    const X=i=>pad.l+i/(months.length-1)*gW,Y=v=>pad.t+gH*(1-(v-minV)/(maxV-minV));
+    const dl=(data,color,dash=[])=>{ctx.setLineDash(dash);ctx.strokeStyle=color;ctx.lineWidth=2*R;ctx.lineJoin='round';ctx.beginPath();data.forEach((v,i)=>i===0?ctx.moveTo(X(i),Y(v)):ctx.lineTo(X(i),Y(v)));ctx.stroke();ctx.setLineDash([]);};
+    dl(hireRate,themed('#1a5fa8','#4a8fd4'));
+    dl(turnover,themed('#c0392b','#e05555'),[4*R,3*R]);
+    const lx=W-pad.r+5*R;
+    ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;ctx.textAlign='left';
+    ctx.fillStyle=themed('#1a5fa8','#4a8fd4');ctx.fillText('Hire',lx,Y(hireRate[11]));
+    ctx.fillStyle=themed('#c0392b','#e05555');ctx.fillText('Turnover',lx,Y(turnover[11]));
+    ctx.fillStyle=ink;ctx.textAlign='center';ctx.font=`${8*R}px IBM Plex Sans,sans-serif`;
+    months.forEach((m,i)=>{if(i%2===0)ctx.fillText(m,X(i),H-8*R);});
+  }
+
+  window.addEventListener('resize',()=>{if(drawn){drawn=false;setTimeout(drawAll,100);}});
+  window.matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>{if(drawn){drawn=false;drawAll();}});
+})();
 </script>
+</body>
+</html>

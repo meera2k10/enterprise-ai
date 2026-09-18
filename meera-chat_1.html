@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Chat with Meera</title>
+<meta name="description" content="Chat with Meera AK — Oracle HCM & AI specialist based in Dubai. Ask about Oracle Fusion, AI agents, analytics, integrations, or upcoming projects.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+<style>
+/* ─── TOKENS ─────────────────────────────────────── */
+:root {
+  --bg:         #f5f2ed;
+  --card:       #fdfcfa;
+  --ink:        #18130e;
+  --ink2:       #5a5048;
+  --copper:     #B5672B;
+  --copper-dim: rgba(181,103,43,0.12);
+  --copper-btn: rgba(181,103,43,0.18);
+  --teal:       #1f5f74;
+  --teal-dim:   rgba(31,95,116,0.10);
+  --border:     #ddd6cc;
+  --bot-bg:     #fdfcfa;
+  --user-bg:    #1f5f74;
+  --user-ink:   #fff;
+  --sys-bg:     rgba(181,103,43,0.10);
+  --sys-ink:    #7a3c12;
+  --input-bg:   #fdfcfa;
+  --hdr-bg:     #18130e;
+  --hdr-ink:    #e8e1d8;
+  --shadow:     0 2px 16px rgba(24,19,14,0.10);
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e0c0a; --card: #161310; --ink: #e8e1d8; --ink2: #9a9088;
+  --border: #2a2420; --bot-bg: #1c1914;
+  --user-bg: #2a7a94; --sys-bg: rgba(181,103,43,0.15); --sys-ink: #d4956a;
+  --input-bg: #1c1914;
+}}
+:root[data-theme="dark"] {
+  --bg: #0e0c0a; --card: #161310; --ink: #e8e1d8; --ink2: #9a9088;
+  --border: #2a2420; --bot-bg: #1c1914;
+  --user-bg: #2a7a94; --sys-bg: rgba(181,103,43,0.15); --sys-ink: #d4956a;
+  --input-bg: #1c1914;
+}
+
+/* ─── RESET ───────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+a { color: var(--teal); text-decoration: underline; text-decoration-color: rgba(31,95,116,0.35); }
+a:hover { text-decoration-color: var(--teal); }
+
+/* ─── LAYOUT ────────────────────────────────────────── */
+#shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  width: 100%;
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+
+/* ─── HEADER ────────────────────────────────────────── */
+#hdr {
+  background: var(--hdr-bg);
+  color: var(--hdr-ink);
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding-top: calc(14px + env(safe-area-inset-top, 0px));
+}
+.hdr-av {
+  width: 40px; height: 40px;
+  background: var(--copper);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 18px; font-weight: 600;
+  color: #fff;
+  flex-shrink: 0;
+}
+.hdr-info { flex: 1; min-width: 0; }
+.hdr-name {
+  font-size: 15px; font-weight: 600;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hdr-sub {
+  font-size: 12px; color: rgba(232,225,216,0.55);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.hdr-status {
+  font-size: 11px; font-weight: 500;
+  display: flex; align-items: center; gap: 5px;
+  color: rgba(232,225,216,0.7);
+  flex-shrink: 0;
+}
+.hdr-dot {
+  width: 7px; height: 7px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%,100%{ opacity:1; } 50%{ opacity:0.4; }
+}
+.hdr-back {
+  color: rgba(232,225,216,0.6);
+  font-size: 13px;
+  text-decoration: none;
+  display: flex; align-items: center; gap: 4px;
+  flex-shrink: 0;
+  padding: 4px 0;
+}
+.hdr-back:hover { color: var(--hdr-ink); text-decoration: none; }
+
+/* ─── GATE ──────────────────────────────────────────── */
+#gate {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  background: var(--bg);
+  overflow-y: auto;
+}
+.gate-inner {
+  width: 100%; max-width: 400px;
+  text-align: center;
+}
+.gate-av {
+  width: 72px; height: 72px;
+  background: var(--copper);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 32px; font-weight: 600;
+  color: #fff;
+  margin: 0 auto 20px;
+  box-shadow: 0 4px 20px rgba(181,103,43,0.30);
+}
+.gate-title {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 22px; font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 6px;
+  text-wrap: balance;
+}
+.gate-sub {
+  font-size: 14px; color: var(--ink2);
+  margin-bottom: 28px;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+.gate-form { display: flex; flex-direction: column; gap: 12px; text-align: left; }
+.gate-form label { font-size: 12px; font-weight: 600; color: var(--ink2); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; display: block; }
+.gate-form input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: var(--input-bg);
+  color: var(--ink);
+  font-size: 15px;
+  font-family: inherit;
+  transition: border-color .15s;
+  outline: none;
+}
+.gate-form input:focus { border-color: var(--copper); }
+.gate-form input.err { border-color: #e44; }
+.err-txt { font-size: 12px; color: #c33; margin-top: 3px; min-height: 14px; }
+.gate-btn {
+  margin-top: 8px;
+  padding: 12px;
+  background: var(--copper);
+  color: #fff;
+  font-size: 15px; font-weight: 600;
+  border: none; border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity .15s, transform .1s;
+}
+.gate-btn:hover { opacity: .9; }
+.gate-btn:active { transform: scale(.98); }
+.gate-note {
+  margin-top: 14px;
+  font-size: 12px; color: var(--ink2);
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ─── CHAT APP ───────────────────────────────────────── */
+#app {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+}
+#app.on { display: flex; }
+
+/* ─── CHAT BODY ─────────────────────────────────────── */
+#chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 16px 16px;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+#chat-body::-webkit-scrollbar { width: 4px; }
+#chat-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+/* ─── MESSAGES ──────────────────────────────────────── */
+.msg { display: flex; gap: 8px; max-width: 88%; }
+.msg.bot { align-self: flex-start; }
+.msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.m-av {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--copper);
+  color: #fff; font-weight: 700; font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.bubble {
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 14px; line-height: 1.65;
+}
+.msg.bot .bubble {
+  background: var(--bot-bg);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 4px;
+  color: var(--ink);
+}
+.msg.user .bubble {
+  background: var(--user-bg);
+  color: var(--user-ink);
+  border-bottom-right-radius: 4px;
+}
+.ts {
+  font-size: 11px; color: var(--ink2);
+  text-align: center; margin: 2px 0 6px;
+  opacity: .6;
+}
+.sys-msg {
+  align-self: center;
+  font-size: 12px; padding: 7px 14px;
+  border-radius: 20px;
+  max-width: 90%; text-align: center;
+  margin: 4px 0;
+}
+.sys-msg.warn { background: #fff8e1; color: #7a5c00; border: 1px solid #ffe082; }
+.sys-msg.block { background: #fdecea; color: #b71c1c; border: 1px solid #ffcdd2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  .sys-msg.warn { background: #2a2000; color: #d4b860; border-color: #5a4c00; }
+  .sys-msg.block { background: #2a0a0a; color: #e57373; border-color: #5a1010; }
+}}
+
+/* ─── QUICK REPLIES ─────────────────────────────────── */
+#qr-row {
+  padding: 8px 16px 4px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.qr {
+  padding: 6px 13px;
+  border: 1.5px solid var(--copper);
+  border-radius: 20px;
+  background: var(--copper-dim);
+  color: var(--copper);
+  font-size: 13px; font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.qr:hover { background: var(--copper); color: #fff; }
+
+/* ─── TYPING ─────────────────────────────────────────── */
+#typing-ind {
+  display: none;
+  align-self: flex-start;
+  gap: 8px;
+  padding: 0 16px;
+  margin-bottom: 4px;
+}
+#typing-ind.show { display: flex; }
+.typing-bubble {
+  padding: 10px 14px;
+  background: var(--bot-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  display: flex; gap: 5px; align-items: center;
+}
+.td { width: 6px; height: 6px; border-radius: 50%; background: var(--ink2); animation: tdp 1.2s infinite; }
+.td:nth-child(2){ animation-delay:.2s; }
+.td:nth-child(3){ animation-delay:.4s; }
+@keyframes tdp { 0%,60%,100%{ transform:translateY(0); } 30%{ transform:translateY(-5px); } }
+
+/* ─── INPUT BAR ─────────────────────────────────────── */
+#input-bar {
+  padding: 12px 14px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border);
+  background: var(--card);
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+#msg-in {
+  flex: 1;
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-family: inherit;
+  background: var(--input-bg);
+  color: var(--ink);
+  resize: none;
+  overflow-y: hidden;
+  line-height: 1.5;
+  max-height: 100px;
+  outline: none;
+  transition: border-color .15s;
+}
+#msg-in:focus { border-color: var(--copper); }
+#send-btn {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--copper);
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: opacity .15s, transform .1s;
+}
+#send-btn:hover { opacity: .85; }
+#send-btn:active { transform: scale(.92); }
+#send-btn svg { width: 16px; height: 16px; }
+
+/* ─── RESPONSIVE ─────────────────────────────────────── */
+@media (max-width: 600px) {
+  #shell { max-width: 100%; }
+  .msg { max-width: 95%; }
+}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <!-- HEADER -->
+  <div id="hdr">
+    <div class="hdr-av">M</div>
+    <div class="hdr-info">
+      <div class="hdr-name">Meera AK</div>
+      <div class="hdr-sub">Oracle HCM & AI Specialist · Dubai</div>
+    </div>
+    <div class="hdr-status">
+      <div class="hdr-dot"></div>
+      Active
+    </div>
+    <a class="hdr-back" href="https://meera2k10.github.io/enterprise-ai" title="Back to portfolio">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Portfolio
+    </a>
+  </div>
+
+  <!-- GATE SCREEN -->
+  <div id="gate">
+    <div class="gate-inner">
+      <div class="gate-av">M</div>
+      <div class="gate-title">Chat with Meera</div>
+      <div class="gate-sub">Oracle HCM architect · AI practitioner · 18 years in enterprise IT.<br>Ask me anything — or just say hi 👋</div>
+      <div class="gate-form">
+        <div>
+          <label for="g-name">Your name</label>
+          <input type="text" id="g-name" placeholder="e.g. Sarah" autocomplete="given-name">
+          <div class="err-txt" id="en"></div>
+        </div>
+        <div>
+          <label for="g-email">Your email</label>
+          <input type="email" id="g-email" placeholder="you@example.com" autocomplete="email">
+          <div class="err-txt" id="ee"></div>
+        </div>
+        <button class="gate-btn" id="gate-go">Start chatting →</button>
+      </div>
+      <div class="gate-note">Your details help me follow up if you'd like to connect.<br>No spam, ever.</div>
+    </div>
+  </div>
+
+  <!-- CHAT APP (hidden until gate passed) -->
+  <div id="app">
+
+    <!-- Messages -->
+    <div id="chat-body"></div>
+
+    <!-- Typing indicator (lives outside chat-body so it doesn't scroll oddly) -->
+    <div id="typing-ind">
+      <div class="m-av" style="width:30px;height:30px;font-size:13px;">M</div>
+      <div class="typing-bubble">
+        <div class="td"></div><div class="td"></div><div class="td"></div>
+      </div>
+    </div>
+
+    <!-- Quick reply chips -->
+    <div id="qr-row"></div>
+
+    <!-- Input bar -->
+    <div id="input-bar">
+      <textarea id="msg-in" placeholder="Ask me anything…" rows="1"></textarea>
+      <button id="send-btn" title="Send">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2.94 2.06a1 1 0 0 1 1.06-.24l14 5.5a1 1 0 0 1 0 1.86l-14 5.5A1 1 0 0 1 2.7 13.4L4.6 10 2.7 6.6a1 1 0 0 1 .24-4.54zM4.6 10.9l9.67-3.8L4.6 9.1l1.37 2.63L4.6 10.9zm0 0"/></svg>
+      </button>
+    </div>
+
+  </div><!-- /#app -->
+</div><!-- /#shell -->
+
+<script>
+(function(){
+  const WEB3FORMS_KEY = 'cde1fde1-4717-4f6d-9f57-6de5ea440282';
+  const MEERA_EMAIL   = 'meera2k10@gmail.com';
+
+  /* ─── Offensive filter ─────────────────────────────── */
+  const BAD  = ['fuck','shit','bitch','asshole','bastard','cunt','dick','pussy','cock','nigger','nigga','faggot','retard','whore','slut'];
+  const MILD = ['crap','damn','hell','wtf','idiot','stupid'];
+  function isOff(t){ const tl=t.toLowerCase().replace(/[^a-z0-9 ]/g,' '); return BAD.some(b=>tl.includes(b)); }
+  function isMild(t){ const tl=t.toLowerCase(); return MILD.some(b=>tl.includes(b)); }
+
+  /* ─── Knowledge base ────────────────────────────────── */
+  const KB = [
+    {q:['how are you','how r you','how do you do','you doing','hows meera',"how's meera",'how is meera'],
+     a:'Hi! I\'m doing great, thank you for asking 😊 Excited about some interesting AI agents work at the moment — always something new to build. What brings you here today?'},
+
+    {q:['who are you','who is this','what is this','about you','introduce yourself','tell me about yourself'],
+     a:'I\'m Meera AK — Oracle HCM specialist, analytics builder, and AI practitioner based in Dubai 👋<br><br>I\'ve spent 18 years in IT, with 15+ deep in Oracle applications — both Fusion HCM and E-Business Suite. My work sits at that intersection of enterprise systems, data, and now AI: I configure and build, then wire up the integrations and dashboards that turn system complexity into decisions people can actually act on.<br><br>What would you like to know?'},
+
+    {q:['who is meera','about meera','background','overview','summary'],
+     a:'I\'m Meera AK (Meeramaheswari Annadurai) — <strong>18 years in IT, 15+ in Oracle Applications</strong>, based in Dubai. Currently a Business Applications Principal in GCC healthcare, where I\'ve deployed 4 AI Agents to production, led a Redwood UI rollout across 5 modules (no SI), and built 10+ OAC/Power BI dashboards used weekly by C-suite.<br><br>I work across the full Oracle Fusion HCM suite — Core HR, Payroll, Absence, ORC, LMS, Goals &amp; Performance, Talent Management, Succession Planning — and I bring the analytics and AI layer on top. What aspect interests you most?'},
+
+    {q:['what do you enjoy','passionate about','love about work','favourite part','what excites you','what drives you'],
+     a:'Honestly? The moment when a system that used to frustrate people starts helping them instead 😄<br><br>I get genuinely excited building things where Oracle Fusion data flows into an AI agent or analytics dashboard that a real HR manager opens every morning and trusts. And I love the integration challenges — connecting Fusion to WhatsApp, SharePoint, biometric systems — where you make disparate systems feel like one experience.<br><br>What\'s your world? Oracle? AI? Analytics? I\'d love to hear what you\'re working on.'},
+
+    {q:['philetics','phygitalytics','advisory','learning community','ai literacy','ai tools','teaching','mentor','community','knowledge transfer','ai consulting','ai beyond oracle','broader ai','general ai'],
+     a:'This is genuinely close to my heart — and it\'s where I\'m investing beyond my Oracle work! 💡<br><br>I\'m connected with <strong><a href="https://www.linkedin.com/company/phygitalytics/" target="_blank" rel="noopener">Phygitalytics</a></strong> — an AI advisory community that takes a practical, grounded view on AI implementation: Human-in-the-Loop design, skills-based hiring in the AI era, applied AI literacy for practitioners, not just hype. The kind of thinking I fully align with.<br><br>Beyond that connection, I actively support <strong>AI tools literacy</strong> — helping HR leaders, business users, and practitioners understand how to use AI in their organisations responsibly. The real mechanics: what agents can do, where RAG fits, how to govern AI without blocking people.<br><br>My philosophy: AI should enable people, not add to their workload or restrict them. If you\'re building in this space or exploring AI for your organisation, I\'d genuinely love to connect.'},
+
+    {q:['project','looking for','available for','new opportunity','open to','collaborate','work together','engage','hire me','bring you in'],
+     a:'__NAME__, great timing to ask! 🤝<br><br>I\'m actively looking to connect with teams working on:<br>• <strong>Oracle Fusion HCM / ERP transformation</strong> — especially no-SI or lean-team implementations<br>• <strong>Oracle AI Agent Studio deployments</strong> — agents that make real work easier<br>• <strong>HR Analytics</strong> — OAC, Power BI, Python, predictive modelling<br>• <strong>AI literacy &amp; advisory</strong> — helping organisations build AI confidence (connected with <a href="https://www.linkedin.com/company/phygitalytics/" target="_blank" rel="noopener">Phygitalytics</a>)<br>• <strong>Emerging tech ventures</strong> — Human-in-the-Loop AI, skills-based hiring, applied AI design<br><br>Drop me a message — I respond personally. 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a>',
+     dyn:true},
+
+    {q:['analytics','hr analytics','business analytics','data analytics','kpi','metric','dashboard'],
+     a:'Analytics is where I probably spend the most energy outside of core implementation! 📊<br><br>I\'ve built <strong>15+ analytics solutions</strong>:<br>• <strong>OAC:</strong> 10+ dashboards — attrition, leave heat maps, recruitment pipeline, headcount forecasting — consumed weekly by C-suite<br>• <strong>Power BI:</strong> Attrition risk, leave forecasting (Python ML), turnover drivers, recruitment funnel<br>• <strong>Tableau:</strong> Aviation and airport sector workforce analytics<br>• <strong>Python + Azure AutoML:</strong> End-to-end attrition prediction pipeline into OTBI<br><br>Curious about a specific type of dashboard or use case?'},
+
+    {q:['power bi','powerbi','pbi','microsoft bi'],
+     a:'Power BI is one of my favourite tools for connecting Oracle Fusion data to leadership! I\'ve built:<br>• Attrition risk dashboards with Python-driven ML scores<br>• Leave forecasting using predictive algorithms — used for resourcing decisions<br>• Turnover and recruitment funnel reports consumed by C-suite weekly<br><br>Curious about a specific use case?'},
+
+    {q:['oracle analytics','oac','oracle analytics cloud'],
+     a:'I love working with OAC because it sits natively with Oracle Fusion — no data movement, no latency. I\'ve built <strong>10+ OAC dashboards</strong> covering attrition, leave liability, recruitment pipeline, overtime, and 6-month headcount forecasting — all via OTBI subject areas. C-suite opens these every Monday morning. 📈<br><br>Want to know how I structured a specific one?'},
+
+    {q:['otbi','bi publisher','bip','report','reporting'],
+     a:'Reporting is where I\'ve probably built the most volume — <strong>20+ custom solutions</strong>:<br>• <strong>OTBI:</strong> Cross-subject-area analysis across HR, Payroll, Absence, Recruitment<br>• <strong>BI Publisher:</strong> Multi-sheet Excel outputs, PDF payslips with bursting, letter templates, compliance reports<br><br>I\'ve handled some complex ones — multi-jurisdiction payslip bursting, custom Recruitment analytics, cross-module headcount. Anything specific you\'re trying to solve?'},
+
+    {q:['attrition','azure','automl','machine learning','ml','prediction','turnover'],
+     a:'This project is one I\'m proudest of! 🤖 I built an end-to-end attrition prediction pipeline:<br><br>1️⃣ Oracle Fusion HCM → automated data extract<br>2️⃣ Azure AutoML → classification model training<br>3️⃣ Managed Online Endpoint → REST inference<br>4️⃣ Attrition risk scores surfaced in OTBI + VBCS for HR leaders<br><br>Result: zero manual intervention, live risk scoring for people teams. I also built Python-based turnover algorithms and deep learning leave forecasting on top. Want to know more about the architecture?'},
+
+    {q:['leave','absence','leave forecast'],
+     a:'Absence is one of those modules that looks simple but gets complex fast — accrual plans, eligibility rules, BPM approvals, calendar overlaps 😅<br><br>I\'ve worked on it from both sides:<br>• <strong>Functional config:</strong> Full absence type/plan setup, eligibility, approval flows<br>• <strong>Analytics:</strong> OAC and Power BI leave trend dashboards, heat maps, leave liability forecasting<br>• <strong>Predictive:</strong> Python algorithms for leave pattern forecasting used in resourcing<br><br>What\'s the challenge you\'re working on?'},
+
+    {q:['headcount','workforce planning','staffing','resource planning'],
+     a:'Workforce planning is where analytics and HCM config meet — I enjoy this a lot! I\'ve built:<br>• OAC and Power BI 6-month headcount forecasting dashboards<br>• Recruitment pipeline analytics (open position → hire timeline)<br>• Python algorithms for leave and overtime forecasting for resourcing<br>• Oracle Fusion Position Management configuration for headcount governance<br><br>Lots of this feeds into C-suite weekly briefs. What\'s your planning horizon?'},
+
+    {q:['recruitment','orc','oracle recruiting','hiring','pipeline','applicant','onboarding'],
+     a:'I\'ve worked Oracle Recruiting Cloud (ORC) from requisition all the way through onboarding:<br>• <strong>Functional:</strong> Requisition templates, offer management, onboarding checklist setup<br>• <strong>Analytics:</strong> Power BI funnel — stage conversion, time-to-hire, source of hire, offer acceptance rates<br>• <strong>OTBI:</strong> Custom Recruitment subject area reports for leadership<br><br>The analytics side is particularly powerful when you connect it to attrition data. Interesting angle?'},
+
+    {q:['ai agent','leave assistant','policy agent','workflow agent','symptoms','oracle agent','agent studio'],
+     a:'I\'ve deployed <strong>4 Oracle AI Agents live in production</strong> via Oracle AI Agent Studio — and I mean genuinely in production, used by real employees daily 🚀<br><br>• <strong>Leave Assistant</strong> — answers absence queries, handles approvals<br>• <strong>Policy RAG Agent</strong> — retrieves HR policy answers from documents in seconds<br>• <strong>Workflow Agent</strong> — routes HCM process questions intelligently<br>• <strong>Symptoms Analysis App</strong> — clinical triage assistant<br><br>Result: 40% reduction in HR helpdesk tickets. Zero external tool dependency — all on Oracle. What\'s your interest in AI agents?'},
+
+    {q:['rag','hr self service','self-service','helpdesk','chatbot','hr assistant'],
+     a:'The RAG project is one I\'m really proud of! I designed and built an in-house RAG-based HR self-service assistant — integrated directly with Oracle Fusion HCM data models in a large GCC healthcare environment.<br><br>The result: <strong>40% reduction in helpdesk inquiries in production</strong>. Employees ask questions in natural language, get policy answers instantly, and the load on HR teams dropped significantly.<br><br>Zero external tool dependency — built on Oracle\'s own stack. Want to know how the RAG architecture was structured?'},
+
+    {q:['redwood','redwood ui','ux rollout','ui migration'],
+     a:'The Redwood rollout was one of my most challenging — and satisfying — projects! I led it independently across <strong>5+ HCM modules</strong> (Core HCM, Absence, Payroll, Learning, Recruitment) with no Systems Integrator.<br><br>I hit some tricky issues: a Submit button failure from a missing ojAction binding, and a VB Studio canvas crash post-26A patch. Solved both myself. It\'s the kind of thing that only happens when you really understand the stack end-to-end 😊<br><br>Are you working on a Redwood migration?'},
+
+    {q:['vbcs','visual builder','page customisation','page customization'],
+     a:'VBCS is where functional config meets development — I really enjoy it! I\'ve built:<br>• Custom VBCS screens for payroll element entry and attrition risk display<br>• Redwood-compliant page extensions across Core HCM, Absence, Payroll<br>• Resolved VB Studio canvas failures post-patch (26A)<br><br>The combination of VBCS + OIC + Fusion REST APIs lets you build genuinely powerful custom experiences without leaving the Oracle stack. What are you trying to build?'},
+
+    {q:['payroll','salary','fast formula','element','costing'],
+     a:'Payroll is one of my core strengths — I\'ve done it in both Fusion and EBS:<br><br><strong>Oracle Fusion Payroll:</strong><br>• Element configuration, costing setup, payroll flows<br>• Fast Formula for complex earnings/deductions<br>• VBCS screens for payroll entry, BIP payslip templates<br><br><strong>Oracle EBS Payroll:</strong><br>• Full HRMS config, AME workflows, PL/SQL, custom forms<br><br>I ran a full multi-jurisdiction payroll implementation in the FMCG sector — end to end, no SI. What\'s the payroll challenge you\'re looking at?'},
+
+    {q:['oic','integration','whatsapp','biometric','sap','sharepoint','rest api','webhook'],
+     a:'Integration is where I connect Oracle to the real world! I\'ve built <strong>8+ integration points</strong>:<br>• <strong>WhatsApp:</strong> Real-time employee notifications via OIC<br>• <strong>SharePoint:</strong> Document flows and approval routing<br>• <strong>Biometric systems:</strong> Attendance feeds into Fusion HCM<br>• <strong>SAP Financials:</strong> OIC-based bi-directional sync<br>• <strong>Azure Functions:</strong> REST inference from AutoML models<br>• Medical benefits connectors, ETL/TIBCO, APEX customisations<br><br>The WhatsApp + HCM integration is particularly popular — employees love getting leave approvals on their phones 📱 Interested in how that was built?'},
+
+    {q:['hcm module','core hcm','benefits','performance','goals','learning','lms','compensation','succession','talent management'],
+     a:'I\'ve worked across the <strong>full Oracle Fusion HCM suite</strong> — 18 years in IT, 15+ on Oracle Applications:<br><br>Core HR · Payroll · Absence Management · <strong>Oracle Recruiting Cloud (ORC)</strong> · <strong>Learning (LMS)</strong> · <strong>Goals &amp; Performance</strong> · <strong>Talent Management</strong> · <strong>Succession Planning</strong> · Benefits · Compensation · Position Management · BPM · VBCS · OTBI/BIP<br><br>Also well-versed in <strong>Oracle E-Business Suite (EBS HRMS)</strong> — HR, Payroll, AME, PL/SQL. I\'ve run full EBS-to-Fusion migrations independently. Any specific module you\'d like to dig into?'},
+
+    {q:['career','experience','implementations','work history','sector','industry'],
+     a:'Here\'s a quick career snapshot:<br><br>🏥 <strong>Healthcare GCC (2025–now):</strong> 4 AI Agents live, RAG assistant (40% ticket drop), Redwood rollout (5 modules, no SI), 10+ OAC/Power BI dashboards<br><br>🛒 <strong>FMCG (2021–2025):</strong> Full Oracle Fusion HCM implementation, Azure AutoML attrition, OIC integrations (biometric, SAP, SharePoint)<br><br>✈️ <strong>Aviation (2018–2020):</strong> Oracle EBS HR/Payroll — large-scale airline environment<br><br>🛫 <strong>Airport (2016–2018):</strong> Oracle EBS, Tableau, Kronos workforce management<br><br>What period or sector is most relevant to what you\'re working on?'},
+
+    {q:['education','dba','degree','golden gate','ggu','qualification','studying'],
+     a:'I\'m currently pursuing a <strong>Doctor of Business Administration specialising in Generative AI</strong> at Golden Gate University, San Francisco (AACSB accredited, 2026–2029) — research focused on enterprise AI deployment gaps. It\'s a perfect complement to what I\'m already building in production 😊<br><br>Earlier degrees: <strong>PGDM-IT</strong> (BIMTECH, 2022) and <strong>BE Computer Science</strong> (Anna University, 2006).'},
+
+    {q:['certification','certified','oracle certified','oci','pmp'],
+     a:'My current certifications:<br>• ✅ Oracle HCM Business Process Certified Foundations Associate<br>• ✅ Oracle Cloud Infrastructure 2023 Foundations Associate<br>• ✅ Data Analysis and Machine Learning — London International Studies<br>• ✅ Agile Methodology Training<br>• 🔄 PMP — In Progress<br><br>I keep these current alongside live project work — certifications mean more when you\'re also shipping real things 😊'},
+
+    {q:['blog','ebiztechtalk','write','article','writing','publish'],
+     a:'I run <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener"><strong>eBizTechTalk</strong></a> — my Oracle HCM technical blog, going since 2017 📝<br><br>Everything I write comes from live project work — real issues, real configs, real fixes. Topics cover Fusion implementation deep-dives, BIP/OTBI tricks, AI deployment notes, VBCS patterns, OIC integrations.<br><br>If you\'re an Oracle practitioner you\'ll find something useful there. What topics do you write or read about?'},
+
+    {q:['contact','email','reach','connect','message','linkedin'],
+     a:'__NAME__, I\'d love to hear from you! 🤝<br><br>Best ways to reach me:<br>• 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a><br>• 🔗 <a href="https://www.linkedin.com/in/meeraka/" target="_blank" rel="noopener">LinkedIn — Meera AK</a><br><br>I reply personally — whether it\'s a project conversation, an Oracle question, or just a connection. Looking forward to it!',
+     dyn:true},
+
+    {q:['hello','hi','hey','good morning','good afternoon','good evening','hiya','howdy'],
+     a:'Hi __NAME__! Lovely to meet you 😊 I\'m here — Oracle HCM, AI agents, analytics, integrations, or anything in between. What would you like to explore?',
+     dyn:true},
+
+    {q:['what can you do','what do you know','help me','what topics','questions'],
+     a:'Great question! You can ask me about:<br><br>💼 <strong>Oracle work</strong> — Fusion HCM modules, EBS, Redwood, VBCS, payroll, integrations<br>📊 <strong>Analytics</strong> — OAC, Power BI, Tableau, Python, Azure AutoML<br>🤖 <strong>AI projects</strong> — Oracle AI Agents, RAG architecture, production deployments<br>🔗 <strong>Integrations</strong> — OIC, WhatsApp, SharePoint, SAP, biometric systems<br>📝 <strong>Blog &amp; writing</strong> — eBizTechTalk<br>🤝 <strong>Projects &amp; collaboration</strong> — what I\'m open to<br><br>Or just have a conversation — I\'m here! 😊'},
+  ];
+
+  const QUICK = ["What are you working on?", "AI Agents in Oracle", "Analytics & dashboards", "ORC & LMS modules", "Open to projects?", "Let's connect"];
+
+  let userName = '', visitorEmail = '', offenseCount = 0, qrShown = false;
+  const gate   = document.getElementById('gate');
+  const app    = document.getElementById('app');
+  const cbody  = document.getElementById('chat-body');
+  const qrRow  = document.getElementById('qr-row');
+  const inp    = document.getElementById('msg-in');
+  const sBtn   = document.getElementById('send-btn');
+  const typInd = document.getElementById('typing-ind');
+
+  /* ─── Gate ───────────────────────────────────────────── */
+  document.getElementById('gate-go').onclick = doGate;
+  document.getElementById('g-name').addEventListener('keydown', e => { if(e.key==='Enter') document.getElementById('g-email').focus(); });
+  document.getElementById('g-email').addEventListener('keydown', e => { if(e.key==='Enter') doGate(); });
+  // Auto-focus name field on load
+  setTimeout(() => document.getElementById('g-name').focus(), 200);
+
+  function doGate(){
+    const name  = (document.getElementById('g-name').value  || '').trim();
+    const email = (document.getElementById('g-email').value || '').trim();
+    let ok = true;
+    const en = document.getElementById('en'), ee = document.getElementById('ee');
+    const gn = document.getElementById('g-name'), ge = document.getElementById('g-email');
+    if(!name){
+      gn.classList.add('err'); en.textContent = 'Please enter your name.'; ok = false;
+    } else { gn.classList.remove('err'); en.textContent = ''; }
+    if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+      ge.classList.add('err'); ee.textContent = 'Please enter a valid email.'; ok = false;
+    } else { ge.classList.remove('err'); ee.textContent = ''; }
+    if(!ok) return;
+
+    userName      = name.split(' ')[0];
+    visitorEmail  = email;
+    gate.style.display = 'none';
+    app.classList.add('on');
+    greet();
+    notify('New chat visitor', `Name: ${name}\nEmail: ${email}\nTime: ${new Date().toLocaleString()}`);
+  }
+
+  /* ─── Greet ──────────────────────────────────────────── */
+  function greet(){
+    botMsg(`Hi ${userName}! Great to meet you 👋 I'm Meera — ask me anything about Oracle HCM, AI agents, analytics, integrations, or just say what's on your mind.`, false);
+    setTimeout(() => {
+      if(qrShown) return; qrShown = true;
+      QUICK.forEach(lbl => {
+        const b = document.createElement('button');
+        b.className = 'qr'; b.textContent = lbl;
+        b.onclick = () => { qrRow.innerHTML = ''; addUser(lbl); respond(lbl); };
+        qrRow.appendChild(b);
+      });
+    }, 500);
+  }
+
+  /* ─── Send ───────────────────────────────────────────── */
+  sBtn.onclick = doSend;
+  inp.addEventListener('keydown', e => { if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); doSend(); } });
+  inp.addEventListener('input',   () => { inp.style.height='34px'; inp.style.height = Math.min(inp.scrollHeight, 100)+'px'; });
+
+  function doSend(){
+    const txt = inp.value.trim(); if(!txt) return;
+    inp.value = ''; inp.style.height = '34px'; qrRow.innerHTML = '';
+    addUser(txt);
+    if(isOff(txt)){
+      offenseCount++;
+      if(offenseCount >= 2){
+        sysMsg('⛔ Flagged for inappropriate language. Chat closed.', 'block');
+        sBtn.disabled = true; inp.disabled = true;
+      } else {
+        sysMsg('🚫 Please keep it professional — one more instance and this chat will close.', 'block');
+      }
+      return;
+    }
+    if(isMild(txt)) sysMsg('⚠️ Please keep the conversation professional.', 'warn');
+    respond(txt);
+  }
+
+  function respond(txt){
+    showTyping();
+    setTimeout(() => { removeTyping(); botMsg(getReply(txt)); }, 650 + Math.random()*400);
+  }
+
+  /* ─── Reply logic ────────────────────────────────────── */
+  function resolveA(e){
+    if(!e.dyn) return e.a;
+    return e.a.replace(/__NAME__/g, userName);
+  }
+  function getReply(txt){
+    const t = txt.toLowerCase();
+    for(const e of KB){ if(e.q.some(k => t.includes(k))) return resolveA(e); }
+    if(/thank|great|awesome|helpful|appreciate|perfect|love it/i.test(txt))
+      return `You're very welcome, ${userName}! 😊 Always happy to chat. Anything else on your mind?`;
+    if(/bye|goodbye|done|later|take care|ttyl/i.test(txt))
+      return `It was lovely chatting, ${userName}! Feel free to come back anytime. And if you'd like to connect properly — 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a> or <a href="https://www.linkedin.com/in/meeraka/" target="_blank" rel="noopener">LinkedIn</a> 👋`;
+    if(/interesting|impressive|wow|amazing|cool|nice/i.test(txt))
+      return `Thank you, ${userName}! 😊 That genuinely means a lot. I put a lot of care into this work — happy to go deeper on anything that caught your eye. What would you like to explore?`;
+    if(/consult|hire|project|engage|work together|opportunit|proposal|rate|pricing/i.test(txt)){
+      notify(`Project inquiry from ${userName}`, `Name: ${userName}\nEmail: ${visitorEmail}\n\nMessage: "${txt}"`);
+      return `That's exciting, ${userName}! I'd love to explore that further. I've just flagged your message so I can follow up personally. In the meantime, the quickest way to reach me is 📧 <a href="mailto:meera2k10@gmail.com">meera2k10@gmail.com</a> — I respond personally, usually within a day. What kind of project is it?`;
+    }
+    const nudges = ['HR Analytics or dashboards','Oracle AI Agents','Fusion HCM modules','integrations like WhatsApp or SharePoint','the eBizTechTalk blog'];
+    const pick = nudges[Math.floor(Math.random() * nudges.length)];
+    return `Hmm, I want to make sure I give you a useful answer, ${userName}! 🤔 I might not have that exact topic covered yet — try asking me about <em>${pick}</em>, or just tell me what you're working on and I'll do my best to help.`;
+  }
+
+  /* ─── DOM helpers ────────────────────────────────────── */
+  function botMsg(html, ts=true){
+    const r = document.createElement('div'); r.className = 'msg bot';
+    r.innerHTML = `<div class="m-av">M</div><div class="bubble">${html}</div>`;
+    cbody.appendChild(r);
+    if(ts){ const t = document.createElement('div'); t.className='ts'; t.textContent=now(); cbody.appendChild(t); }
+    scrollBottom();
+  }
+  function addUser(txt){
+    const r = document.createElement('div'); r.className = 'msg user';
+    r.innerHTML = `<div class="bubble">${esc(txt)}</div>`;
+    cbody.appendChild(r);
+    scrollBottom();
+  }
+  function sysMsg(html, cls){
+    const d = document.createElement('div'); d.className = `sys-msg ${cls}`; d.innerHTML = html;
+    cbody.appendChild(d); scrollBottom();
+  }
+  function showTyping(){ typInd.classList.add('show'); scrollBottom(); }
+  function removeTyping(){ typInd.classList.remove('show'); }
+  function scrollBottom(){ setTimeout(() => cbody.scrollTop = cbody.scrollHeight, 30); }
+  function esc(t){ return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function now(){ return new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}); }
+
+  /* ─── Notify via Web3Forms ───────────────────────────── */
+  function notify(subject, body){
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject,
+        message: body,
+        from_name: 'Meera Portfolio Chat',
+        replyto: visitorEmail || MEERA_EMAIL
+      })
+    }).catch(()=>{});
+  }
+})();
+</script>
+</body>
+</html>

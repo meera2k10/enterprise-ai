@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Weekly HR Snapshot — AI Portfolio</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+  <style>
+  /* ── Back bar ─────────────────────────────────────────── */
+  .back-bar {
+    position: sticky; top: 0; z-index: 100;
+    background: #0B1E33;
+    border-bottom: 1px solid #1E3A55;
+    padding: 10px 24px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .back-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: #2BBFBF; text-decoration: none;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .back-link:hover { color: #5DD8D8; }
+  .back-link::before { content: '←'; }
+  .back-bar-sep { color: #1E3A55; font-size: 18px; line-height: 1; }
+  .back-bar-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: #6A8BA8;
+  }
+  @media (prefers-color-scheme: light) {
+    .back-bar { background: #EEF4FA; border-color: #C8DAEA; }
+    .back-bar-sep { color: #C8DAEA; }
+    .back-bar-title { color: #5A7A96; }
+  }
+
+  /* ── Tokens (dark-first) ─────────────────────────────── */
+  :root {
+    --bg:       #0B1E33;
+    --surface:  #112237;
+    --surface2: #162D46;
+    --border:   #1E3A55;
+    --text:     #D8E8F5;
+    --muted:    #6A8BA8;
+    --teal:     #2BBFBF;
+    --teal-dim: rgba(43,191,191,.12);
+    --coral:    #E05C5C;
+    --coral-dim:rgba(224,92,92,.12);
+    --amber:    #F4A93A;
+    --amber-dim:rgba(244,169,58,.12);
+    --good:     #3CC68A;
+    --rule:     rgba(255,255,255,.06);
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg:       #EEF4FA;
+      --surface:  #FFFFFF;
+      --surface2: #F3F8FD;
+      --border:   #C8DAEA;
+      --text:     #0C1E30;
+      --muted:    #5A7A96;
+      --teal-dim: rgba(43,191,191,.10);
+      --coral-dim:rgba(224,92,92,.10);
+      --amber-dim:rgba(244,169,58,.10);
+      --rule:     rgba(0,0,0,.07);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg:       #EEF4FA;
+    --surface:  #FFFFFF;
+    --surface2: #F3F8FD;
+    --border:   #C8DAEA;
+    --text:     #0C1E30;
+    --muted:    #5A7A96;
+    --teal-dim: rgba(43,191,191,.10);
+    --coral-dim:rgba(224,92,92,.10);
+    --amber-dim:rgba(244,169,58,.10);
+    --rule:     rgba(0,0,0,.07);
+  }
+
+  /* ── Reset ────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    padding-inline: 20px;
+    padding-block: 0;
+    min-height: 100%;
+  }
+  canvas { display: block; }
+
+  /* ── Page shell ───────────────────────────────────────── */
+  .page { max-width: 1160px; margin-inline: auto; padding-block: 32px 60px; }
+
+  /* ── Header ───────────────────────────────────────────── */
+  .dash-header {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; flex-wrap: wrap;
+    gap: 12px; margin-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 20px;
+  }
+  .dash-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 6px;
+  }
+  .dash-title {
+    font-family: var(--mono);
+    font-size: 20px; font-weight: 600;
+    color: var(--text); line-height: 1.2;
+  }
+  .dash-week {
+    font-family: var(--mono);
+    font-size: 12px; color: var(--muted); margin-top: 4px;
+  }
+  .sample-badge {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    background: var(--amber-dim);
+    color: var(--amber);
+    border: 1px solid rgba(244,169,58,.25);
+    border-radius: 3px; padding: 4px 10px;
+    align-self: flex-start; white-space: nowrap;
+  }
+
+  /* ── KPI row ──────────────────────────────────────────── */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px; margin-bottom: 24px;
+  }
+  @media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px 14px;
+    position: relative; overflow: hidden;
+  }
+  .kpi::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--accent, var(--teal));
+  }
+  .kpi-num {
+    font-family: var(--mono);
+    font-size: 28px; font-weight: 600;
+    color: var(--accent, var(--teal));
+    line-height: 1; margin-bottom: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kpi-label {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 500;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted);
+  }
+  .kpi-delta {
+    font-family: var(--mono);
+    font-size: 11px; margin-top: 4px;
+    color: var(--muted);
+  }
+
+  /* ── Two-panel tables ─────────────────────────────────── */
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 24px;
+  }
+  @media (max-width: 700px) { .panels { grid-template-columns: 1fr; } }
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+  }
+  .panel-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .panel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .panel-title {
+    font-family: var(--mono);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text);
+  }
+  .panel-count {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--muted);
+    margin-left: auto;
+  }
+  .data-table { width: 100%; border-collapse: collapse; }
+  .data-table th {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--muted); padding: 8px 18px;
+    text-align: left; border-bottom: 1px solid var(--rule);
+    background: var(--surface2);
+  }
+  .data-table td {
+    font-size: 13px; padding: 10px 18px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: middle;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: var(--surface2); }
+  .emp-name { font-weight: 600; color: var(--text); }
+  .emp-dept {
+    font-family: var(--mono);
+    font-size: 11px; color: var(--muted); margin-top: 1px;
+  }
+  .date-cell {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--muted); white-space: nowrap;
+  }
+  .reason-pill {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 3px; white-space: nowrap;
+  }
+  .reason-resign { background: var(--coral-dim); color: var(--coral); }
+  .reason-contract { background: var(--amber-dim); color: var(--amber); }
+  .reason-term { background: rgba(224,92,92,.25); color: var(--coral); }
+  .nat-tag {
+    font-family: var(--mono); font-size: 10px;
+    color: var(--muted);
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px; padding: 2px 7px;
+    white-space: nowrap;
+  }
+
+  /* ── Charts row ───────────────────────────────────────── */
+  .charts-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    gap: 16px;
+  }
+  @media (max-width: 860px) { .charts-row { grid-template-columns: 1fr; } }
+  .chart-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 18px 14px;
+  }
+  .chart-panel-title {
+    font-family: var(--mono);
+    font-size: 10px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 16px;
+  }
+  .chart-wrap { position: relative; }
+
+  /* ── Leave summary list ───────────────────────────────── */
+  .leave-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 4px; }
+  .leave-row { display: flex; align-items: center; gap: 10px; }
+  .leave-label {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--muted); min-width: 90px;
+  }
+  .leave-bar-wrap {
+    flex: 1; height: 6px; background: var(--surface2);
+    border-radius: 3px; overflow: hidden;
+  }
+  .leave-bar { height: 100%; border-radius: 3px; }
+  .leave-num {
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    color: var(--text); min-width: 28px; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .leave-total {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .leave-total-label {
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+  }
+  .leave-total-num {
+    font-family: var(--mono); font-size: 22px; font-weight: 600;
+    color: var(--amber); font-variant-numeric: tabular-nums;
+  }
+
+  /* ── Footer ───────────────────────────────────────────── */
+  .dash-footer {
+    margin-top: 24px;
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: .07em; color: var(--muted);
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Back bar -->
+  <div class="back-bar">
+    <a href="https://meera2k10.github.io/enterprise-ai/" class="back-link">Back to Portfolio</a>
+    <span class="back-bar-sep">|</span>
+    <span class="back-bar-title">Weekly HR Snapshot · Power BI on Oracle Fusion HCM</span>
+  </div>
+
+  <div class="page">
+
+    <!-- Header -->
+    <div class="dash-header">
+      <div class="dash-title-group">
+        <div class="dash-eyebrow">Oracle Fusion HCM · Power BI</div>
+        <div class="dash-title">Weekly HR Snapshot</div>
+        <div class="dash-week">Week of 15 – 19 Sep 2026 &nbsp;·&nbsp; Generated 19 Sep 2026</div>
+      </div>
+      <div class="sample-badge">⚠ Sample Data</div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-row">
+      <div class="kpi" style="--accent:var(--teal)">
+        <div class="kpi-num">5</div>
+        <div class="kpi-label">Joined This Week</div>
+        <div class="kpi-delta">↑ +2 vs last week</div>
+      </div>
+      <div class="kpi" style="--accent:var(--coral)">
+        <div class="kpi-num">4</div>
+        <div class="kpi-label">Leaving This Week</div>
+        <div class="kpi-delta">↓ −3 vs last week</div>
+      </div>
+      <div class="kpi" style="--accent:var(--amber)">
+        <div class="kpi-num">47</div>
+        <div class="kpi-label">On Leave Today</div>
+        <div class="kpi-delta">2.79% of headcount</div>
+      </div>
+      <div class="kpi" style="--accent:#7B9FD4">
+        <div class="kpi-num">3</div>
+        <div class="kpi-label">On Notice Period</div>
+        <div class="kpi-delta">Due to exit by Oct 5</div>
+      </div>
+      <div class="kpi" style="--accent:var(--good)">
+        <div class="kpi-num">1,688</div>
+        <div class="kpi-label">Net Headcount</div>
+        <div class="kpi-delta">After this week's moves</div>
+      </div>
+    </div>
+
+    <!-- Tables -->
+    <div class="panels">
+
+      <!-- Joiners -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot" style="background:var(--teal)"></div>
+          <div class="panel-title">Joiners This Week</div>
+          <div class="panel-count">5 employees</div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Start Date</th>
+                <th>Nationality</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="emp-name">Ahmed Al Mansouri</div>
+                  <div class="emp-dept">Sales Retail · Sales Associate</div>
+                </td>
+                <td class="date-cell">Mon 15 Sep</td>
+                <td><span class="nat-tag">Indian</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Maria Santos</div>
+                  <div class="emp-dept">HoReCa &amp; Exports · Acct Manager</div>
+                </td>
+                <td class="date-cell">Mon 15 Sep</td>
+                <td><span class="nat-tag">Filipino</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Raj Kumar</div>
+                  <div class="emp-dept">Operations/Prod · Shift Supervisor</div>
+                </td>
+                <td class="date-cell">Tue 16 Sep</td>
+                <td><span class="nat-tag">Indian</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Sarah Fouad</div>
+                  <div class="emp-dept">Finance · Senior Accountant</div>
+                </td>
+                <td class="date-cell">Wed 17 Sep</td>
+                <td><span class="nat-tag">Egyptian</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Mohamed Hassan</div>
+                  <div class="emp-dept">Supply Chain · Logistics Coord.</div>
+                </td>
+                <td class="date-cell">Thu 18 Sep</td>
+                <td><span class="nat-tag">Pakistani</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Leavers -->
+      <div class="panel">
+        <div class="panel-header">
+          <div class="panel-dot" style="background:var(--coral)"></div>
+          <div class="panel-title">Leavers This Week</div>
+          <div class="panel-count">4 employees</div>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Employee</th>
+                <th>Last Day</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="emp-name">James Osei</div>
+                  <div class="emp-dept">Sales H&amp;O · Senior Sales Rep</div>
+                </td>
+                <td class="date-cell">Fri 19 Sep</td>
+                <td><span class="reason-pill reason-resign">Resignation</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Priya Nair</div>
+                  <div class="emp-dept">Human Resources · HR Officer</div>
+                </td>
+                <td class="date-cell">Thu 18 Sep</td>
+                <td><span class="reason-pill reason-contract">Contract End</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Carlos Mendez</div>
+                  <div class="emp-dept">Operations/Planning · Prod. Lead</div>
+                </td>
+                <td class="date-cell">Fri 19 Sep</td>
+                <td><span class="reason-pill reason-resign">Resignation</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="emp-name">Fatima Al Rashid</div>
+                  <div class="emp-dept">Marketing · Brand Executive</div>
+                </td>
+                <td class="date-cell">Fri 19 Sep</td>
+                <td><span class="reason-pill reason-term">Termination</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /panels -->
+
+    <!-- Charts -->
+    <div class="charts-row">
+
+      <!-- Dept movement bar -->
+      <div class="chart-panel">
+        <div class="chart-panel-title">Movement by Department</div>
+        <div class="chart-wrap"><canvas id="deptChart" height="210"></canvas></div>
+      </div>
+
+      <!-- Leave breakdown -->
+      <div class="chart-panel">
+        <div class="chart-panel-title">Leave Type — Today</div>
+        <div class="leave-list">
+          <div class="leave-row">
+            <span class="leave-label">Annual</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:66%;background:var(--teal)"></div>
+            </div>
+            <span class="leave-num">31</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">Sick</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:26%;background:var(--coral)"></div>
+            </div>
+            <span class="leave-num">12</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">Emergency</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:9%;background:var(--amber)"></div>
+            </div>
+            <span class="leave-num">4</span>
+          </div>
+        </div>
+        <div class="leave-total">
+          <span class="leave-total-label">Total on leave</span>
+          <span class="leave-total-num">47</span>
+        </div>
+
+        <div class="chart-panel-title" style="margin-top:20px">Dept Exposure</div>
+        <div class="leave-list">
+          <div class="leave-row">
+            <span class="leave-label">Sales Retail</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:100%;background:var(--teal);opacity:.7"></div>
+            </div>
+            <span class="leave-num">15</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">Operations</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:73%;background:var(--teal);opacity:.7"></div>
+            </div>
+            <span class="leave-num">11</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">HoReCa</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:53%;background:var(--teal);opacity:.55"></div>
+            </div>
+            <span class="leave-num">8</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">Finance</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:33%;background:var(--teal);opacity:.45"></div>
+            </div>
+            <span class="leave-num">5</span>
+          </div>
+          <div class="leave-row">
+            <span class="leave-label">Others</span>
+            <div class="leave-bar-wrap">
+              <div class="leave-bar" style="width:27%;background:var(--muted);opacity:.5"></div>
+            </div>
+            <span class="leave-num">8</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trend line -->
+      <div class="chart-panel">
+        <div class="chart-panel-title">8-Week Joiner vs Leaver Trend</div>
+        <div class="chart-wrap"><canvas id="trendChart" height="210"></canvas></div>
+      </div>
+
+    </div><!-- /charts-row -->
+
+    <div class="dash-footer">SAMPLE DATA — Oracle Fusion HCM · Power BI Analytics &nbsp;·&nbsp; Generated by HR Analytics Team &nbsp;·&nbsp; Week ending 19 Sep 2026</div>
+
+  </div><!-- /page -->
+
+  <script>
+  (function () {
+    const dark = !document.documentElement.dataset.theme
+      ? window.matchMedia('(prefers-color-scheme: dark)').matches
+      : document.documentElement.dataset.theme === 'dark';
+
+    const gridColor  = dark ? 'rgba(255,255,255,.07)' : 'rgba(0,0,0,.07)';
+    const labelColor = dark ? '#6A8BA8' : '#5A7A96';
+    const textColor  = dark ? '#D8E8F5' : '#0C1E30';
+
+    const TEAL  = '#2BBFBF';
+    const CORAL = '#E05C5C';
+
+    const baseFont = { family: "'IBM Plex Mono', monospace", size: 11 };
+    Chart.defaults.font = baseFont;
+    Chart.defaults.color = labelColor;
+
+    // Department Movement Bar
+    const deptCtx = document.getElementById('deptChart').getContext('2d');
+    new Chart(deptCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Sales Retail','Sales H&O','Operations','HoReCa','Supply Chain','Finance','HR'],
+        datasets: [
+          {
+            label: 'Joiners',
+            data: [1, 0, 2, 1, 1, 0, 0],
+            backgroundColor: TEAL + 'CC',
+            borderRadius: 3,
+            borderSkipped: false,
+          },
+          {
+            label: 'Leavers',
+            data: [0, 1, 1, 0, 0, 0, 1],
+            backgroundColor: CORAL + 'CC',
+            borderRadius: 3,
+            borderSkipped: false,
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top', align: 'start',
+            labels: {
+              boxWidth: 10, boxHeight: 10, padding: 14,
+              color: labelColor, font: baseFont,
+              usePointStyle: true, pointStyle: 'rectRounded'
+            }
+          },
+          tooltip: {
+            backgroundColor: dark ? '#162D46' : '#FFFFFF',
+            borderColor: dark ? '#1E3A55' : '#C8DAEA',
+            borderWidth: 1,
+            titleColor: textColor,
+            bodyColor: labelColor,
+            padding: 10,
+            callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}` }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: gridColor },
+            ticks: { color: labelColor, font: { ...baseFont, size: 10 }, maxRotation: 35 },
+            border: { color: 'transparent' }
+          },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: labelColor, font: baseFont, stepSize: 1, callback: v => Number.isInteger(v) ? v : '' },
+            border: { color: 'transparent' },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // 8-Week Trend Line
+    const trendCtx = document.getElementById('trendChart').getContext('2d');
+    const gradJ = trendCtx.createLinearGradient(0, 0, 0, 200);
+    gradJ.addColorStop(0, TEAL + '55');
+    gradJ.addColorStop(1, TEAL + '00');
+    const gradL = trendCtx.createLinearGradient(0, 0, 0, 200);
+    gradL.addColorStop(0, CORAL + '44');
+    gradL.addColorStop(1, CORAL + '00');
+
+    new Chart(trendCtx, {
+      type: 'line',
+      data: {
+        labels: ['Jul 28','Aug 4','Aug 11','Aug 18','Aug 25','Sep 1','Sep 8','Sep 15'],
+        datasets: [
+          {
+            label: 'Joiners',
+            data: [9, 8, 12, 6, 10, 9, 11, 5],
+            borderColor: TEAL, backgroundColor: gradJ,
+            borderWidth: 2, pointRadius: 4, pointHoverRadius: 6,
+            pointBackgroundColor: TEAL,
+            pointBorderColor: dark ? '#112237' : '#FFFFFF',
+            pointBorderWidth: 2, fill: true, tension: 0.35
+          },
+          {
+            label: 'Leavers',
+            data: [7, 6, 9, 11, 8, 10, 7, 4],
+            borderColor: CORAL, backgroundColor: gradL,
+            borderWidth: 2, pointRadius: 4, pointHoverRadius: 6,
+            pointBackgroundColor: CORAL,
+            pointBorderColor: dark ? '#112237' : '#FFFFFF',
+            pointBorderWidth: 2, fill: true, tension: 0.35
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: {
+            position: 'top', align: 'start',
+            labels: {
+              boxWidth: 10, boxHeight: 10, padding: 14,
+              color: labelColor, font: baseFont,
+              usePointStyle: true, pointStyle: 'circle'
+            }
+          },
+          tooltip: {
+            backgroundColor: dark ? '#162D46' : '#FFFFFF',
+            borderColor: dark ? '#1E3A55' : '#C8DAEA',
+            borderWidth: 1,
+            titleColor: textColor, bodyColor: labelColor, padding: 10,
+            callbacks: { label: ctx => ` ${ctx.dataset.label}: ${ctx.parsed.y}` }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: gridColor },
+            ticks: { color: labelColor, font: { ...baseFont, size: 10 }, maxRotation: 30 },
+            border: { color: 'transparent' }
+          },
+          y: {
+            grid: { color: gridColor },
+            ticks: { color: labelColor, font: baseFont, stepSize: 3 },
+            border: { color: 'transparent' },
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+  })();
+  </script>
+
+</body>
+</html>

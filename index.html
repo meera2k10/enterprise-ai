@@ -324,12 +324,7 @@ nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,.4); }
 }
 .writing-link:hover { opacity: .7; }
 .post-list { display: flex; flex-direction: column; gap: 0; }
-<a href="./weekly-hr-snapshot.html" class="post-item">
-  <span class="post-date">Sep 2026</span>
-  <span class="post-title">Weekly HR Snapshot — Live BI Dashboard: Joiners, Leavers &amp; Leave Management</span>
-  <span class="post-tag">Power BI</span>
-</a>
-  .post-item {
+.post-item {
   display: flex; align-items: baseline; gap: 1.5rem;
   padding: 1rem 0;
   border-bottom: 1px solid var(--rule);
@@ -669,7 +664,6 @@ footer {
     <p class="eyebrow reveal">AI &amp; Innovation</p>
 
     <div class="ai-grid reveal">
-
       <div class="ai-card">
         <p class="ai-card-label">RAG · Oracle HCM · Healthcare Sector</p>
         <h3>AI-Powered HR Self-Service Assistant</h3>
@@ -685,7 +679,7 @@ footer {
       <div class="ai-card teal">
         <p class="ai-card-label">Oracle AI Agent Studio · Healthcare Sector</p>
         <h3>Oracle AI Agents Suite — 4 Live Agents</h3>
-        <p>Deployed four Oracle AI Agents in production: <strong>Leave Assistant</strong> (absence queries and approvals), <strong>Policy RAG Agent</strong> (HR policy Q&A), <strong>Workflow Agent</strong> (HCM process routing), and <strong>Symptoms Analysis App</strong> (clinical support). All connected to live Fusion HCM without external tools.</p>
+        <p>Deployed four Oracle AI Agents in production: <strong>Leave Assistant</strong> (absence queries and approvals), <strong>Policy RAG Agent</strong> (HR policy Q&amp;A), <strong>Workflow Agent</strong> (HCM process routing), and <strong>Symptoms Analysis App</strong> (clinical support). All connected to live Fusion HCM without external tools.</p>
         <div class="ai-meta">
           <span class="live">Live · Production</span>
           <span>4 Agents</span>
@@ -705,7 +699,6 @@ footer {
           <span>OTBI Surface</span>
         </div>
       </div>
-
     </div>
 
     <div class="ai-grid reveal" style="margin-top:1.5rem">
@@ -747,6 +740,14 @@ footer {
       Technical Oracle HCM writing published on eBizTechTalk since 2017 — covering Fusion Cloud implementation, BIP/OTBI, AI deployments, and integration patterns from real projects.
     </p>
     <div class="post-list reveal">
+
+      <!-- ✅ NEW ENTRY — Weekly HR Snapshot dashboard -->
+      <a href="./weekly-hr-snapshot.html" class="post-item">
+        <span class="post-date">Sep 2026</span>
+        <span class="post-title">Weekly HR Snapshot — Live BI Dashboard: Joiners, Leavers &amp; Leave Management</span>
+        <span class="post-tag">Power BI</span>
+      </a>
+
       <a href="https://ebiztechtalk.blogspot.com" target="_blank" rel="noopener" class="post-item">
         <span class="post-date">Sep 2026</span>
         <span class="post-title">Oracle HCM Extracts — A Practical Guide to Building Your First Integration Extract</span>
@@ -973,18 +974,16 @@ revealEls.forEach(el => io.observe(el));
   draw();
 })();
 
-/* ── Chat Widget — full resume-backed KB + dashboards ── */
+/* ── Chat Widget ── */
 (function(){
-  const WEB3FORMS_KEY='cde1fde1-4717-4f6d-9f57-6de5ea440282'; // ← sign up free at web3forms.com with meera2k10@gmail.com
+  const WEB3FORMS_KEY='cde1fde1-4717-4f6d-9f57-6de5ea440282';
   const MEERA_EMAIL='meera2k10@gmail.com';
 
-  /* ─ Offensive filter ─ */
   const BAD=['fuck','shit','bitch','asshole','bastard','cunt','dick','pussy','cock','nigger','nigga','faggot','retard','whore','slut'];
   const MILD=['crap','damn','hell','wtf','idiot','stupid'];
   function isOff(t){const tl=t.toLowerCase().replace(/[^a-z0-9 ]/g,' ');return BAD.some(b=>tl.includes(b));}
   function isMild(t){const tl=t.toLowerCase();return MILD.some(b=>tl.includes(b));}
 
-  /* ─ Knowledge base — first-person, humanised ─ */
   const KB=[
     {q:['how are you','how r you','how do you do','you doing','hows meera','how\'s meera','how is meera'],
      a:'Hi! I\'m doing great, thank you for asking 😊 Excited about some interesting AI agents work at the moment — always something new to build. What brings you here today?'},
@@ -1057,14 +1056,12 @@ revealEls.forEach(el => io.observe(el));
   const inp=document.getElementById('msg-in');
   const sBtn=document.getElementById('send-btn');
 
-  /* Toggle */
   document.getElementById('mcw-btn').onclick=()=>{
     panel.classList.toggle('open');
     if(panel.classList.contains('open'))setTimeout(()=>document.getElementById('g-name')?.focus(),120);
   };
   document.getElementById('mcw-close').onclick=()=>panel.classList.remove('open');
 
-  /* Gate */
   document.getElementById('gate-go').onclick=doGate;
   document.getElementById('g-name')?.addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('g-email')?.focus();});
   document.getElementById('g-email')?.addEventListener('keydown',e=>{if(e.key==='Enter')doGate();});
@@ -1090,7 +1087,6 @@ revealEls.forEach(el => io.observe(el));
     setTimeout(drawAll,300);
   }
 
-  /* Tabs */
   window.mcwSwitchTab=function(id){
     document.getElementById('pane-chat').style.display=id==='chat'?'flex':'none';
     document.getElementById('pane-dash').style.display=id==='dash'?'block':'none';
@@ -1099,7 +1095,6 @@ revealEls.forEach(el => io.observe(el));
     if(id==='dash')drawAll();
   };
 
-  /* Greet */
   function greet(){
     botMsg(`Hi ${userName}! Great to meet you 👋 I\'m Meera\'s assistant — I know her work inside out: Oracle HCM, AI agents, analytics, integrations, blog. Ask me anything, or pick a topic below to get started.`,false);
     setTimeout(()=>{
@@ -1112,7 +1107,6 @@ revealEls.forEach(el => io.observe(el));
     },450);
   }
 
-  /* Send */
   sBtn.onclick=doSend;
   inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doSend();}});
   inp.addEventListener('input',()=>{inp.style.height='34px';inp.style.height=Math.min(inp.scrollHeight,100)+'px';});

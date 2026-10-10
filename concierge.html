@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How Employee and Manager Concierge Agent Apps in Oracle Fusion HCM bring HR updates to people before they ask.">
+<title>Concierge Workspaces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: a single reading column; screenshots break out slightly wider, framed like the product's own dark UI */
+:root{
+  --bg:#f5f8f9; --surface:#ffffff; --ink:#12303d; --muted:#4f6773; --line:#dbe5e9;
+  --navy:#0e3a4f; --accent:#c8663c; --teal:#2f8f9b; --on-navy:#e6f0f3; --on-navy-soft:#a9c4cf;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;
+  --body:"Source Sans 3","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0a1c25; --surface:#10293a; --ink:#e4eef2; --muted:#9db4be; --line:#1f3f50;
+  --navy:#0b2f41; --accent:#e58c5e; --teal:#5cbfcb; --on-navy:#e6f0f3; --on-navy-soft:#a9c4cf; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1c25; --surface:#10293a; --ink:#e4eef2; --muted:#9db4be; --line:#1f3f50;
+  --navy:#0b2f41; --accent:#e58c5e; --teal:#5cbfcb; --on-navy:#e6f0f3; --on-navy-soft:#a9c4cf; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:18px/1.65 var(--body);padding-inline:16px}
+.col{max-width:720px;margin-inline:auto}
+.wide{max-width:900px;margin-inline:auto}
+header.hero{background:var(--navy);color:var(--on-navy);margin-inline:-16px;padding:64px 16px 56px}
+.eyebrow{font:600 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+h1{font:700 clamp(32px,6vw,50px)/1.1 var(--display);margin:14px 0 18px;text-wrap:balance}
+.hero p{color:var(--on-navy-soft);font-size:20px;margin:0;max-width:620px}
+.byline{margin-top:22px;font-size:15px;color:var(--on-navy-soft)}
+main{padding-block:40px 64px}
+h2{font:600 26px/1.25 var(--display);margin:56px 0 12px;text-wrap:balance}
+h3{font:600 19px/1.3 var(--display);margin:0 0 6px}
+p{margin:0 0 16px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-block:20px}
+.pair > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;min-width:0}
+.pair p{color:var(--muted);font-size:16px;margin:0}
+.path{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font:600 16px var(--display);margin-block:12px 4px}
+.path span{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 12px}
+.path i{color:var(--teal);font-style:normal}
+.step{margin-top:48px}
+.step-head{display:flex;gap:14px;align-items:baseline}
+.num{font:700 15px var(--display);color:var(--accent);white-space:nowrap}
+figure{margin:18px 0 0}
+figure img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:0 10px 30px rgba(10,40,55,.18)}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+ul{padding-left:22px;margin:0 0 16px}
+li{margin-bottom:8px}
+.note{border-top:1px solid var(--line);margin-top:56px;padding-top:16px;font-size:14px;color:var(--muted);font-style:italic}
+footer{border-top:1px solid var(--line);padding-block:20px 32px;font-size:14px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="col">
+    <div class="eyebrow">Oracle Fusion HCM · AI Agent Studio</div>
+    <h1>From HR agents to concierge workspaces</h1>
+    <p>Our HR agents could answer almost anything. People just had to remember to ask. So I built two Agent Apps that bring the answers to them first.</p>
+    <div class="byline">Meeramaheswari Annadurai · October 2026</div>
+  </div>
+</header>
+
+<main>
+  <div class="col">
+    <h2>Agents that wait to be asked</h2>
+    <p>Our HCM Agents already answer HR questions through Ask Oracle. But a chat agent only helps when someone thinks to ask. Open onboarding tasks, overdue courses, leave awaiting approval and who on the team is off next month were spread across Journeys, Learning, Absence and the notifications inbox.</p>
+    <p>So I tried a different approach: let the AI gather everything first and tell people where they stand.</p>
+
+    <h2>Two workspaces, one Home page</h2>
+    <div class="pair">
+      <div><div class="eyebrow">For every employee</div><h3 style="margin-top:10px">Employee Concierge</h3><p>What needs your attention, what is waiting on someone else, and how your leave has been used this year.</p></div>
+      <div><div class="eyebrow">For people managers</div><h3 style="margin-top:10px">Manager Concierge</h3><p>A team snapshot, priority actions, upcoming absences, plus talent, pay and retention risk.</p></div>
+    </div>
+    <p>Both sit next to the existing agents on the Fusion Home page, so there is nothing new to learn:</p>
+    <div class="path"><span>Home</span><i>›</i><span>HCM Agents tab</span><i>›</i><span>Apps</span></div>
+  </div>
+
+  <div class="wide">
+    <figure><img src="1-home-agent-apps.jpg" alt="Fusion Home page with the HCM Agents tab open, showing the Employee Dashboard and Manager Dashboard app tiles" loading="lazy">
+    <figcaption>The two Agent Apps on the HCM Agents tab.</figcaption></figure>
+  </div>
+
+  <div class="col"><h2>How it works</h2></div>
+
+  <section class="step">
+    <div class="col">
+      <div class="step-head"><span class="num">Step 1</span><h3>Employee: start with the AI summary</h3></div>
+      <p>The workspace opens with a plain-English summary of where you stand. <strong>Needs your attention</strong> lists the courses and journey tasks waiting on you, each with where to go next. <strong>In progress</strong> shows requests waiting on someone else, such as leave awaiting approval.</p>
+    </div>
+    <div class="wide"><figure><img src="2-employee-concierge.jpg" alt="Employee Concierge with an AI summary, a Needs your attention list of courses and journeys, and leave requests awaiting approval" loading="lazy"></figure></div>
+  </section>
+
+  <section class="step">
+    <div class="col">
+      <div class="step-head"><span class="num">Step 2</span><h3>Employee: check your leave</h3></div>
+      <p>Scroll down for your monthly leave pattern and leave by absence type for the year, built from approved and completed absences, with key insights in days or hours.</p>
+    </div>
+    <div class="wide"><figure><img src="3-employee-leave-insights.jpg" alt="Charts of monthly leave pattern and leave taken by absence type, with key insights" loading="lazy"></figure></div>
+  </section>
+
+  <section class="step">
+    <div class="col">
+      <div class="step-head"><span class="num">Step 3</span><h3>Manager: get the team snapshot</h3></div>
+      <p>For managers, the AI writes a short narrative of the team: size, roles, grades, tenure and location. Alongside it are priority actions, a one-click reminder to the team, pending items and upcoming absences for planning cover.</p>
+    </div>
+    <div class="wide"><figure><img src="4-manager-concierge.jpg" alt="Manager Concierge Workspace with an AI team summary, activity insights, upcoming absences and priority actions" loading="lazy"></figure></div>
+  </section>
+
+  <section class="step">
+    <div class="col">
+      <div class="step-head"><span class="num">Step 4</span><h3>Manager: go deeper on talent and pay</h3></div>
+      <p>Annual pay and retention risk for each person, plus performance rating and impact of loss. Any card expands to full screen.</p>
+    </div>
+    <div class="wide"><figure><img src="5-manager-talent-compensation.jpg" alt="Compensation table with annual pay and High or Low retention risk, and a talent table with performance rating and impact of loss" loading="lazy"></figure></div>
+  </section>
+
+  <div class="col">
+    <h2>Design choices that mattered</h2>
+    <ul>
+      <li><strong>Summary first.</strong> One AI-written paragraph tells people where they stand before they read any table.</li>
+      <li><strong>An overview, not a new transaction screen.</strong> Leave, learning and journeys are still done in their standard Fusion pages. The workspace points people there.</li>
+      <li><strong>Same security as HCM.</strong> Employees see only their own data; managers see only their direct team.</li>
+      <li><strong>Live data.</strong> The workspace reads the latest HCM data each time it opens.</li>
+    </ul>
+
+    <h2>What's done</h2>
+    <p>Both workspaces are built, tested and documented with a quick-reference guide for employees and managers, ready for rollout.</p>
+
+    <h2>What I learned</h2>
+    <p>AI in HR isn't only about answering questions. It is about deciding what someone needs to see today and saying it in one sentence. Moving from a chat agent to a proactive workspace changes the question from "what can I ask?" to "what should I do next?".</p>
+    <p>If you're building with Oracle AI Agent Studio, I'd like to hear how you're approaching Agent Apps.</p>
+
+    <p class="note">Names, organisation, pay and location details in the screenshots are fictional (AI-generated) for illustration only.</p>
+  </div>
+</main>
+
+<footer><div class="col">Meeramaheswari Annadurai · Business Applications Principal · Oracle Fusion HCM &amp; Enterprise AI</div></footer>
+</body>
+</html>

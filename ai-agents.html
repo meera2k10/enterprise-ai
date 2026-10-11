@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oracle Fusion AI Agents</title>
+<meta name="description" content="HCM, Absence, Payroll and RAG policy agents in Oracle Fusion Cloud HCM with Redwood — what we enabled, the profile options we set, and the real fixes that made it work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fb;--surface:#ffffff;--ink:#14212e;--muted:#5b6b7b;--line:#dfe5ec;
+  --navy:#0b2a47;--teal:#0e8f9b;--teal-soft:#e3f4f5;--amber:#b5650b;--amber-soft:#fdf1e2;
+  --red:#b3261e;--red-soft:#fbe9e7;--code:#eef2f6;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e141b;--surface:#16202a;--ink:#e6edf3;--muted:#9aaab8;--line:#26333f;
+  --navy:#9cc7f0;--teal:#4cc6d1;--teal-soft:#13323a;--amber:#f0a856;--amber-soft:#33281a;
+  --red:#f28b82;--red-soft:#3a1f1d;--code:#1d2833;}}
+:root[data-theme="dark"]{
+  --bg:#0e141b;--surface:#16202a;--ink:#e6edf3;--muted:#9aaab8;--line:#26333f;
+  --navy:#9cc7f0;--teal:#4cc6d1;--teal-soft:#13323a;--amber:#f0a856;--amber-soft:#33281a;
+  --red:#f28b82;--red-soft:#3a1f1d;--code:#1d2833;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif}
+a{color:var(--teal)}
+code,.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:.86em}
+code{background:var(--code);padding:.1em .35em;border-radius:4px;word-break:break-all}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+nav{border-bottom:1px solid var(--line);background:var(--surface)}
+nav .wrap{display:flex;gap:20px;align-items:center;height:56px;overflow-x:auto;white-space:nowrap}
+nav b{margin-right:auto;color:var(--navy)}
+nav a{text-decoration:none;color:var(--muted);font-size:14px}
+nav a.on{color:var(--ink);font-weight:600}
+header{padding:56px 0 32px}
+.eyebrow{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);font-weight:600}
+h1{font-size:clamp(30px,5vw,46px);line-height:1.12;margin:.3em 0 .4em;color:var(--navy);letter-spacing:-.02em}
+.lede{font-size:18px;color:var(--muted);max-width:720px}
+.notice{border-left:4px solid var(--amber);background:var(--amber-soft);padding:14px 18px;border-radius:6px;margin:24px 0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:28px 0}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.stat b{display:block;font-size:24px;color:var(--navy)}
+.stat span{font-size:13px;color:var(--muted)}
+section{padding:36px 0;border-top:1px solid var(--line)}
+h2{font-size:26px;margin:0 0 6px;color:var(--navy);letter-spacing:-.01em}
+h3{font-size:18px;margin:26px 0 6px}
+.sub{color:var(--muted);margin:0 0 20px}
+.agent{display:grid;grid-template-columns:1fr 1.5fr;gap:28px;align-items:start;margin:28px 0}
+@media (max-width:820px){.agent{grid-template-columns:1fr}}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 10px;border-radius:99px;background:var(--teal-soft);color:var(--teal);margin-bottom:8px}
+.tag.warn{background:var(--red-soft);color:var(--red)}
+figure{margin:0}
+figure img{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);display:block;background:#fff}
+figcaption{font-size:13px;color:var(--muted);margin-top:6px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+ul.tight{padding-left:20px;margin:8px 0}ul.tight li{margin:4px 0}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--code);font-weight:600}
+tr:last-child td{border-bottom:0}
+ol.steps{counter-reset:s;list-style:none;padding:0}
+ol.steps>li{counter-increment:s;position:relative;padding:0 0 14px 44px}
+ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--navy);color:var(--surface);font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center}
+.fix{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:14px 0}
+.fix h3{margin:0 0 8px;font-size:17px}
+.fix .sym{color:var(--red);font-weight:600}
+.fix .cause{color:var(--amber);font-weight:600}
+.fix .done{color:var(--teal);font-weight:600}
+.links li{margin:6px 0}
+footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <b>Meera Annadurai</b>
+  <a href="index.html">Home</a>
+  <a href="weekly-hr-snapshot.html">Analytics</a>
+  <a class="on" href="ai-agents.html">AI Agents</a>
+</div></nav>
+
+<main class="wrap">
+<header>
+  <div class="eyebrow">Oracle Fusion Cloud HCM · AI Agent Studio · Redwood</div>
+  <h1>AI agents in Oracle Fusion HCM — what we switched on, and what it took</h1>
+  <p class="lede">Employee time-off, manager team absence, payroll self-service, a RAG policy advisor and Redwood payslip analytics — rolled out in-house without a Systems Integrator. This page shows the agents working, the profile options behind them, and the real fixes we needed along the way.</p>
+  <div class="notice"><b>Disclaimer.</b> Screenshots are from a <b>test environment</b> and have been anonymised: the organisation name, people, person numbers, contact details, URLs and every pay amount have been replaced with fictitious values (“Demo Healthcare”, “Aisha Rahman”, “Daniel Brooks”). Chart scales were changed to match the fictitious figures. No real employee or salary data is shown. This is a personal write-up, not an official statement of Oracle or of any employer; profile option codes and agent behaviour change between quarterly updates, so always confirm against Oracle documentation for your release.</div>
+  <div class="stats">
+    <div class="stat"><b>5</b><span>agent use cases in Redwood</span></div>
+    <div class="stat"><b>3</b><span>modules: Absence, Payroll, Core HCM</span></div>
+    <div class="stat"><b>0</b><span>Systems Integrators</span></div>
+    <div class="stat"><b>8</b><span>real fixes documented below</span></div>
+  </div>
+</header>
+
+<section id="agents">
+  <h2>The agents</h2>
+  <p class="sub">All are copies of Oracle's delivered AI Agent Studio templates, configured, secured by role and surfaced through “Ask Oracle” on Redwood pages.</p>
+
+  <div class="agent">
+    <div>
+      <span class="tag">Absence · Employee</span>
+      <h3>Time-off Assistant (leave application agent)</h3>
+      <p>Embedded on the Apply Leave card. The employee states the leave in plain language; the agent resolves the absence type, dates and duration, shows a confirmation card and submits only after the employee clicks <b>Approve</b>.</p>
+      <ul class="tight">
+        <li>Quick actions: log, edit or withdraw an absence</li>
+        <li>Human-in-the-loop approval before any transaction</li>
+        <li>Validates against the absence types the person is eligible for</li>
+      </ul>
+    </div>
+    <figure><img src="assets/ai-agents/01-timeoff-assistant.png" alt="Time-off Assistant opened from the Apply Leave card with quick actions" loading="lazy"><figcaption>Opened from “Ask Oracle” on the Apply Leave card.</figcaption></figure>
+  </div>
+
+  <div class="gallery">
+    <figure><img src="assets/ai-agents/02-absence-type-check.png" alt="Agent asks the user to choose a valid absence type" loading="lazy"><figcaption>“Log a vacation” isn't an absence type here, so the agent stops and lists the valid ones instead of guessing.</figcaption></figure>
+    <figure><img src="assets/ai-agents/03-confirm-request.png" alt="Agent confirmation card with absence details" loading="lazy"><figcaption>Confirmation card: type, start/end, duration — the user approves.</figcaption></figure>
+    <figure><img src="assets/ai-agents/04-absence-submitted.png" alt="Absence submitted successfully message" loading="lazy"><figcaption>Submitted through the standard absence API, so normal approval workflow applies.</figcaption></figure>
+  </div>
+
+  <div class="agent">
+    <div>
+      <span class="tag">Absence · Manager</span>
+      <h3>Leave and Absence Analyst (My Team)</h3>
+      <p>Launched from the My Team spotlight. Managers ask about a named team member and get current plan balances with an explanation of how the balance is built (adjustments, absences taken, carryover).</p>
+      <p><span class="tag warn">Observed limitation</span><br>A team-wide question (“leave details of my team for 2026”) returned <code>null</code>, while the same question for a named person worked. Others have reported the hierarchy lookup issue on Customer Connect — ask per person until it's addressed in your release.</p>
+    </div>
+    <figure><img src="assets/ai-agents/05-my-team-agent.png" alt="My Team absence agent showing a team member's leave balances" loading="lazy"><figcaption>Per-person balances work; the team-wide query returned null.</figcaption></figure>
+  </div>
+
+  <div class="agent">
+    <div>
+      <span class="tag">Payroll · Employee</span>
+      <h3>Pay Analyst</h3>
+      <p>Opened from the Redwood Payslips page. Answers “show my recent payslips” with period, payment date and net amount for every archived payslip the employee can see — no separate report or download.</p>
+      <ul class="tight"><li>Respects the same payslip data security as the page</li><li>Works only once payslips are generated with a valid template (see fix 6)</li></ul>
+    </div>
+    <figure><img src="assets/ai-agents/06-pay-analyst.png" alt="Pay Analyst agent listing recent payslips" loading="lazy"><figcaption>Amounts are fictitious.</figcaption></figure>
+  </div>
+
+  <div class="agent">
+    <div>
+      <span class="tag">Payroll · Analytics</span>
+      <h3>Redwood payslip analytics</h3>
+      <p>Not an agent, but the companion piece: the Redwood Payslips page charts earnings by element across periods, so an employee can see at a glance why one month differs — here a leave-entitlement payment and retro element in one period.</p>
+    </div>
+    <figure><img src="assets/ai-agents/07-payslip-analytics.png" alt="Redwood payslip earnings chart by element" loading="lazy"><figcaption>Earnings by element, per process date (scale adjusted to fictitious values).</figcaption></figure>
+  </div>
+
+  <div class="agent">
+    <div>
+      <span class="tag">RAG · Policy</span>
+      <h3>Leave and Absence Policy Advisor</h3>
+      <p>A retrieval-augmented agent on the New Absence page meant to answer policy questions (“what notice do I need for annual leave?”) from the organisation's own leave policy.</p>
+      <p><span class="tag warn">Lesson learned</span><br>In our first test it answered that no specific information was available for the employer and legislation, then pointed the user to HR. A RAG agent can only answer from documents that are actually attached and indexed for it — the agent was live before the policy content was. The honest fallback is the right behaviour; the fix is content, not prompts.</p>
+    </div>
+    <figure><img src="assets/ai-agents/08-policy-rag-agent.png" alt="Policy advisor agent responding that no specific information is available" loading="lazy"><figcaption>Fallback answer when the policy document isn't indexed yet.</figcaption></figure>
+  </div>
+</section>
+
+<section id="profiles">
+  <h2>Redwood profile options we enabled</h2>
+  <p class="sub">Setup and Maintenance → <b>Manage Administrator Profile Values</b> → search the code → Profile Level <b>Site</b> → Value <b>Y</b> → Save and Close.</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Area</th><th>Profile option code</th><th>Purpose / note</th></tr></thead>
+    <tbody>
+      <tr><td>Global</td><td><code>ORA_HCM_VBCS_PWA_ENABLED</code></td><td>Master switch for HCM Redwood pages. Site level only — the value can't be set per user. Pilot individual pages with page-level options at User level instead.</td></tr>
+      <tr><td>Core HCM</td><td><code>ORA_PER_PERSONAL_INFORMATION_REDWOOD_ENABLED</code></td><td>Personal Details and Contact Info (on by default from 26C).</td></tr>
+      <tr><td>Core HCM</td><td><code>ORA_PER_EMPLOYMENT_INFO_REDWOOD_ENABLED</code></td><td>Redwood Employment Info page.</td></tr>
+      <tr><td>Absence</td><td><code>ORA_ANC_ADD_ABSENCE_VBCS_UI_ENABLED</code></td><td>Redwood Add Absence page — where the Time-off Assistant and Policy Advisor sit.</td></tr>
+      <tr><td>Absence</td><td><code>HCM_ABSENCES_RESPONSIVE_ENABLED</code></td><td>Confirmed Y at Site while troubleshooting the Submit issue (fix 5).</td></tr>
+      <tr><td>Absence</td><td><code>ORA_ANC_ADMIN_ABSENCE_VBCS_UI_ENABLED</code></td><td>Absences and Entitlements admin page (25B+), for HR.</td></tr>
+      <tr><td>Payroll</td><td><code>ORA_PAY_PAYSLIPS_REDWOOD_ENABLED</code></td><td>Redwood Payslips page (analytics view + Pay Analyst entry point). Not the same as <code>ORA_PAY_PAYSLIP_OUTPUT_REDWOOD_DISABLED</code>, which governs output — easily confused.</td></tr>
+      <tr><td>Payroll</td><td><code>ORA_PAY_DEDUCTION_INFO_REDWOOD_ENABLED</code></td><td>Redwood Deduction card.</td></tr>
+      <tr><td>Payroll</td><td><code>ORA_PAY_PAYROLL_ACTIVITY_REDWOOD_ENABLED</code></td><td>Payroll Activity Center — run the upgrade-results flow <i>before</i> enabling.</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:14px;color:var(--muted)">Full, release-specific list: My Oracle Support Doc ID 2922407.1 (HCM Redwood Pages with Profile Options). Codes are added and defaults change every quarter.</p>
+</section>
+
+<section id="steps">
+  <h2>The steps we followed</h2>
+  <ol class="steps">
+    <li><b>Search index first.</b> Run the ESS job that creates the index definition and performs the initial ingest to Oracle Search (<code>fa-hcm-person</code>). Check the document count in Search Administration — silent failures are common, and Redwood person search fails everywhere without it.</li>
+    <li><b>Global Redwood switch.</b> Set <code>ORA_HCM_VBCS_PWA_ENABLED</code> = Y at Site.</li>
+    <li><b>Page-level options module by module</b> (table above), Core HCM → Absence → Payroll, testing each in TEST before the next.</li>
+    <li><b>Copy the delivered agent templates</b> in AI Agent Studio (Time Off, Leave and Absence Analyst, My Team, Pay Analyst, Policy Advisor), adjust instructions and publish.</li>
+    <li><b>Grant access by role</b> on each agent's security tab, then run the two security import jobs (fix 2) so the roles appear.</li>
+    <li><b>Surface the agents</b> on Redwood pages through VB Studio (Ask Oracle on Apply Leave, My Team spotlight, Payslips, New Absence).</li>
+    <li><b>Promote TEST → PROD</b> via Manage Extension Lifecycle in TEST VB Studio (fix 8) — there's no VB Studio in PROD, and deployment goes live immediately.</li>
+    <li><b>Regression after each quarterly patch</b>: balances, approvals, payslip generation and every agent prompt.</li>
+  </ol>
+</section>
+
+<section id="fixes">
+  <h2>Real fixes — not just screenshots</h2>
+  <p class="sub">Issues we actually hit in this rollout, the root cause, and what resolved them.</p>
+
+  <div class="fix"><h3>1 · Redwood person search returns nothing</h3>
+    <p><span class="sym">Symptom:</span> worker search empty on Absence, Payroll and HR pages after enabling Redwood.<br>
+    <span class="cause">Cause:</span> the <code>fa-hcm-person</code> Oracle Search index was missing or partly ingested.<br>
+    <span class="done">Fix:</span> re-run the index definition + initial ingest ESS job; verify the document count in Search Administration before re-testing. Re-check after every refresh.</p></div>
+
+  <div class="fix"><h3>2 · Roles don't appear in the agent's security picker / agent won't respond</h3>
+    <p><span class="sym">Symptom:</span> new or changed roles not selectable; users see the agent but get no answer.<br>
+    <span class="cause">Cause:</span> security changes not imported, and missing channel permission groups.<br>
+    <span class="done">Fix:</span> run <b>Import Resource Application Security Data</b>, then <b>Import User and Role Application Security Data</b>. Make sure the ChannelManifest and ExternalChatCorrelation permission groups (AllRowsAllFields) are granted — eight of them, and the most frequently missed step.</p></div>
+
+  <div class="fix"><h3>3 · Leave duration wrong in agent-created absences</h3>
+    <p><span class="sym">Symptom:</span> durations not matching the plan.<br>
+    <span class="cause">Cause:</span> plans accrue in <b>hours</b> (1 working day = 8 hours) while the workflow assumed days.<br>
+    <span class="done">Fix:</span> hours-based UOM throughout the agent workflow, and the shift times (08:00–17:00) used when building <code>StartDateTime</code> / <code>EndDateTime</code>.</p></div>
+
+  <div class="fix"><h3>4 · ANC-3405194 — <code>tempBalanceEndDate</code> is null</h3>
+    <p><span class="sym">Symptom:</span> absence entry/balance calculation errors for future dates.<br>
+    <span class="cause">Cause:</span> the payroll calendar wasn't generated far enough ahead.<br>
+    <span class="done">Fix:</span> extend the payroll calendar (we went to 31/12/2028).</p></div>
+
+  <div class="fix"><h3>5 · Redwood Add Absence “Submit” does nothing</h3>
+    <p><span class="sym">Symptom:</span> classic UI submits fine; Redwood Submit is silent. A HAR trace showed no POST to the absences REST API at all.<br>
+    <span class="cause">Cause:</span> in VB Studio the page had no action chain bound to the button (<code>ojAction</code>) — inherited Oracle metadata in the extension workspace had gone stale after a quarterly patch.<br>
+    <span class="done">Fix:</span> delete and recreate the VB Studio workspace so it picks up current runtime dependencies, then re-apply the extension changes. The same pattern later broke the VB Studio canvas after 26A.</p></div>
+
+  <div class="fix"><h3>6 · Blank Redwood payslips — <code>mainTemplPath is null</code></h3>
+    <p><span class="sym">Symptom:</span> Generate Payslips completes with alerts, counters show success, PDFs are blank; worked in TEST, failed in PROD.<br>
+    <span class="cause">Cause:</span> the payslip delivery option pointed at a custom template in a BI Publisher catalog folder that didn't exist in PROD.<br>
+    <span class="done">Fix:</span> download the template from TEST as an archive, create the identical catalog folder path in PROD, upload, and re-run for one employee. Keep only the delivery options you actually use enabled. Note the custom classic RTF and the Redwood sub-template layout are not interchangeable.</p></div>
+
+  <div class="fix"><h3>7 · “Unable to identify the absence type”</h3>
+    <p><span class="sym">Symptom:</span> the Time-off Assistant rejects “log a vacation”.<br>
+    <span class="cause">Cause:</span> by design the agent maps to configured absence type names; “vacation” isn't one.<br>
+    <span class="done">What we do:</span> the agent's list of valid types is the guidance — users name the type (“Sick Leave on 12 Oct”). Train users with the real type names, and add the organisation's common synonyms in the agent instructions.</p></div>
+
+  <div class="fix"><h3>8 · Promoting the extension to PROD with a release mismatch</h3>
+    <p><span class="sym">Symptom:</span> publish blocked while TEST was on 26B and PROD on 26A.<br>
+    <span class="cause">Cause:</span> dependency version constraints in <code>extension.json</code> required the newer release.<br>
+    <span class="done">Fix:</span> temporarily lower the constraints (e.g. <code>&gt;=25.0.0</code>), publish through Manage Extension Lifecycle, then restore them in TEST. Also: VB Studio code here needs ES5 <code>var</code>, and <code>console.log</code> is blocked.</p></div>
+</section>
+
+<section id="refs">
+  <h2>Community and documentation we referred to</h2>
+  <ul class="links">
+    <li><a href="https://docs.oracle.com/en/cloud/saas/human-resources/rwhcm/how-do-i-set-profile-options-for-redwood-pages.html">Oracle Help Center — Set profile options for Redwood pages</a></li>
+    <li><a href="https://support.oracle.com/epmos/faces/DocumentDisplay?id=2922407.1">My Oracle Support — HCM Redwood Pages with Profile Options (Doc ID 2922407.1)</a> (login required)</li>
+    <li><a href="https://docs.oracle.com/en/cloud/saas/readiness/hcm/25c/amg-25c/25C-absence-mgmt-wn-f39419.htm">25C What's New — Leave and Absence Analyst AI agent</a></li>
+    <li><a href="https://docs.oracle.com/en/cloud/saas/readiness/hcm/25c/amg-25c/25C-absence-mgmt-wn-f39449.htm">25C What's New — Leave and Absence Analyst (My Team) AI agent</a></li>
+    <li><a href="https://docs.oracle.com/en/cloud/saas/readiness/hcm/26b/hure-26b/26B-hr-wn-f43388.htm">Redwood enabled by default for Global HR pages in 26C</a></li>
+    <li><a href="https://community.oracle.com/customerconnect/categories/fusion-ai">Oracle Cloud Customer Connect — AI for Fusion Applications community</a> (threads on My Team agent hierarchy data, Time Off agent errors, Pay Analyst data)</li>
+  </ul>
+</section>
+</main>
+
+<footer><div class="wrap">
+  © 2026 Meera Annadurai · Oracle Fusion HCM &amp; AI. Oracle, Oracle Fusion and Redwood are trademarks of Oracle and/or its affiliates; this site is independent and not endorsed by Oracle. All names and figures in screenshots are fictitious.
+</div></footer>
+</body>
+</html>

@@ -70,14 +70,23 @@ ol.steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:28px
 .links li{margin:6px 0}
 footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
 </style>
+<style id="site-nav-css">
+.site-nav{position:sticky;top:0;z-index:1000;width:100vw;margin-left:calc(50% - 50vw);margin-top:0;box-sizing:border-box;background:#ffffff;border-bottom:1px solid #dfe5ec;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.site-nav .sn-in{max-width:1080px;margin:0 auto;padding:0 16px;height:56px;display:flex;align-items:center;gap:22px;overflow-x:auto;white-space:nowrap}
+.site-nav .sn-brand{margin-right:auto;font-weight:700;font-size:16px;color:#0b2a47;text-decoration:none}
+.site-nav a.sn-link{font-size:14px;color:#5b6b7b;text-decoration:none;border:0}
+.site-nav a.sn-link:hover{color:#0b2a47}
+.site-nav a.sn-on{color:#0b2a47;font-weight:600}
+@media (max-width:560px){.site-nav .sn-in{height:auto;flex-wrap:wrap;gap:6px 16px;padding:10px 16px}.site-nav .sn-brand{flex-basis:100%;font-size:15px}}
+</style>
 </head>
 <body>
-<nav><div class="wrap">
-  <b>Meera Annadurai</b>
-  <a href="index.html">Home</a>
-  <a href="weekly-hr-snapshot.html">Analytics</a>
-  <a class="on" href="ai-agents.html">AI Agents</a>
-  <a href="concierge.html">Concierge Apps</a>
+<nav class="site-nav" aria-label="Site"><div class="sn-in">
+    <a class="sn-brand" href="./index.html">Meera Annadurai</a>
+    <a class="sn-link" href="./index.html">Home</a>
+    <a class="sn-link" href="./weekly-hr-snapshot.html">Analytics</a>
+    <a class="sn-link sn-on" href="./ai-agents.html">AI Agents</a>
+    <a class="sn-link" href="./concierge.html">Concierge Apps</a>
 </div></nav>
 
 <main class="wrap">

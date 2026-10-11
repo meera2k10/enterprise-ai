@@ -77,6 +77,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
   <a href="index.html">Home</a>
   <a href="weekly-hr-snapshot.html">Analytics</a>
   <a class="on" href="ai-agents.html">AI Agents</a>
+  <a href="concierge.html">Concierge Apps</a>
 </div></nav>
 
 <main class="wrap">
@@ -108,13 +109,13 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
         <li>Validates against the absence types the person is eligible for</li>
       </ul>
     </div>
-    <figure><img src="assets/ai-agents/01-timeoff-assistant.png" alt="Time-off Assistant opened from the Apply Leave card with quick actions" loading="lazy"><figcaption>Opened from “Ask Oracle” on the Apply Leave card.</figcaption></figure>
+    <figure><img src="01-timeoff-assistant.png" alt="Time-off Assistant opened from the Apply Leave card with quick actions" loading="lazy"><figcaption>Opened from “Ask Oracle” on the Apply Leave card.</figcaption></figure>
   </div>
 
   <div class="gallery">
-    <figure><img src="assets/ai-agents/02-absence-type-check.png" alt="Agent asks the user to choose a valid absence type" loading="lazy"><figcaption>“Log a vacation” isn't an absence type here, so the agent stops and lists the valid ones instead of guessing.</figcaption></figure>
-    <figure><img src="assets/ai-agents/03-confirm-request.png" alt="Agent confirmation card with absence details" loading="lazy"><figcaption>Confirmation card: type, start/end, duration — the user approves.</figcaption></figure>
-    <figure><img src="assets/ai-agents/04-absence-submitted.png" alt="Absence submitted successfully message" loading="lazy"><figcaption>Submitted through the standard absence API, so normal approval workflow applies.</figcaption></figure>
+    <figure><img src="02-absence-type-check.png" alt="Agent asks the user to choose a valid absence type" loading="lazy"><figcaption>“Log a vacation” isn't an absence type here, so the agent stops and lists the valid ones instead of guessing.</figcaption></figure>
+    <figure><img src="03-confirm-request.png" alt="Agent confirmation card with absence details" loading="lazy"><figcaption>Confirmation card: type, start/end, duration — the user approves.</figcaption></figure>
+    <figure><img src="04-absence-submitted.png" alt="Absence submitted successfully message" loading="lazy"><figcaption>Submitted through the standard absence API, so normal approval workflow applies.</figcaption></figure>
   </div>
 
   <div class="agent">
@@ -124,7 +125,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
       <p>Launched from the My Team spotlight. Managers ask about a named team member and get current plan balances with an explanation of how the balance is built (adjustments, absences taken, carryover).</p>
       <p><span class="tag warn">Observed limitation</span><br>A team-wide question (“leave details of my team for 2026”) returned <code>null</code>, while the same question for a named person worked. Others have reported the hierarchy lookup issue on Customer Connect — ask per person until it's addressed in your release.</p>
     </div>
-    <figure><img src="assets/ai-agents/05-my-team-agent.png" alt="My Team absence agent showing a team member's leave balances" loading="lazy"><figcaption>Per-person balances work; the team-wide query returned null.</figcaption></figure>
+    <figure><img src="05-my-team-agent.png" alt="My Team absence agent showing a team member's leave balances" loading="lazy"><figcaption>Per-person balances work; the team-wide query returned null.</figcaption></figure>
   </div>
 
   <div class="agent">
@@ -134,7 +135,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
       <p>Opened from the Redwood Payslips page. Answers “show my recent payslips” with period, payment date and net amount for every archived payslip the employee can see — no separate report or download.</p>
       <ul class="tight"><li>Respects the same payslip data security as the page</li><li>Works only once payslips are generated with a valid template (see fix 6)</li></ul>
     </div>
-    <figure><img src="assets/ai-agents/06-pay-analyst.png" alt="Pay Analyst agent listing recent payslips" loading="lazy"><figcaption>Amounts are fictitious.</figcaption></figure>
+    <figure><img src="06-pay-analyst.png" alt="Pay Analyst agent listing recent payslips" loading="lazy"><figcaption>Amounts are fictitious.</figcaption></figure>
   </div>
 
   <div class="agent">
@@ -143,7 +144,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
       <h3>Redwood payslip analytics</h3>
       <p>Not an agent, but the companion piece: the Redwood Payslips page charts earnings by element across periods, so an employee can see at a glance why one month differs — here a leave-entitlement payment and retro element in one period.</p>
     </div>
-    <figure><img src="assets/ai-agents/07-payslip-analytics.png" alt="Redwood payslip earnings chart by element" loading="lazy"><figcaption>Earnings by element, per process date (scale adjusted to fictitious values).</figcaption></figure>
+    <figure><img src="07-payslip-analytics.png" alt="Redwood payslip earnings chart by element" loading="lazy"><figcaption>Earnings by element, per process date (scale adjusted to fictitious values).</figcaption></figure>
   </div>
 
   <div class="agent">
@@ -153,7 +154,7 @@ footer{padding:40px 0 60px;border-top:1px solid var(--line);font-size:13px;color
       <p>A retrieval-augmented agent on the New Absence page meant to answer policy questions (“what notice do I need for annual leave?”) from the organisation's own leave policy.</p>
       <p><span class="tag warn">Lesson learned</span><br>In our first test it answered that no specific information was available for the employer and legislation, then pointed the user to HR. A RAG agent can only answer from documents that are actually attached and indexed for it — the agent was live before the policy content was. The honest fallback is the right behaviour; the fix is content, not prompts.</p>
     </div>
-    <figure><img src="assets/ai-agents/08-policy-rag-agent.png" alt="Policy advisor agent responding that no specific information is available" loading="lazy"><figcaption>Fallback answer when the policy document isn't indexed yet.</figcaption></figure>
+    <figure><img src="08-policy-rag-agent.png" alt="Policy advisor agent responding that no specific information is available" loading="lazy"><figcaption>Fallback answer when the policy document isn't indexed yet.</figcaption></figure>
   </div>
 </section>
 
